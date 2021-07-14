@@ -21,11 +21,6 @@
   --animation-timing-function-natural: cubic-bezier(0.4, 0, 1, 1);
 }
 
-@font-face {
-  font-family: 'Blackout 2AM';
-  src: url('../assets/blackout.2am.ttf');
-}
-
 html {
   /* Browser-normalizations */
   -webkit-tap-highlight-color: transparent;
@@ -47,10 +42,15 @@ body {
   color: var(--main-fg-color);
 }
 
-a:link {
+a {
   color: var(--gray-mid);
   text-decoration: none;
   transition: color var(--animation-speed-normal) var(--animation-timing-function-natural);
+}
+
+a:link {
+  color: var(--gray-mid);
+  text-decoration: none;
 }
 
 a:hover {
@@ -69,7 +69,7 @@ a:visited, a:active {
 header#site-header {
   display: flex;
   width: 100%;
-  padding: 10px 0;
+  padding: 2px 0;
   position: sticky;
   top: 0;
   background: var(--main-bg-color);
@@ -81,9 +81,12 @@ header#site-header .page-width-wrapper {
 #main-logo {
   flex: 1;
   display: inline-block;
-  /* font-family: 'Blackout 2AM'; */
-  font-size: 48px;
   align-self: center;
+  height: 80px;
+  background-image: url('../assets/Varied Vibe - Logo - Horizontal (Optimized).svg');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
 }
 nav#top-site-nav {
   flex: 2;
@@ -133,8 +136,8 @@ nav#top-social-links li {
   margin: 0 5px;
 }
 nav#top-social-links a.social-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 a.social-icon {
