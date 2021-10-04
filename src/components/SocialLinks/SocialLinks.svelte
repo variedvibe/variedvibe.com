@@ -74,9 +74,14 @@
     background-position: center;
     background-size: contain;
     filter: invert(100%) brightness(100%);
+    transition: filter var(--animation-speed-normal)
+      var(--animation-timing-function-natural);
   }
   .in-footer a.social-icon {
     filter: invert(100%) brightness(33.33%);
+  }
+  a.social-icon:hover {
+    filter: invert(100%) brightness(47.5%);
   }
 
   a.social-icon.icon-instagram {
