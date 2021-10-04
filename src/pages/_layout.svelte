@@ -19,6 +19,9 @@
 </footer>
 
 <style>
+  main {
+    flex: 1;
+  }
   footer {
     display: block;
     width: 100%;

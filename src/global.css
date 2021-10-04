@@ -75,6 +75,12 @@ h1 {
   margin: 20px 0;
 }
 
+#varied-vibe-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .page-width-wrapper {
   max-width: 1200px;
   margin: 0 auto;
