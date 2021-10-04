@@ -22,8 +22,13 @@
     display: flex;
     width: auto;
     font-size: 16px;
-    margin: 40px 60px;
     text-align: center;
+  }
+  @media (max-width: 500px) {
+    .product {
+      flex-direction: column;
+      align-items: center;
+    }
   }
   .media {
     flex: 1;
@@ -33,7 +38,6 @@
     width: 200px;
     height: 300px;
     background-color: var(--gray-mid);
-    margin-bottom: 10px;
   }
   .details {
     flex: 4;

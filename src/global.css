@@ -35,7 +35,7 @@ html {
 html,
 body {
   width: 100%;
-  min-width: 320px;
+  min-width: 280px;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -70,7 +70,18 @@ a:active {
   color: var(--gray-dark);
 }
 
+h1 {
+  font-size: 2em;
+  margin: 20px 0;
+}
+
 .page-width-wrapper {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
+}
+@media (max-width: 500px) {
+  .page-width-wrapper {
+    padding: 0 5px;
+  }
 }

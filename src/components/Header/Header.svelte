@@ -1,6 +1,7 @@
 <script>
-  import Navigation from "./Navigation.svelte";
   import { url, layout } from "@roxi/routify";
+  import Navigation from "./Navigation.svelte";
+  import SocialLinks from "../SocialLinks/SocialLinks.svelte";
 
   export let home = {
     path: $url("/"),
@@ -15,52 +16,11 @@
     <a href={$url("/")} id="main-logo"><!-- logo --></a>
 
     <nav id="top-site-nav">
-      <!--<ul>-->
-      <!--<li><a href={$url('/')}>Home</a></li>-->
-      <!--<li><a href="/about-us">About Us</a></li>-->
-      <!--</ul>-->
       <Navigation maxDepth="1" items={navItems} />
     </nav>
 
     <nav id="top-social-links">
-      <ul class="social-links">
-        <li>
-          <a
-            class="social-icon icon-instagram"
-            title="Instagram - Varied Vibe."
-            target="_blank"
-            rel="noopener"
-            href="https://www.instagram.com/variedvibe/"><!-- icon --></a
-          >
-        </li>
-        <li>
-          <a
-            class="social-icon icon-twitter"
-            title="Twitter - Varied Vibe."
-            target="_blank"
-            rel="noopener"
-            href="https://twitter.com/VariedVibe"><!-- icon --></a
-          >
-        </li>
-        <li>
-          <a
-            class="social-icon icon-facebook"
-            title="Facebook - Varied Vibe."
-            target="_blank"
-            rel="noopener"
-            href="https://www.facebook.com/VariedVibe/"><!-- icon --></a
-          >
-        </li>
-        <li>
-          <a
-            class="social-icon icon-github"
-            title="GitHub - Varied Vibe."
-            target="_blank"
-            rel="noopener"
-            href="https://github.com/variedvibe"><!-- icon --></a
-          >
-        </li>
-      </ul>
+      <SocialLinks />
     </nav>
   </div>
 </header>
@@ -88,17 +48,30 @@
     background-position: left center;
     background-size: contain;
   }
+  @media (max-width: 500px) {
+    #main-logo {
+      height: 40px;
+    }
+  }
+  @media (max-height: 400px) {
+    #main-logo {
+      height: 60px;
+    }
+  }
   nav#top-site-nav {
     flex: 2;
     display: inline-flex;
     flex-direction: row;
     padding: 0;
     margin: 10px auto;
-    font-size: 20px;
-    line-height: 0;
     align-self: center;
     justify-self: center;
     justify-content: center;
+  }
+  @media (max-width: 500px) {
+    nav#top-site-nav {
+      justify-content: end;
+    }
   }
   nav#top-social-links {
     flex: 1;
@@ -113,40 +86,9 @@
     justify-self: center;
     justify-content: flex-end;
   }
-  nav#top-social-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  nav#top-social-links li {
-    flex: 1;
-    display: inline-block;
-    padding: 0;
-    margin: 0 5px;
-  }
-  nav#top-social-links a.social-icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  a.social-icon {
-    display: block;
-    text-decoration: none;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    filter: invert(100%) brightness(100%);
-  }
-  a.social-icon.icon-instagram {
-    background-image: url("/assets/social-icons/instagram.svg");
-  }
-  a.social-icon.icon-twitter {
-    background-image: url("/assets/social-icons/twitter.svg");
-  }
-  a.social-icon.icon-facebook {
-    background-image: url("/assets/social-icons/facebook.svg");
-  }
-  a.social-icon.icon-github {
-    background-image: url("/assets/social-icons/github.svg");
+  @media (max-width: 500px) {
+    nav#top-social-links {
+      display: none;
+    }
   }
 </style>

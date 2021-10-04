@@ -40,12 +40,22 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    font-size: 20px;
+    line-height: 0;
   }
   li {
     flex: 1;
     display: inline-block;
     padding: 0;
     margin: 0 10px;
+  }
+  @media (max-width: 500px) {
+    ul {
+      font-size: 12px;
+    }
+    li {
+      margin: 0 5px;
+    }
   }
 
   a,

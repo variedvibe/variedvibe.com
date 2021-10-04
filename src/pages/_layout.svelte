@@ -1,5 +1,6 @@
 <script>
   import Header from "../components/Header/Header.svelte";
+  import SocialLinks from "../components/SocialLinks/SocialLinks.svelte";
 </script>
 
 <Header />
@@ -9,7 +10,12 @@
 </main>
 
 <footer>
-  <div class="page-width-wrapper">Copyright © 2021 Varied Vibe.</div>
+  <div class="page-width-wrapper">
+    <nav id="bottom-social-links">
+      <SocialLinks inFooter="true" />
+    </nav>
+    Copyright © 2021 Varied Vibe.
+  </div>
 </footer>
 
 <style>
@@ -22,5 +28,8 @@
     text-align: center;
     font-size: 14px;
     color: var(--gray-mid-dark);
+  }
+  #bottom-social-links {
+    margin: 10px auto;
   }
 </style>

@@ -9,14 +9,22 @@
 </script>
 
 <div class="page-width-wrapper">
-  {#await product then Product}
-    {#if Product}
-      <ProductDetail
-        id={Product.id}
-        name={Product.name}
-        description={Product.description}
-        images={Product.images}
-      />
-    {/if}
-  {/await}
+  <div class="product-container">
+    {#await product then Product}
+      {#if Product}
+        <ProductDetail
+          id={Product.id}
+          name={Product.name}
+          description={Product.description}
+          images={Product.images}
+        />
+      {/if}
+    {/await}
+  </div>
 </div>
+
+<style>
+  .product-container {
+    margin: 40px auto;
+  }
+</style>
