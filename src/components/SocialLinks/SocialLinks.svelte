@@ -1,7 +1,7 @@
 <script>
   export let inFooter = false;
 
-  $: getClass = () => (inFooter ? "in-footer" : "");
+  let getClass = () => (inFooter ? "in-footer" : "");
 </script>
 
 <ul class={getClass()}>
