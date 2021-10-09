@@ -1,5 +1,8 @@
 # Dependencies
 node_modules
 
+# Environment specific configuration
+.env
+
 # Dev runtime files
 .routify
