@@ -34,6 +34,11 @@
     top: 0;
     background: var(--main-bg-color);
   }
+  @media (max-height: 500px) {
+    header {
+      position: unset;
+    }
+  }
   header .page-width-wrapper {
     display: flex;
     width: 100%;
@@ -48,12 +53,12 @@
     background-position: left center;
     background-size: contain;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     #main-logo {
-      height: 40px;
+      height: 50px;
     }
   }
-  @media (max-height: 400px) {
+  @media (max-height: 500px) {
     #main-logo {
       height: 60px;
     }
@@ -70,6 +75,7 @@
   }
   @media (max-width: 500px) {
     nav#top-site-nav {
+      flex: 1.5;
       justify-content: end;
     }
   }

@@ -22,7 +22,7 @@
 </script>
 
 <ul>
-  {#each items as { path, title, children, ...rest }}
+  {#each items as { path, title, children }}
     <li data-nav-depth={_depth}>
       <!-- we use $url to resolve the path  -->
       <a href={$url(path)} class={getClass(path)}> {title}</a>
@@ -49,9 +49,25 @@
     padding: 0;
     margin: 0 10px;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 300px) {
     ul {
       font-size: 12px;
+    }
+    li {
+      margin: 0 5px;
+    }
+  }
+  @media (max-width: 400px) and (min-width: 301px) {
+    ul {
+      font-size: 14px;
+    }
+    li {
+      margin: 0 5px;
+    }
+  }
+  @media (max-width: 600px) and (min-width: 401px) {
+    ul {
+      font-size: 16px;
     }
     li {
       margin: 0 5px;
