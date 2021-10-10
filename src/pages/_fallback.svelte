@@ -1,5 +1,6 @@
 <script>
   import { url } from "@roxi/routify";
+
   import Hero from "../components/Hero/Hero.svelte";
 </script>
 

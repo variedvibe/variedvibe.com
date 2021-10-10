@@ -1,5 +1,6 @@
 <script>
   import { url, layout } from "@roxi/routify";
+
   import Navigation from "./Navigation.svelte";
   import SocialLinks from "../SocialLinks/SocialLinks.svelte";
 

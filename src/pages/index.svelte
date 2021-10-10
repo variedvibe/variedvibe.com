@@ -1,8 +1,8 @@
 <script>
+  import { getFeaturedProducts } from "../services/Shop/Shop.js";
+
   import Hero from "../components/Hero/Hero.svelte";
   import ProductOverview from "../components/Product/ProductOverview.svelte";
-
-  import { getFeaturedProducts } from "../services/Shop/Shop.js";
 
   export let featuredProducts = getFeaturedProducts();
 </script>

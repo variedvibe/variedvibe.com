@@ -1,7 +1,7 @@
 <script>
-  import ProductOverview from "../../components/Product/ProductOverview.svelte";
-
   import { getAllProducts } from "../../services/Shop/Shop.js";
+
+  import ProductOverview from "../../components/Product/ProductOverview.svelte";
 
   export let allProducts = getAllProducts();
 </script>
