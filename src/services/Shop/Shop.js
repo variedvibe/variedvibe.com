@@ -42,5 +42,11 @@ export async function getFeaturedProducts() {
 }
 
 export async function getProduct(id) {
-  return allProducts.find((product) => product.id === id);
+  let product = allProducts.find((product) => product.id === id);
+
+  if (!product) {
+    throw new Error("unknown product");
+  }
+
+  return product;
 }
