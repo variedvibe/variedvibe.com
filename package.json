@@ -46,6 +46,9 @@
     "vite-main-js": "^0.0.1",
     "workbox-cli": "^6.1.0"
   },
+  "dependencies": {
+    "shopify-buy": "^2.12.0"
+  },
   "routify": {
     "extensions": "svelte,html,svx,md"
   },

@@ -9,8 +9,8 @@
 <div class="page-width-wrapper">
   {#await allProducts then products}
     <section id="products">
-      {#each products as { id, name, images }}
-        <ProductOverview {id} {name} {images} />
+      {#each products as product}
+        <ProductOverview {product} />
       {/each}
     </section>
   {/await}

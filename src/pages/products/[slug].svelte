@@ -1,14 +1,13 @@
 <script>
-  import { getProduct } from "../../services/Shop/Shop.js";
+  import { getProductBySlug } from "../../services/Shop/Shop.js";
 
   import { pageMeta } from "../../components/PageMeta/stores.js";
   import ProductDetail from "../../components/Product/ProductDetail.svelte";
 
   export let slug;
-  let id = Number.parseInt(slug, 10);
 
-  async function fetchProduct(id) {
-    let product = await getProduct(id);
+  async function fetchProduct(slug) {
+    let product = await getProductBySlug(slug);
 
     $pageMeta.title = product.name;
     $pageMeta.description = product.description;
@@ -17,7 +16,7 @@
     return product;
   }
 
-  export let product = fetchProduct(id);
+  export let product = fetchProduct(slug);
 </script>
 
 <div class="page-width-wrapper">
@@ -25,12 +24,7 @@
     {#await product}
       Loading...
     {:then Product}
-      <ProductDetail
-        id={Product.id}
-        name={Product.name}
-        description={Product.description}
-        images={Product.images}
-      />
+      <ProductDetail product={Product} />
     {:catch}
       Something went wrong.
     {/await}

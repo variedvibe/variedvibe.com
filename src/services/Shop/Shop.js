@@ -1,52 +1,65 @@
-let allProducts = [
-  {
-    id: 1,
-    name: "Product 1",
-    description: "Product 1 description here.",
-    images: [""],
-  },
-  {
-    id: 2,
-    name: "Product 2",
-    description: "Product 2 description here.",
-    images: [""],
-  },
-  {
-    id: 3,
-    name: "Product 3",
-    description: "Product 3 description here.",
-    images: [""],
-  },
-  {
-    id: 4,
-    name: "Product 4",
-    description: "Product 4 description here.",
-    images: [""],
-  },
-  {
-    id: 5,
-    name: "Product 5",
-    description: "Product 5 description here.",
-    images: [""],
-  },
-];
+import Client from "shopify-buy";
 
-let featuredProducts = allProducts.slice(0, 3);
+import { Product, ProductImage } from "./product.js";
+
+const featuredProductCollectionHandle = import.meta.env
+  .VITE_SHOPIFY_FEATURED_COLLECTION_HANDLE;
+
+const shopifyClient = Client.buildClient({
+  domain: import.meta.env.VITE_SHOPIFY_DOMAIN,
+  storefrontAccessToken: import.meta.env.VITE_SHOPIFY_STOREFRONT_API_TOKEN,
+});
 
 export async function getAllProducts() {
-  return allProducts;
+  let products = await shopifyClient.product.fetchAll();
+
+  return products?.map(shopifyProductToProduct) ?? [];
 }
 
 export async function getFeaturedProducts() {
-  return featuredProducts;
+  let collection = await shopifyClient.collection.fetchByHandle(
+    featuredProductCollectionHandle
+  );
+
+  return collection?.products.map(shopifyProductToProduct) ?? [];
 }
 
-export async function getProduct(id) {
-  let product = allProducts.find((product) => product.id === id);
+export async function getProductById(id) {
+  let shopifyProduct = await shopifyClient.product.fetch(id);
 
-  if (!product) {
+  if (!shopifyProduct) {
     throw new Error("unknown product");
   }
 
+  return shopifyProductToProduct(shopifyProduct);
+}
+
+export async function getProductBySlug(slug) {
+  let shopifyProduct = await shopifyClient.product.fetchByHandle(slug);
+
+  if (!shopifyProduct) {
+    throw new Error("unknown product");
+  }
+
+  return shopifyProductToProduct(shopifyProduct);
+}
+
+function shopifyProductToProduct(shopifyProduct) {
+  let product = new Product(
+    shopifyProduct.id,
+    shopifyProduct.handle,
+    shopifyProduct.title,
+    shopifyProduct.description,
+    shopifyProduct.images.map(shopifyProductImageToProductImage)
+  );
+
   return product;
+}
+
+function shopifyProductImageToProductImage(shopifyProductImage) {
+  return new ProductImage(
+    shopifyProductImage.id,
+    shopifyProductImage.src,
+    shopifyProductImage.altText
+  );
 }

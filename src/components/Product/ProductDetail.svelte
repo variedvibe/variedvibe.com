@@ -1,19 +1,14 @@
 <script>
-  //import { url } from '@roxi/routify'
-
-  //export let id;
-  export let name;
-  export let description;
-  export let images = [];
+  export let product;
 </script>
 
 <div class="product">
   <div class="media">
-    <img alt={name} title={name} src={images[0]} />
+    <img alt={product.name} title={product.name} src={product.images[0].src} />
   </div>
   <div class="details">
-    <h1>{name}</h1>
-    <p>{description}</p>
+    <h1>{product.name}</h1>
+    <p>{product.description}</p>
   </div>
 </div>
 
@@ -38,6 +33,7 @@
     width: 200px;
     height: 300px;
     background-color: var(--gray-mid);
+    object-fit: cover;
   }
   .details {
     flex: 4;

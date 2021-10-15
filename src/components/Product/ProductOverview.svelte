@@ -1,17 +1,15 @@
 <script>
   import { url } from "@roxi/routify";
 
-  export let id;
-  export let name;
+  export let product;
   export let href = null;
-  export let images = [];
 
-  let linkHref = $url(href ?? (id && `/products/${id}`));
+  let linkHref = $url(href ?? `/products/${product.slug}`);
 </script>
 
 <a class="product" href={linkHref}>
-  <img alt={name} title={name} src={images[0]} />
-  {name}
+  <img alt={product.name} title={product.name} src={product.images[0].src} />
+  {product.name}
 </a>
 
 <style>
@@ -27,5 +25,6 @@
     height: 300px;
     background-color: var(--gray-mid);
     margin-bottom: 10px;
+    object-fit: cover;
   }
 </style>
