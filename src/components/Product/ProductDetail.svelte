@@ -4,7 +4,11 @@
 
 <div class="product">
   <div class="media">
-    <img alt={product.name} title={product.name} src={product.images[0].src} />
+    <img
+      alt={product.images[0]?.altText ?? product.name}
+      title={product.name}
+      src={product.images[0]?.src}
+    />
   </div>
   <div class="details">
     <h1>{product.name}</h1>
