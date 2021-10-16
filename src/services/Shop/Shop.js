@@ -50,6 +50,7 @@ function shopifyProductToProduct(shopifyProduct) {
     shopifyProduct.handle,
     shopifyProduct.title,
     shopifyProduct.description,
+    shopifyProduct.descriptionHtml,
     shopifyProduct.images.map(shopifyProductImageToProductImage)
   );
 

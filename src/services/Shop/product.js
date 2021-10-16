@@ -3,13 +3,15 @@ export class Product {
   slug;
   name;
   description;
+  descriptionHtml;
   images = [];
 
-  constructor(id, slug, name, description, images) {
+  constructor(id, slug, name, description, descriptionHtml, images) {
     this.id = id;
     this.slug = slug;
     this.name = name;
     this.description = description;
+    this.descriptionHtml = descriptionHtml;
     this.images = images;
   }
 }

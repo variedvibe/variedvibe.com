@@ -8,7 +8,7 @@
   </div>
   <div class="details">
     <h1>{product.name}</h1>
-    <p>{product.description}</p>
+    <p>{@html product.descriptionHtml}</p>
   </div>
 </div>
 
@@ -17,6 +17,8 @@
     display: flex;
     width: auto;
     font-size: 16px;
+  }
+  .product h1 {
     text-align: center;
   }
   @media (max-width: 500px) {
@@ -30,12 +32,13 @@
   }
   .media img {
     display: block;
-    width: 200px;
-    height: 300px;
-    background-color: var(--gray-mid);
+    width: 250px;
+    height: 375px;
     object-fit: cover;
+    background-color: var(--gray-mid);
   }
   .details {
     flex: 4;
+    margin: 0px 20px;
   }
 </style>

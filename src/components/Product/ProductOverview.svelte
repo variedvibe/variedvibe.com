@@ -21,10 +21,10 @@
   }
   .product img {
     display: block;
-    width: 200px;
-    height: 300px;
+    width: 250px;
+    height: 375px;
+    object-fit: cover;
     background-color: var(--gray-mid);
     margin-bottom: 10px;
-    object-fit: cover;
   }
 </style>
