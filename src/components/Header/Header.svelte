@@ -33,6 +33,7 @@
     padding: 2px 0;
     position: sticky;
     top: 0;
+    z-index: 100;
     background: var(--main-bg-color);
   }
   @media (max-height: 500px) {
