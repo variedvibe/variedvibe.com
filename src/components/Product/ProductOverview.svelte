@@ -53,4 +53,28 @@
   .product:hover img.alt-image {
     opacity: 1;
   }
+
+  /* Touch-only devices can't really "hover". So fallback to an automatic
+   * animation that transitions between the primary and alternate images. */
+  @media (hover: none) {
+    @keyframes opacity {
+      0%,
+      45% {
+        opacity: 0;
+      }
+      55%,
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .product img.alt-image {
+      animation: opacity 5s;
+      animation-timing-function: var(--animation-timing-function-natural);
+      animation-delay: 1s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-fill-mode: both;
+    }
+  }
 </style>
