@@ -52,7 +52,7 @@ body {
 a {
   color: var(--gray-light);
   text-decoration: none;
-  transition: color var(--animation-speed-normal)
+  transition: color var(--animation-speed-fast)
     var(--animation-timing-function-natural);
 }
 
