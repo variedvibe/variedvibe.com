@@ -3,6 +3,7 @@
 </script>
 
 <div class="product">
+  <h1 class="mobile-header">{product.name}</h1>
   <div class="media">
     {#each product.images as image}
       <img
@@ -26,6 +27,10 @@
   }
   .product h1 {
     text-align: center;
+    margin-top: 0;
+  }
+  .mobile-header {
+    display: none;
   }
   .media {
     flex: 3;
@@ -50,11 +55,21 @@
     .media {
       flex: 2;
     }
+    .details {
+      flex: 2;
+      margin: 0px 10px;
+    }
   }
   @media (max-width: 600px) {
     .product {
       flex-direction: column;
       align-items: center;
+    }
+    .mobile-header {
+      display: unset;
+    }
+    .details h1 {
+      display: none;
     }
     .media {
       align-items: center;

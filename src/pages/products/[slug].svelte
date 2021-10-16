@@ -33,6 +33,6 @@
 
 <style>
   .product-container {
-    margin: 40px auto;
+    margin: 10px auto;
   }
 </style>
