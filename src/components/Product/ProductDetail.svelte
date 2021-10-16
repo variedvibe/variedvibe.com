@@ -4,11 +4,13 @@
 
 <div class="product">
   <div class="media">
-    <img
-      alt={product.images[0]?.altText ?? product.name}
-      title={product.name}
-      src={product.images[0]?.src}
-    />
+    {#each product.images as image}
+      <img
+        alt={image.altText ?? product.name}
+        title={product.name}
+        src={image.src}
+      />
+    {/each}
   </div>
   <div class="details">
     <h1>{product.name}</h1>
@@ -25,24 +27,44 @@
   .product h1 {
     text-align: center;
   }
-  @media (max-width: 500px) {
+  .media {
+    flex: 3;
+    line-height: 0;
+    text-align: left;
+    align-items: start;
+  }
+  .media img {
+    display: inline-block;
+    max-width: 375px;
+    max-height: 375px;
+    margin: 5px;
+    object-fit: cover;
+    background-color: var(--gray-mid);
+    vertical-align: top;
+  }
+  .details {
+    flex: 2;
+    margin: 0px 20px;
+  }
+  @media (max-width: 1050px) {
+    .media {
+      flex: 2;
+    }
+  }
+  @media (max-width: 600px) {
     .product {
       flex-direction: column;
       align-items: center;
     }
-  }
-  .media {
-    flex: 1;
-  }
-  .media img {
-    display: block;
-    width: 250px;
-    height: 375px;
-    object-fit: cover;
-    background-color: var(--gray-mid);
-  }
-  .details {
-    flex: 4;
-    margin: 0px 20px;
+    .media {
+      align-items: center;
+      text-align: center;
+    }
+    .media img {
+      /* Below should override, but this is if `calc()` fails (old browsers) */
+      max-width: 100%;
+      max-width: calc(100% - 2.5px);
+      margin: 2.5px;
+    }
   }
 </style>
