@@ -6,22 +6,12 @@
   export let current = 0;
 
   let shown = false;
-  let lastScrollPositionTop = 0;
-  let lastScrollPositionLeft = 0;
 
   export function toggleShow(index) {
     current = index;
     shown = !shown;
 
     document.body.classList.toggle("modal-open", shown);
-
-    if (!shown) {
-      window.scrollTo(lastScrollPositionLeft, lastScrollPositionTop);
-    } else {
-      lastScrollPositionTop = document.documentElement.scrollTop;
-      lastScrollPositionLeft = document.documentElement.scrollLeft;
-      window.scrollTo(0, 0);
-    }
   }
 
   $: getClass = () => (shown ? "shown" : "hidden");
