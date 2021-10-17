@@ -65,6 +65,9 @@
     flex: 2;
     margin: 0px 20px;
   }
+  .details :global(ul) {
+    padding-inline-start: 25px;
+  }
   @media (max-width: 1050px) {
     .media {
       flex: 2;
