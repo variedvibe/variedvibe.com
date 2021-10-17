@@ -78,7 +78,7 @@
   @media (max-width: 500px) {
     nav#top-site-nav {
       flex: 1.5;
-      justify-content: end;
+      justify-content: flex-end;
     }
   }
   nav#top-social-links {
