@@ -49,6 +49,12 @@ body {
   color: var(--main-fg-color);
 }
 
+@supports (-webkit-touch-callout: none) {
+  body {
+    height: -webkit-fill-available;
+  }
+}
+
 a {
   color: var(--gray-light);
   text-decoration: none;
@@ -90,4 +96,8 @@ h1 {
   .page-width-wrapper {
     padding: 0 5px;
   }
+}
+
+.modal-open {
+  overflow: hidden;
 }

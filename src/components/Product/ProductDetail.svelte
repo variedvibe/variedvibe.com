@@ -1,15 +1,26 @@
 <script>
+  import Lightbox from "../Lightbox/Lightbox.svelte";
+
   export let product;
+
+  let lightboxImages = product.images.map((image) => ({
+    src: image.src,
+    altText: image.altText,
+    title: product.name,
+  }));
+
+  let lightbox;
 </script>
 
 <div class="product">
   <h1 class="mobile-header">{product.name}</h1>
   <div class="media">
-    {#each product.images as image}
+    {#each product.images as image, i}
       <img
         alt={image.altText ?? product.name}
         title={product.name}
         src={image.src}
+        on:click={lightbox.toggleShow(i)}
       />
     {/each}
   </div>
@@ -18,6 +29,8 @@
     <p>{@html product.descriptionHtml}</p>
   </div>
 </div>
+
+<Lightbox images={lightboxImages} bind:this={lightbox} />
 
 <style>
   .product {
@@ -46,6 +59,7 @@
     object-fit: cover;
     background-color: var(--gray-mid);
     vertical-align: top;
+    cursor: pointer;
   }
   .details {
     flex: 2;
