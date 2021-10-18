@@ -4,10 +4,11 @@
   export let product;
   export let href = null;
 
-  let linkHref = $url(href ?? `/products/${product.slug}`);
+  let isDisabled = !product.id && !product.slug;
+  let linkHref = !isDisabled ? $url(href ?? `/products/${product.slug}`) : "";
 </script>
 
-<a class="product" href={linkHref}>
+<a class="product {isDisabled && 'disabled'}" href={linkHref}>
   <img
     alt={product.images[0]?.altText ?? product.name}
     title={product.name}
@@ -31,6 +32,9 @@
     font-size: 16px;
     margin: 40px 60px;
     text-align: center;
+  }
+  .product.disabled {
+    pointer-events: none;
   }
   .product img {
     display: block;

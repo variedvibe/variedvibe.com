@@ -10,6 +10,8 @@ const shopifyClient = Client.buildClient({
   storefrontAccessToken: import.meta.env.VITE_SHOPIFY_STOREFRONT_API_TOKEN,
 });
 
+export const errorSlugUnknownProduct = "ERR_UNKNOWN_PRODUCT";
+
 export async function getAllProducts() {
   let products = await shopifyClient.product.fetchAll();
 
@@ -28,7 +30,7 @@ export async function getProductById(id) {
   let shopifyProduct = await shopifyClient.product.fetch(id);
 
   if (!shopifyProduct) {
-    throw new Error("unknown product");
+    throw new Error(errorSlugUnknownProduct);
   }
 
   return shopifyProductToProduct(shopifyProduct);
@@ -38,10 +40,14 @@ export async function getProductBySlug(slug) {
   let shopifyProduct = await shopifyClient.product.fetchByHandle(slug);
 
   if (!shopifyProduct) {
-    throw new Error("unknown product");
+    throw new Error(errorSlugUnknownProduct);
   }
 
   return shopifyProductToProduct(shopifyProduct);
+}
+
+export function getNullProduct() {
+  return new Product("", "", "", "", "", []);
 }
 
 function shopifyProductToProduct(shopifyProduct) {

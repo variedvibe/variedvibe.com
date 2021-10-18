@@ -1,5 +1,9 @@
 <script>
-  import { getProductBySlug } from "../../services/Shop/Shop.js";
+  import {
+    getProductBySlug,
+    errorSlugUnknownProduct,
+  } from "../../services/Shop/Shop.js";
+  import { goto } from "@roxi/routify";
 
   import { pageMeta } from "../../components/PageMeta/stores.js";
   import ProductDetail from "../../components/Product/ProductDetail.svelte";
@@ -7,7 +11,18 @@
   export let slug;
 
   async function fetchProduct(slug) {
-    let product = await getProductBySlug(slug);
+    let product;
+
+    try {
+      product = await getProductBySlug(slug);
+    } catch (e) {
+      if (e.message === errorSlugUnknownProduct) {
+        $goto("/404", null, true, false);
+        return;
+      }
+
+      throw e;
+    }
 
     $pageMeta.title = product.name;
     $pageMeta.description = product.description;
@@ -22,11 +37,13 @@
 <div class="page-width-wrapper">
   <div class="product-container">
     {#await product}
-      Loading...
+      <p class="status-message">Loading...</p>
     {:then Product}
       <ProductDetail product={Product} />
     {:catch}
-      Something went wrong.
+      <p class="status-message">
+        😓 Sorry. Something went wrong. Please try again later.
+      </p>
     {/await}
   </div>
 </div>
@@ -34,5 +51,9 @@
 <style>
   .product-container {
     margin: 10px auto;
+  }
+  .status-message {
+    font-size: 1.2em;
+    text-align: center;
   }
 </style>

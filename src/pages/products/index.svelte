@@ -1,19 +1,28 @@
 <script>
-  import { getAllProducts } from "../../services/Shop/Shop.js";
+  import { getAllProducts, getNullProduct } from "../../services/Shop/Shop.js";
 
   import ProductOverview from "../../components/Product/ProductOverview.svelte";
 
-  export let allProducts = getAllProducts();
+  let allProducts = getAllProducts();
+  let nullProduct = getNullProduct();
 </script>
 
 <div class="page-width-wrapper">
-  {#await allProducts then products}
-    <section id="products">
+  <section id="products">
+    {#await allProducts}
+      <ProductOverview product={nullProduct} />
+      <ProductOverview product={nullProduct} />
+      <ProductOverview product={nullProduct} />
+    {:then products}
       {#each products as product}
         <ProductOverview {product} />
       {/each}
-    </section>
-  {/await}
+    {:catch}
+      <p class="status-message">
+        😓 Sorry. Something went wrong. Please try again later.
+      </p>
+    {/await}
+  </section>
 </div>
 
 <style>
@@ -22,5 +31,10 @@
     width: 100%;
     flex-wrap: wrap;
     justify-content: center;
+  }
+  .status-message {
+    flex: 0 0 100%;
+    font-size: 1.2em;
+    text-align: center;
   }
 </style>
