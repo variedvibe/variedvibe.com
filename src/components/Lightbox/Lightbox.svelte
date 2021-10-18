@@ -14,16 +14,45 @@
     shown = !shown;
 
     document.body.classList.toggle("modal-open", shown);
+
+    if (shown) {
+      window.addEventListener("keydown", keyPressHandler);
+    } else {
+      window.removeEventListener("keydown", keyPressHandler);
+    }
   }
+
+  export function previous() {
+    hasPrevious && current--;
+  }
+
+  export function next() {
+    hasNext && current++;
+  }
+
+  function keyPressHandler(ev) {
+    switch (ev.key) {
+      case "Escape":
+        toggleShow();
+        break;
+      case "ArrowLeft":
+        previous();
+        break;
+      case "ArrowRight":
+        next();
+        break;
+    }
+  }
+
+  onDestroy(() => {
+    document.body.classList.remove("modal-open");
+    window.removeEventListener("keydown", keyPressHandler);
+  });
 
   $: getClass = () => (shown ? "shown" : "hidden");
   $: getImageClass = (index) => (index === current ? "active" : "");
   $: hasPrevious = current > 0;
   $: hasNext = current < images.length - 1;
-
-  onDestroy(() => {
-    document.body.classList.remove("modal-open");
-  });
 </script>
 
 <div class="container {getClass()}">
@@ -41,12 +70,12 @@
   <span
     id="previous"
     class="text-icon navigation {!hasPrevious && 'disabled'}"
-    on:click={() => current--}>&lt;</span
+    on:click={previous}>&lt;</span
   >
   <span
     id="next"
     class="text-icon navigation {!hasNext && 'disabled'}"
-    on:click={() => current++}>&gt;</span
+    on:click={next}>&gt;</span
   >
 </div>
 
