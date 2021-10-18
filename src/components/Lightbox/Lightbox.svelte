@@ -1,4 +1,6 @@
 <script>
+  import { onDestroy } from "svelte";
+
   /**
    * Should be an array of objects with {src, altText, title}.
    */
@@ -18,10 +20,14 @@
   $: getImageClass = (index) => (index === current ? "active" : "");
   $: hasPrevious = current > 0;
   $: hasNext = current < images.length - 1;
+
+  onDestroy(() => {
+    document.body.classList.remove("modal-open");
+  });
 </script>
 
 <div class="container {getClass()}">
-  <span id="close" on:click={toggleShow}>X</span>
+  <span id="close" class="text-icon" on:click={toggleShow}>X</span>
   <div id="image" on:click={toggleShow}>
     {#each images as image, i}
       <img
@@ -34,12 +40,12 @@
   </div>
   <span
     id="previous"
-    class="navigation {!hasPrevious && 'disabled'}"
+    class="text-icon navigation {!hasPrevious && 'disabled'}"
     on:click={() => current--}>&lt;</span
   >
   <span
     id="next"
-    class="navigation {!hasNext && 'disabled'}"
+    class="text-icon navigation {!hasNext && 'disabled'}"
     on:click={() => current++}>&gt;</span
   >
 </div>
@@ -64,22 +70,34 @@
   .container.hidden {
     display: none;
   }
-  #close {
+  .text-icon {
     display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    font-family: ui-monospace, monospace, ui-sans-serif, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 0 1px var(--black);
+    color: var(--white);
+  }
+  .text-icon:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  @media (max-width: 600px) {
+    .text-icon {
+      padding: 5px;
+    }
+  }
+  #close {
     position: absolute;
     z-index: 1010;
     top: 0;
     right: 0;
     width: 1em;
     height: 1em;
-    padding: 10px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-family: monospace;
-    font-size: 14px;
-    font-weight: bold;
   }
   #image {
     flex: 1;
@@ -96,19 +114,10 @@
     display: block;
   }
   .navigation {
-    display: flex;
     position: absolute;
     z-index: 1005;
     width: 1em;
     height: 100%;
-    padding: 10px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-family: monospace;
-    font-size: 14px;
-    font-weight: bold;
   }
   .navigation.disabled {
     display: none;
