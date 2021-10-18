@@ -50,7 +50,7 @@
 
 <style>
   .product-container {
-    margin: 10px auto;
+    margin: 0 auto;
   }
   .status-message {
     font-size: 1.2em;

@@ -30,7 +30,8 @@
     display: block;
     position: relative;
     font-size: 16px;
-    margin: 40px 60px;
+    margin: 60px;
+    margin-top: 0;
     text-align: center;
   }
   .product.disabled {

@@ -13,7 +13,7 @@
 
 <Hero />
 
-<aside id="main-blurb">Something something something should be here...</aside>
+<aside id="main-blurb">It's a VIBE. What's yours?</aside>
 
 <div class="page-width-wrapper">
   <section id="products">
@@ -37,9 +37,10 @@
   #main-blurb {
     display: block;
     width: 100%;
-    margin: 0 auto;
-    padding: 20px 0;
+    margin: 30px auto;
     text-align: center;
+    font-size: 1.5em;
+    font-style: italic;
   }
   #products {
     display: flex;
