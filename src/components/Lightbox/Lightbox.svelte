@@ -147,6 +147,9 @@
     z-index: 1005;
     width: 1em;
     height: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 20px;
   }
   .navigation.disabled {
     display: none;
@@ -156,5 +159,19 @@
   }
   .navigation#next {
     right: 0;
+  }
+
+  /* Touch-only devices get larger padding, to provide larger touch targets. */
+  @media (hover: none) {
+    #close {
+      padding-left: 15px;
+      padding-bottom: 15px;
+    }
+    .navigation#previous {
+      padding-right: 20%;
+    }
+    .navigation#next {
+      padding-left: 20%;
+    }
   }
 </style>
