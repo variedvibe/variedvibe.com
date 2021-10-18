@@ -16,6 +16,8 @@
 
   $: getClass = () => (shown ? "shown" : "hidden");
   $: getImageClass = (index) => (index === current ? "active" : "");
+  $: hasPrevious = current > 0;
+  $: hasNext = current < images.length - 1;
 </script>
 
 <div class="container {getClass()}">
@@ -30,6 +32,16 @@
       />
     {/each}
   </div>
+  <span
+    id="previous"
+    class="navigation {!hasPrevious && 'disabled'}"
+    on:click={() => current--}>&lt;</span
+  >
+  <span
+    id="next"
+    class="navigation {!hasNext && 'disabled'}"
+    on:click={() => current++}>&gt;</span
+  >
 </div>
 
 <style>
@@ -55,6 +67,7 @@
   #close {
     display: flex;
     position: absolute;
+    z-index: 1010;
     top: 0;
     right: 0;
     width: 1em;
@@ -81,5 +94,29 @@
   }
   img.active {
     display: block;
+  }
+  .navigation {
+    display: flex;
+    position: absolute;
+    z-index: 1005;
+    width: 1em;
+    height: 100%;
+    padding: 10px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .navigation.disabled {
+    display: none;
+  }
+  .navigation#previous {
+    left: 0;
+  }
+  .navigation#next {
+    right: 0;
   }
 </style>
