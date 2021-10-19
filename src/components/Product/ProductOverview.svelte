@@ -81,5 +81,10 @@
       animation-direction: alternate;
       animation-fill-mode: both;
     }
+
+    /* Reset normal hover effects, so mobile doesn't try and show them */
+    .product:hover img.alt-image {
+      opacity: unset;
+    }
   }
 </style>

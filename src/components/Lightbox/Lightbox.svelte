@@ -173,5 +173,10 @@
     .navigation#next {
       padding-left: 20%;
     }
+
+    /* Reset normal hover effects, so mobile doesn't try and show them */
+    .text-icon:hover {
+      background-color: unset;
+    }
   }
 </style>

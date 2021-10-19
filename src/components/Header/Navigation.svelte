@@ -84,6 +84,12 @@
   a:hover {
     color: var(--gray-mid);
   }
+  @media (hover: none) {
+    /* Reset normal hover effects, so mobile doesn't try and show them */
+    a:hover {
+      color: var(--white);
+    }
+  }
   a:active {
     color: var(--gray-dark);
   }

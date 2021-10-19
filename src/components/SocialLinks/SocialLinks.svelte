@@ -83,6 +83,12 @@
   a.social-icon:hover {
     filter: invert(100%) brightness(47.5%);
   }
+  @media (hover: none) {
+    /* Reset normal hover effects, so mobile doesn't try and show them */
+    a.social-icon:hover {
+      filter: invert(100%) brightness(33.33%);
+    }
+  }
 
   a.social-icon.icon-instagram {
     background-image: url("/assets/social-icons/instagram.svg");
