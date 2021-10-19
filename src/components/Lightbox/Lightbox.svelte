@@ -111,6 +111,7 @@
     font-weight: bold;
     text-shadow: 0 0 1px var(--black);
     color: var(--white);
+    user-select: none;
   }
   .text-icon:hover {
     background-color: rgba(0, 0, 0, 0.2);
