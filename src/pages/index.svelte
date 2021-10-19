@@ -39,6 +39,7 @@
     width: 100%;
     margin: 30px auto;
     text-align: center;
+    font-family: var(--main-font-title);
     font-size: 1.5em;
     font-style: italic;
   }

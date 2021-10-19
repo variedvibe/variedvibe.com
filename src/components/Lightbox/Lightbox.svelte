@@ -106,7 +106,7 @@
     justify-content: center;
     text-align: center;
     cursor: pointer;
-    font-family: ui-monospace, monospace, ui-sans-serif, sans-serif;
+    font-family: var(--main-font-ui-icons);
     font-size: 14px;
     font-weight: bold;
     text-shadow: 0 0 1px var(--black);

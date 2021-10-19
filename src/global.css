@@ -21,6 +21,7 @@
     sans-serif;
   --main-font-title: roboto, -apple-system, blinkmacsystemfont, "San Francisco",
     "Helvetica Neue", "Segoe UI", helvetica, arial, sans-serif;
+  --main-font-ui-icons: ui-monospace, monospace, ui-sans-serif, sans-serif;
   --animation-speed-normal: 500ms;
   --animation-speed-fast: 250ms;
   --animation-speed-slow: 750ms;
@@ -80,6 +81,15 @@ a:hover {
 
 a:active {
   color: var(--gray-dark);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--main-font-title);
 }
 
 h1 {

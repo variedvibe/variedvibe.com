@@ -22,7 +22,7 @@
       src={product.images[1].src}
     />
   {/if}
-  {product.name}
+  <p>{product.name}</p>
 </a>
 
 <style>
@@ -43,7 +43,7 @@
     height: 375px;
     object-fit: cover;
     background-color: var(--gray-mid);
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
   .product img.alt-image {
     position: absolute;
@@ -57,6 +57,10 @@
   }
   .product:hover img.alt-image {
     opacity: 1;
+  }
+  .product p {
+    margin: 0 auto;
+    font-family: var(--main-font-title);
   }
 
   /* Touch-only devices can't really "hover". So fallback to an automatic
