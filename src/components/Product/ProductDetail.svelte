@@ -53,8 +53,8 @@
   }
   .media img {
     display: inline-block;
-    max-width: 375px;
-    max-height: 375px;
+    width: calc(50% - 10px);
+    height: auto;
     margin: 5px;
     object-fit: cover;
     background-color: var(--gray-mid);
@@ -93,9 +93,7 @@
       text-align: center;
     }
     .media img {
-      /* Below should override, but this is if `calc()` fails (old browsers) */
-      max-width: 100%;
-      max-width: calc(100% - 2.5px);
+      width: calc(50% - 5px);
       margin: 2.5px;
     }
   }
