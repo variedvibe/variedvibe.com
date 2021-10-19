@@ -7,6 +7,7 @@
     src: image.src,
     altText: image.altText,
     title: product.name,
+    srcSet: image.srcSet,
   }));
 
   let lightbox;
@@ -20,6 +21,7 @@
         alt={image.altText ?? product.name}
         title={product.name}
         src={image.src}
+        srcset={image.srcSet}
         on:click={lightbox.toggleShow(i)}
       />
     {/each}

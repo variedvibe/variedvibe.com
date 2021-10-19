@@ -13,6 +13,7 @@
     alt={product.images[0]?.altText ?? product.name}
     title={product.name}
     src={product.images[0]?.src}
+    srcset={product.images[0]?.srcSet}
   />
   {#if product.images[1]}
     <img
@@ -20,6 +21,7 @@
       alt={product.images[1].altText ?? product.name}
       title={product.name}
       src={product.images[1].src}
+      srcset={product.images[1].srcSet}
     />
   {/if}
   <p>{product.name}</p>

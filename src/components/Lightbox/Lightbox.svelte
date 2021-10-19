@@ -2,7 +2,7 @@
   import { onDestroy } from "svelte";
 
   /**
-   * Should be an array of objects with {src, altText, title}.
+   * Should be an array of objects with {src, altText, title, srcSet}.
    */
   export let images;
   export let current = 0;
@@ -64,6 +64,7 @@
         alt={image.altText}
         title={image.title}
         src={image.src}
+        srcset={image.srcSet}
       />
     {/each}
   </div>
