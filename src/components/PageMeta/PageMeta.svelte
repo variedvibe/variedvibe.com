@@ -4,7 +4,7 @@
 
   const mainTitle = "Varied Vibe.";
   const mainTagline = "It's a VIBE. What's yours?";
-  const mainDescription = mainTagline; // TODO: Write a full description.
+  const mainDescription = "Denver apparel co. It's a VIBE. What's yours?";
   const defaultType = "website";
 
   // Give optional props `null` default values
