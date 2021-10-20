@@ -31,8 +31,6 @@
   .product {
     display: block;
     position: relative;
-    margin: 60px 30px;
-    margin-top: 0;
     text-align: center;
   }
   .product.disabled {
