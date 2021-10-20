@@ -7,6 +7,10 @@
 
   import { pageMeta } from "../../components/PageMeta/stores.js";
   import ProductDetail from "../../components/Product/ProductDetail.svelte";
+  import StatusMessage, {
+    messageLoading,
+    messageErrorGeneric,
+  } from "../../components/StatusMessage/StatusMessage.svelte";
 
   export let slug;
 
@@ -37,13 +41,11 @@
 <div class="page-width-wrapper">
   <div class="product-container">
     {#await product}
-      <p class="status-message">Loading...</p>
+      <StatusMessage message={messageLoading} />
     {:then Product}
       <ProductDetail product={Product} />
     {:catch}
-      <p class="status-message">
-        😓 Sorry. Something went wrong. Please try again later.
-      </p>
+      <StatusMessage message={messageErrorGeneric} />
     {/await}
   </div>
 </div>
@@ -51,9 +53,5 @@
 <style>
   .product-container {
     margin: 0 auto;
-  }
-  .status-message {
-    font-size: var(--important-font-size);
-    text-align: center;
   }
 </style>

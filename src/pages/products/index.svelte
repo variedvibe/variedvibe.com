@@ -2,6 +2,9 @@
   import { getAllProducts, getNullProduct } from "../../services/Shop/Shop.js";
 
   import ProductOverview from "../../components/Product/ProductOverview.svelte";
+  import StatusMessage, {
+    messageErrorGeneric,
+  } from "../../components/StatusMessage/StatusMessage.svelte";
 
   let allProducts = getAllProducts();
   let nullProduct = getNullProduct();
@@ -18,9 +21,7 @@
         <ProductOverview {product} />
       {/each}
     {:catch}
-      <p class="status-message">
-        😓 Sorry. Something went wrong. Please try again later.
-      </p>
+      <StatusMessage message={messageErrorGeneric} />
     {/await}
   </section>
 </div>
@@ -34,10 +35,5 @@
     /* Use space-between as a fallback if space-evenly isn't available */
     justify-content: space-between;
     justify-content: space-evenly;
-  }
-  .status-message {
-    flex: 0 0 100%;
-    font-size: var(--important-font-size);
-    text-align: center;
   }
 </style>
