@@ -38,20 +38,18 @@
   export let product = fetchProduct(slug);
 </script>
 
-<div class="page-width-wrapper">
-  <div class="product-container">
-    {#await product}
-      <StatusMessage message={messageLoading} />
-    {:then Product}
-      <ProductDetail product={Product} />
-    {:catch}
-      <StatusMessage message={messageErrorGeneric} />
-    {/await}
-  </div>
+<div id="container" class="page-width-wrapper">
+  {#await product}
+    <StatusMessage message={messageLoading} />
+  {:then Product}
+    <ProductDetail product={Product} />
+  {:catch}
+    <StatusMessage message={messageErrorGeneric} />
+  {/await}
 </div>
 
 <style>
-  .product-container {
+  #container {
     margin: 0 auto;
   }
 </style>
