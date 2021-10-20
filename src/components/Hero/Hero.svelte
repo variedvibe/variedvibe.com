@@ -61,6 +61,6 @@
     background-position: center;
     background-size: contain;
     backdrop-filter: contrast(0.85);
-    z-index: 100;
+    z-index: 20;
   }
 </style>
