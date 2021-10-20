@@ -47,7 +47,10 @@
     display: flex;
     width: 100%;
     flex-wrap: wrap;
-    justify-content: center;
+
+    /* Use space-between as a fallback if space-evenly isn't available */
+    justify-content: space-between;
+    justify-content: space-evenly;
   }
   .status-message {
     flex: 0 0 100%;
