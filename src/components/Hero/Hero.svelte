@@ -1,7 +1,7 @@
 <script>
   const defaultBackgroundColor = "#e0e0e0"; // Hard-coded to match the image
   const defaultImageSrc =
-    "/assets/hero-images/Varied Vibe Shoot - Reeves Flower - Tight Crop - Uniform Background.jpg";
+    "/assets/hero-images/Varied Vibe Shoot - Reeves Flower - Uniform Background.jpg";
 
   export let backgroundColor = defaultBackgroundColor;
   export let imageSrc = defaultImageSrc;
@@ -61,6 +61,7 @@
     background-position: center;
     background-size: contain;
     backdrop-filter: contrast(0.85);
+    filter: drop-shadow(0px 0px 5px var(--gray-mid-darker));
     z-index: 20;
   }
 </style>
