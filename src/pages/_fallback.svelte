@@ -19,7 +19,7 @@
     text-align: center;
   }
   p {
-    font-size: 1.2em;
+    font-size: var(--important-font-size);
   }
   .go-home {
     font-weight: bold;

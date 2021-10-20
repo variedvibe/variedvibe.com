@@ -53,7 +53,7 @@
     margin: 0 auto;
   }
   .status-message {
-    font-size: 1.2em;
+    font-size: var(--important-font-size);
     text-align: center;
   }
 </style>

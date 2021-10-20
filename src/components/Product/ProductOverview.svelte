@@ -31,7 +31,6 @@
   .product {
     display: block;
     position: relative;
-    font-size: 16px;
     margin: 60px 30px;
     margin-top: 0;
     text-align: center;

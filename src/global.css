@@ -22,6 +22,10 @@
   --main-font-title: roboto, -apple-system, blinkmacsystemfont, "San Francisco",
     "Helvetica Neue", "Segoe UI", helvetica, arial, sans-serif;
   --main-font-ui-icons: ui-monospace, monospace, ui-sans-serif, sans-serif;
+  --normal-font-size: 16px;
+  --heading-font-size: 2em;
+  --important-font-size: 1.2em;
+  --small-font-size: 0.8em;
   --animation-speed-normal: 500ms;
   --animation-speed-fast: 250ms;
   --animation-speed-slow: 750ms;
@@ -47,6 +51,7 @@ body {
   justify-content: center;
   background: var(--main-bg-color);
   font-family: var(--main-font-normal);
+  font-size: var(--main-font-size);
   color: var(--main-fg-color);
 }
 
@@ -93,8 +98,8 @@ h6 {
 }
 
 h1 {
-  font-size: 2em;
   margin: 20px 0;
+  font-size: var(--heading-font-size);
 }
 
 html::-webkit-scrollbar {

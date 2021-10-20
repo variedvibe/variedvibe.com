@@ -32,7 +32,7 @@
     margin-top: 50px;
     padding: 30px 0;
     text-align: center;
-    font-size: 14px;
+    font-size: var(--small-font-size);
     color: var(--gray-mid-dark);
   }
   #bottom-social-links {

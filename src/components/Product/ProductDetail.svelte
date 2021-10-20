@@ -38,7 +38,6 @@
   .product {
     display: flex;
     width: auto;
-    font-size: 16px;
   }
   .product h1 {
     text-align: center;
