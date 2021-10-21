@@ -1,7 +1,7 @@
 <script>
   const defaultBackgroundColor = "#e0e0e0"; // Hard-coded to match the image
   const defaultImageSrc =
-    "/assets/hero-images/Varied Vibe Shoot - Reeves Flower - Uniform Background.jpg";
+    "/assets/hero-images/reeves-flower-uniform-background.jpg";
 
   export let backgroundColor = defaultBackgroundColor;
   export let imageSrc = defaultImageSrc;

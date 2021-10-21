@@ -50,7 +50,7 @@
     display: inline-block;
     align-self: center;
     height: 80px;
-    background-image: url("/assets/Varied Vibe - Logo - Horizontal (Optimized).svg");
+    background-image: url("/assets/logo-horizontal.svg");
     background-repeat: no-repeat;
     background-position: left center;
     background-size: contain;
