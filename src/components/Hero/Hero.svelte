@@ -2,15 +2,28 @@
   const defaultBackgroundColor = "#e0e0e0"; // Hard-coded to match the image
   const defaultImageSrc =
     "/assets/hero-images/reeves-flower-uniform-background.jpg";
+  const defaultImageSrcSet = [
+    "/assets/hero-images/reeves-flower-uniform-background_250x.jpg 250w",
+    "/assets/hero-images/reeves-flower-uniform-background_500x.jpg 500w",
+    "/assets/hero-images/reeves-flower-uniform-background_750x.jpg 750w",
+    "/assets/hero-images/reeves-flower-uniform-background_1000x.jpg 1000w",
+    "/assets/hero-images/reeves-flower-uniform-background_2000x.jpg 2000w",
+    "/assets/hero-images/reeves-flower-uniform-background_4000x.jpg 4000w",
+  ].join(", ");
 
   export let backgroundColor = defaultBackgroundColor;
   export let imageSrc = defaultImageSrc;
+  export let imageSrcSet = "";
   export let addNoise = true;
   export let addVibeOverlay = true;
+
+  if (!imageSrcSet && imageSrc === defaultImageSrc) {
+    imageSrcSet = defaultImageSrcSet;
+  }
 </script>
 
 <section id="hero" style="--background-color: {backgroundColor}">
-  <img alt="hero" src={imageSrc} />
+  <img alt="hero" srcset={imageSrcSet} src={imageSrc} />
   {#if addNoise}
     <div id="noise-filter" class="overlay" />
   {/if}
