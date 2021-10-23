@@ -66,7 +66,8 @@ clientsClaim(); // take control of client without having to wait for refresh
  **********/
 
 // serve local pages from the SPA entry point (__app.html)
-registerRoute(isLocalPage, matchPrecache(entrypointUrl));
+// TODO: Investigate why this isn't working...
+//registerRoute(isLocalPage, matchPrecache(entrypointUrl));
 
 // serve local assets from cache first
 registerRoute(isLocalAsset, new CacheFirst());
