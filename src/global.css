@@ -21,7 +21,9 @@
     sans-serif;
   --main-font-title: roboto, -apple-system, blinkmacsystemfont, "San Francisco",
     "Helvetica Neue", "Segoe UI", helvetica, arial, sans-serif;
-  --main-font-ui-icons: ui-monospace, monospace, ui-sans-serif, sans-serif;
+  --main-font-ui-icons: ui-monospace, menlo, monaco, "Cascadia Mono",
+    "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
+    "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
   --normal-font-size: 16px;
   --heading-font-size: 2em;
   --important-font-size: 1.2em;
