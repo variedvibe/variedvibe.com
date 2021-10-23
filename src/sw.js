@@ -19,7 +19,7 @@ import { RoutifyPlugin, freshCacheData } from "@roxi/routify/workbox-plugin";
  * CONFIG *
  **********/
 
-const entrypointUrl = "__app.html"; // entrypoint
+const entrypointUrl = "index.html"; // entrypoint
 const fallbackImage = "404.svg";
 const files = self.__WB_MANIFEST; // files matching globDirectory and globPattern in rollup.config.js
 
