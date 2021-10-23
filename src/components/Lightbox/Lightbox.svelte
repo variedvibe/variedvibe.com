@@ -56,7 +56,9 @@
 </script>
 
 <div class="container {getClass()}">
-  <span id="close" class="text-icon" on:click={toggleShow}>X</span>
+  <div id="close" class="ui-action" on:click={toggleShow}>
+    <span class="ui-icon" />
+  </div>
   <div id="image" on:click={toggleShow}>
     {#each images as image, i}
       <img
@@ -68,16 +70,20 @@
       />
     {/each}
   </div>
-  <span
+  <div
     id="previous"
-    class="text-icon navigation {!hasPrevious && 'disabled'}"
-    on:click={previous}>&lt;</span
+    class="ui-action navigation {!hasPrevious && 'disabled'}"
+    on:click={previous}
   >
-  <span
+    <span class="ui-icon" />
+  </div>
+  <div
     id="next"
-    class="text-icon navigation {!hasNext && 'disabled'}"
-    on:click={next}>&gt;</span
+    class="ui-action navigation {!hasNext && 'disabled'}"
+    on:click={next}
   >
+    <span class="ui-icon" />
+  </div>
 </div>
 
 <style>
@@ -100,35 +106,45 @@
   .container.hidden {
     display: none;
   }
-  .text-icon {
+  .ui-action {
     display: flex;
-    padding: 10px;
+    padding: 15px;
     align-items: center;
     justify-content: center;
     text-align: center;
     cursor: pointer;
-    font-family: var(--main-font-ui-icons);
-    font-size: 14px;
-    font-weight: bold;
-    text-shadow: 0 0 1px var(--black);
-    color: var(--white);
     user-select: none;
   }
-  .text-icon:hover {
+  .ui-action::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 1.5em;
+    height: 1.5em;
+    background-color: rgba(64, 64, 64, 0.4);
+    border: 1px solid transparent;
+    border-radius: 100px;
+  }
+  .ui-action:hover {
     background-color: rgba(0, 0, 0, 0.2);
   }
-  @media (max-width: 600px) {
-    .text-icon {
-      padding: 5px;
-    }
+  .ui-action .ui-icon {
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
   }
   #close {
     position: absolute;
     z-index: 1010;
     top: 0;
     right: 0;
-    width: 1em;
-    height: 1em;
+  }
+  #close .ui-icon {
+    width: 0.6em;
+    height: 0.6em;
+    background-image: url("/assets/ui-icons/close-line.svg");
+    filter: invert(1);
   }
   #image {
     flex: 1;
@@ -147,27 +163,37 @@
   .navigation {
     position: absolute;
     z-index: 1005;
-    width: 1em;
     height: 100%;
     padding-top: 0;
     padding-bottom: 0;
-    font-size: 20px;
   }
   .navigation.disabled {
     display: none;
   }
+  .navigation .ui-icon {
+    width: 0.6em;
+    height: 0.6em;
+  }
   .navigation#previous {
     left: 0;
   }
+  .navigation#previous .ui-icon {
+    background-image: url("/assets/ui-icons/angle-left-arrow-line.svg");
+    filter: invert(1);
+  }
   .navigation#next {
     right: 0;
+  }
+  .navigation#next .ui-icon {
+    background-image: url("/assets/ui-icons/angle-right-arrow-line.svg");
+    filter: invert(1);
   }
 
   /* Touch-only devices get larger padding, to provide larger touch targets. */
   @media (hover: none) {
     #close {
-      padding-left: 15px;
-      padding-bottom: 15px;
+      padding-left: 18px;
+      padding-bottom: 18px;
     }
     .navigation#previous {
       padding-right: 20%;
@@ -177,7 +203,7 @@
     }
 
     /* Reset normal hover effects, so mobile doesn't try and show them */
-    .text-icon:hover {
+    .ui-action:hover {
       background-color: unset;
     }
   }
