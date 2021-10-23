@@ -14,7 +14,11 @@
 
 <header>
   <div class="page-width-wrapper">
-    <a href={$url("/")} id="main-logo"><!-- logo --></a>
+    <h1 id="main-logo">
+      <a href={$url("/")} title="Go Home"
+        ><i><u class="visually-hidden">Varied Vibe.</u></i></a
+      >
+    </h1>
 
     <nav id="top-site-nav">
       <Navigation maxDepth="1" items={navItems} />
@@ -50,6 +54,8 @@
     display: inline-block;
     align-self: center;
     height: 80px;
+    padding: 0;
+    margin: 0;
     background-image: url("/assets/logo-horizontal.svg");
     background-repeat: no-repeat;
     background-position: left center;
@@ -64,6 +70,11 @@
     #main-logo {
       height: 60px;
     }
+  }
+  #main-logo a {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
   nav#top-site-nav {
     flex: 2;

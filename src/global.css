@@ -25,7 +25,8 @@
     "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
     "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
   --normal-font-size: 16px;
-  --heading-font-size: 2em;
+  --heading-primary-font-size: 2em;
+  --heading-secondary-font-size: 1.5em;
   --important-font-size: 1.2em;
   --small-font-size: 0.8em;
   --animation-speed-normal: 500ms;
@@ -100,8 +101,16 @@ h6 {
 }
 
 h1 {
+  /* NOTE: We should reserve this for our header logo */
+}
+
+h2 {
   margin: 20px 0;
-  font-size: var(--heading-font-size);
+  font-size: var(--heading-primary-font-size);
+}
+
+h3 {
+  font-size: var(--heading-secondary-font-size);
 }
 
 html::-webkit-scrollbar {
@@ -143,6 +152,17 @@ html::-webkit-scrollbar-thumb:active {
   .page-width-wrapper {
     padding: 0 5px;
   }
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 
 .modal-open {

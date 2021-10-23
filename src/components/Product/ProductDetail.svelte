@@ -14,7 +14,7 @@
 </script>
 
 <div class="product">
-  <h1 class="mobile-header">{product.name}</h1>
+  <h2 class="mobile-header">{product.name}</h2>
   <div class="media">
     {#each product.images as image, i}
       <img
@@ -27,7 +27,7 @@
     {/each}
   </div>
   <div class="details">
-    <h1>{product.name}</h1>
+    <h2>{product.name}</h2>
     <p>{@html product.descriptionHtml}</p>
   </div>
 </div>
@@ -39,7 +39,7 @@
     display: flex;
     width: auto;
   }
-  .product h1 {
+  .product h2 {
     text-align: center;
     margin-top: 0;
   }
@@ -86,7 +86,7 @@
     .mobile-header {
       display: unset;
     }
-    .details h1 {
+    .details h2 {
       display: none;
     }
     .media {

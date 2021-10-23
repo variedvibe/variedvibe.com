@@ -5,7 +5,7 @@
 <Hero />
 
 <div id="container" class="page-width-wrapper">
-  <h1>About Us</h1>
+  <h2>About Us</h2>
 
   <p>
     Founded in Denver, Colorado, in 2021, three friends came up with the idea to

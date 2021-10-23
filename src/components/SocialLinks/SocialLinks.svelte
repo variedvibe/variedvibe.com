@@ -11,8 +11,10 @@
       title="Instagram - Varied Vibe."
       target="_blank"
       rel="noopener"
-      href="https://www.instagram.com/variedvibe/"><!-- icon --></a
+      href="https://www.instagram.com/variedvibe/"
     >
+      <i><u class="visually-hidden">Instagram - Varied Vibe.</u></i>
+    </a>
   </li>
   <li>
     <a
@@ -20,8 +22,10 @@
       title="Twitter - Varied Vibe."
       target="_blank"
       rel="noopener"
-      href="https://twitter.com/VariedVibe"><!-- icon --></a
+      href="https://twitter.com/VariedVibe"
     >
+      <i><u class="visually-hidden">Twitter - Varied Vibe.</u></i>
+    </a>
   </li>
   <li>
     <a
@@ -29,8 +33,10 @@
       title="Facebook - Varied Vibe."
       target="_blank"
       rel="noopener"
-      href="https://www.facebook.com/VariedVibe/"><!-- icon --></a
+      href="https://www.facebook.com/VariedVibe/"
     >
+      <i><u class="visually-hidden">Facebook - Varied Vibe.</u></i>
+    </a>
   </li>
   <li>
     <a
@@ -38,8 +44,10 @@
       title="GitHub - Varied Vibe."
       target="_blank"
       rel="noopener"
-      href="https://github.com/variedvibe"><!-- icon --></a
+      href="https://github.com/variedvibe"
     >
+      <i><u class="visually-hidden">GitHub - Varied Vibe.</u></i>
+    </a>
   </li>
 </ul>
 

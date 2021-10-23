@@ -7,7 +7,7 @@
 <Hero />
 
 <div class="container">
-  <h1>Hmmm... You seem lost.</h1>
+  <h2>Hmmm... You seem lost.</h2>
   <p>
     Let's try bringing you back <a class="go-home" href={$url("/")}>home</a>.
   </p>

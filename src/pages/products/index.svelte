@@ -14,7 +14,7 @@
 </script>
 
 <div id="container" class="page-width-wrapper">
-  <h1>Products</h1>
+  <h2>Products</h2>
 
   {#await featuredProducts}
     <ProductGroup products={nullProducts} />
