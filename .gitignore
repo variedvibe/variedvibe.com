@@ -9,4 +9,3 @@ node_modules
 
 # Build files
 dist/
-public/sw.generated.js

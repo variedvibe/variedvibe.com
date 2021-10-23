@@ -22,7 +22,7 @@
     "dev:vite": "vite",
     "build:vite": "vite build",
     "serve:vite": "vite preview",
-    "build:pwa-bundle": "esbuild --bundle src/sw.js --outfile=public/sw.generated.js --define:process.env.NODE_ENV=\"'production'\"",
+    "build:pwa-bundle": "esbuild --bundle src/sw.js --outfile=dist/sw.generated.js --define:process.env.NODE_ENV=\"'production'\"",
     "build:pwa-inject": "workbox injectManifest",
     "build-static:spank": "spank"
   },
