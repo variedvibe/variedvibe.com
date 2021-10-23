@@ -6,3 +6,7 @@ node_modules
 
 # Dev runtime files
 .routify
+
+# Build files
+dist/
+public/sw.generated.js
