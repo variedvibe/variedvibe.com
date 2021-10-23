@@ -1,0 +1,6 @@
+# Redirect all URLs to our index, so that our SPA (JS) router handle it.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
