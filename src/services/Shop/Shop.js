@@ -2,12 +2,15 @@ import Client from "shopify-buy";
 
 import { Product, ProductImage } from "./product.js";
 
-const featuredProductCollectionHandle = import.meta.env
-  .VITE_SHOPIFY_FEATURED_COLLECTION_HANDLE;
+const featuredProductCollectionHandle =
+  import.meta.env.VITE_SHOPIFY_FEATURED_COLLECTION_HANDLE ??
+  import.meta.env.SHOPIFY_FEATURED_COLLECTION_HANDLE;
 
 const shopifyClient = Client.buildClient({
-  domain: import.meta.env.VITE_SHOPIFY_DOMAIN,
-  storefrontAccessToken: import.meta.env.VITE_SHOPIFY_STOREFRONT_API_TOKEN,
+  domain: import.meta.env.VITE_SHOPIFY_DOMAIN ?? import.meta.env.SHOPIFY_DOMAIN,
+  storefrontAccessToken:
+    import.meta.env.VITE_SHOPIFY_STOREFRONT_API_TOKEN ??
+    import.meta.env.SHOPIFY_STOREFRONT_API_TOKEN,
 });
 
 /**

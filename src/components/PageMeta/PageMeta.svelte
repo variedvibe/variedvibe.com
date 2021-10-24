@@ -6,6 +6,15 @@
   const mainTagline = "It's a VIBE. What's yours?";
   const mainDescription = "Denver apparel co. It's a VIBE. What's yours?";
   const defaultType = "website";
+  const baseUrl = new URL(
+    import.meta.env.VITE_BASE_URL ??
+      import.meta.env.BASE_URL ??
+      "https://variedvibe.com/"
+  );
+  const defaultImageSrc = new URL(
+    "/assets/logo-horizontal.svg",
+    baseUrl
+  ).toString();
 
   // Give optional props `null` default values
   export let title = null;
@@ -25,9 +34,15 @@
     title || $page.meta.title || $page.parent.meta.title || mainTagline;
   $: $pageMeta.description =
     description || $page.meta.description || $page.parent.meta.description;
-  $: $pageMeta.type = type || defaultType;
-  $: $pageMeta.url = canonicalUrl || $url($page.path);
-  $: $pageMeta.image = image;
+  $: $pageMeta.type =
+    type || $page.meta.image || $page.parent.meta.image || defaultType;
+  $: $pageMeta.url =
+    canonicalUrl ||
+    $page.meta.url ||
+    $page.parent.meta.url ||
+    $url(new URL($page.path, baseUrl).toString());
+  $: $pageMeta.image =
+    image || $page.meta.image || $page.parent.meta.image || defaultImageSrc;
 
   // Set the meta tags
   $: metatags.title = $pageMeta.title

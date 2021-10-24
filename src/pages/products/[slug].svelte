@@ -30,7 +30,7 @@
 
     $pageMeta.title = product.name;
     $pageMeta.description = product.description;
-    $pageMeta.image = product.images[0];
+    $pageMeta.image = product.images[0]?.src;
 
     return product;
   }
