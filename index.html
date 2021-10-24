@@ -49,7 +49,10 @@
       from our other meta tags, to prevent redundancy and maintenance headaches.
     -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/assets/logo-horizontal.svg" />
+    <meta
+      property="og:image"
+      content="<%= new URL('/assets/logo-horizontal.svg', baseUrl).toString() %>"
+    />
   </head>
 
   <body>

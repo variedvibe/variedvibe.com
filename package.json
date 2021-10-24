@@ -45,6 +45,7 @@
     "svelte-hmr": "^0.14.4",
     "vite": "^2.3.7",
     "vite-main-js": "^0.0.1",
+    "vite-plugin-html": "^2.1.1",
     "workbox-cli": "^6.1.0"
   },
   "dependencies": {
