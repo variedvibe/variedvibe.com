@@ -51,6 +51,12 @@
     padding: 0;
     margin: 0 10px;
   }
+  li:first-child {
+    margin-left: 0;
+  }
+  li:last-child {
+    margin-right: 0;
+  }
   @media (max-width: 300px) {
     ul {
       font-size: 12px;
