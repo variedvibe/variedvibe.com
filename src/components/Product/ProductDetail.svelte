@@ -51,12 +51,15 @@
     line-height: 0;
     text-align: left;
     align-items: start;
+    margin-top: -10px;
+    margin-left: -10px;
   }
   .media img {
     display: inline-block;
     width: calc(50% - 10px);
     height: auto;
-    margin: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
     object-fit: cover;
     background-color: var(--gray-mid);
     vertical-align: top;
@@ -64,7 +67,7 @@
   }
   .details {
     flex: 2;
-    margin: 0px 20px;
+    margin-left: 20px;
   }
   .details :global(ul) {
     padding-inline-start: 25px;
@@ -75,7 +78,6 @@
     }
     .details {
       flex: 2;
-      margin: 0px 10px;
     }
   }
   @media (max-width: 600px) {
@@ -86,16 +88,22 @@
     .mobile-header {
       display: unset;
     }
+    .details {
+      margin: 0 10px;
+    }
     .details h2 {
       display: none;
     }
     .media {
       align-items: center;
       text-align: center;
+      margin-top: -5px;
+      margin-left: -5px;
     }
     .media img {
       width: calc(50% - 5px);
-      margin: 2.5px;
+      margin-top: 5px;
+      margin-left: 5px;
     }
   }
 </style>
