@@ -1,0 +1,55 @@
+/*
+ * Import the global CSS for dev.
+ *
+ * Testing with JS disabled doesn't properly run our src inclusions, so include
+ * them manually here.
+ *
+ * Normally I wouldn't leave a comment like this in, but its just for no-script.
+ */
+
+/* @import "/src/global.css"; */
+
+noscript.noscript-message {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+
+noscript.noscript-message .container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+  margin: 5%;
+}
+
+noscript.noscript-message .logo {
+  display: inline-block;
+  align-self: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  object-fit: contain;
+}
+
+noscript.noscript-message p {
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 0;
+}
+
+noscript.noscript-message span.break {
+  display: inline-block;
+}
+
+noscript.noscript-message a {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 0.1em;
+}

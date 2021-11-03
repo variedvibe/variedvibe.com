@@ -53,10 +53,32 @@
       property="og:image"
       content="<%= new URL('/assets/open-graph-image.png', baseUrl).toString() %>"
     />
+
+    <noscript>
+      <link rel="stylesheet" href="/noscript.css" />
+    </noscript>
   </head>
 
   <body>
-    <noscript>Please enable Javascript for the best experience.</noscript>
+    <noscript class="noscript-message">
+      <div class="container">
+        <img class="logo" alt="Logo" src="/assets/logo-horizontal.svg" />
+        <p>
+          <span class="break">This app requires JavaScript.</span>
+          <span class="break">
+            Please
+            <a
+              title="Enable JavaScript"
+              target="_blank"
+              rel="noopener"
+              href="https://www.enable-javascript.com/"
+              >enable it</a
+            >
+            to continue.
+          </span>
+        </p>
+      </div>
+    </noscript>
 
     <script type="module" src="/src/main.js"></script>
   </body>
