@@ -1,6 +1,6 @@
 <script>
   import BrowserHints from "/src/components/Meta/Performance/BrowserHints.svelte";
-  import PageMeta from "/src/components/PageMeta/PageMeta.svelte";
+  import PageMeta from "/src/components/Meta/PageMeta/PageMeta.svelte";
   import Header from "/src/components/Header/Header.svelte";
   import SocialLinks from "/src/components/SocialLinks/SocialLinks.svelte";
 </script>

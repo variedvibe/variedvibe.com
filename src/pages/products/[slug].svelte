@@ -5,7 +5,7 @@
   } from "/src/services/Shop/Shop.js";
   import { goto } from "@roxi/routify";
 
-  import { pageMeta } from "/src/components/PageMeta/stores.js";
+  import { pageMeta } from "/src/components/Meta/PageMeta/stores.js";
   import ProductDetail from "/src/components/Product/ProductDetail.svelte";
   import StatusMessage, {
     messageLoading,
