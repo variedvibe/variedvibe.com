@@ -1,7 +1,7 @@
 <script>
   import { url } from "@roxi/routify";
 
-  import Hero from "../components/Hero/Hero.svelte";
+  import Hero from "/src/components/Hero/Hero.svelte";
 </script>
 
 <Hero />

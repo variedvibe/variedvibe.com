@@ -2,7 +2,7 @@
   import { url, layout } from "@roxi/routify";
 
   import Navigation from "./Navigation.svelte";
-  import SocialLinks from "../SocialLinks/SocialLinks.svelte";
+  import SocialLinks from "/src/components/SocialLinks/SocialLinks.svelte";
 
   export let home = {
     path: $url("/"),

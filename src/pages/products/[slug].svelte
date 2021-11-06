@@ -2,15 +2,15 @@
   import {
     getProductBySlug,
     errorSlugUnknownProduct,
-  } from "../../services/Shop/Shop.js";
+  } from "/src/services/Shop/Shop.js";
   import { goto } from "@roxi/routify";
 
-  import { pageMeta } from "../../components/PageMeta/stores.js";
-  import ProductDetail from "../../components/Product/ProductDetail.svelte";
+  import { pageMeta } from "/src/components/PageMeta/stores.js";
+  import ProductDetail from "/src/components/Product/ProductDetail.svelte";
   import StatusMessage, {
     messageLoading,
     messageErrorGeneric,
-  } from "../../components/StatusMessage/StatusMessage.svelte";
+  } from "/src/components/StatusMessage/StatusMessage.svelte";
 
   export let slug;
 

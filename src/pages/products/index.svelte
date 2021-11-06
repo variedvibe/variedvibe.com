@@ -2,12 +2,12 @@
   import {
     getFeaturedProducts,
     getNullProduct,
-  } from "../../services/Shop/Shop.js";
+  } from "/src/services/Shop/Shop.js";
 
-  import ProductGroup from "../../components/Product/ProductGroup.svelte";
+  import ProductGroup from "/src/components/Product/ProductGroup.svelte";
   import StatusMessage, {
     messageErrorGeneric,
-  } from "../../components/StatusMessage/StatusMessage.svelte";
+  } from "/src/components/StatusMessage/StatusMessage.svelte";
 
   let featuredProducts = getFeaturedProducts();
   let nullProducts = new Array(3).fill(getNullProduct());

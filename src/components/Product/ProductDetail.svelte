@@ -1,5 +1,5 @@
 <script>
-  import Lightbox from "../Lightbox/Lightbox.svelte";
+  import Lightbox from "/src/components/Lightbox/Lightbox.svelte";
 
   export let product;
 

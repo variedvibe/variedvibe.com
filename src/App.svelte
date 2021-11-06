@@ -1,10 +1,10 @@
 <script>
   import { Router } from "@roxi/routify";
-  import { routes } from "../.routify/routes";
+  import { routes } from "/.routify/routes";
 
   import { GoogleAnalytics } from "@beyonk/svelte-google-analytics";
 
-  import Serviceworker from "./components/Serviceworker.svelte";
+  import Serviceworker from "/src/components/Serviceworker.svelte";
 
   import _ from "./global.css"; // Global styles
 
