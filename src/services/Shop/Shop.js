@@ -2,12 +2,15 @@ import Client from "shopify-buy";
 
 import { Product, ProductImage } from "./product.js";
 
+const shopifyDomain =
+  import.meta.env.VITE_SHOPIFY_DOMAIN ?? import.meta.env.SHOPIFY_DOMAIN;
+
 const featuredProductCollectionHandle =
   import.meta.env.VITE_SHOPIFY_FEATURED_COLLECTION_HANDLE ??
   import.meta.env.SHOPIFY_FEATURED_COLLECTION_HANDLE;
 
 const shopifyClient = Client.buildClient({
-  domain: import.meta.env.VITE_SHOPIFY_DOMAIN ?? import.meta.env.SHOPIFY_DOMAIN,
+  domain: shopifyDomain,
   storefrontAccessToken:
     import.meta.env.VITE_SHOPIFY_STOREFRONT_API_TOKEN ??
     import.meta.env.SHOPIFY_STOREFRONT_API_TOKEN,
@@ -30,6 +33,10 @@ const srcSetImageSizes = {
 };
 
 export const errorSlugUnknownProduct = "ERR_UNKNOWN_PRODUCT";
+
+export function getBaseUrl() {
+  return `https://${shopifyDomain}/`;
+}
 
 export async function getAllProducts() {
   let products = await shopifyClient.product.fetchAll();
