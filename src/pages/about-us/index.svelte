@@ -43,8 +43,8 @@
           >Aurora Adams; <em>Model Photography</em></a
         >
       </li>
-      <li>Our various models; friends and partners in style</li>
-      <li>Denver; the inspiration</li>
+      <li>Our various models; <em>friends and partners in style</em></li>
+      <li>Denver; <em>the life and inspiration</em></li>
     </ul>
   </section>
 </div>
@@ -73,6 +73,12 @@
   }
   .thanks-list {
     text-align: left;
+  }
+  .thanks-list a {
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: var(--gray-mid);
+    text-underline-offset: 0.1em;
   }
   .thanks-list em {
     color: var(--gray-mid);
