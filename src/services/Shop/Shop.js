@@ -1,6 +1,13 @@
 import Client from "shopify-buy";
 
-import { Product, ProductImage } from "./product.js";
+import {
+  Product,
+  ProductImage,
+  ProductOption,
+  ProductPrice,
+  ProductSelectedOption,
+  ProductVariant,
+} from "./product.js";
 
 const shopifyDomain =
   import.meta.env.VITE_SHOPIFY_DOMAIN ?? import.meta.env.SHOPIFY_DOMAIN;
@@ -73,7 +80,7 @@ export async function getProductBySlug(slug) {
 }
 
 export function getNullProduct() {
-  return new Product("", "", "", "", "", []);
+  return new Product("", "", "", "", "", [], [], []);
 }
 
 function shopifyProductToProduct(shopifyProduct) {
@@ -83,7 +90,9 @@ function shopifyProductToProduct(shopifyProduct) {
     shopifyProduct.title,
     shopifyProduct.description,
     shopifyProduct.descriptionHtml,
-    shopifyProduct.images.map(shopifyProductImageToProductImage)
+    shopifyProduct.images.map(shopifyProductImageToProductImage),
+    shopifyProduct.options.map(shopifyProductOptionToProductOption),
+    shopifyProduct.variants.map(shopifyProductVariantToProductVariant)
   );
 
   return product;
@@ -126,4 +135,42 @@ function shopifyImageSrcToSrcSet(shopifyImageSrc) {
   }
 
   return srcSetArgs.join(", ");
+}
+
+function shopifyProductOptionToProductOption(shopifyProductOption) {
+  return new ProductOption(
+    shopifyProductOption.id,
+    shopifyProductOption.name,
+    shopifyProductOption.values.map((v) => v.value)
+  );
+}
+
+function shopifyProductPriceToProductPrice(shopifyProductPrice) {
+  return new ProductPrice(
+    shopifyProductPrice.amount,
+    shopifyProductPrice.currencyCode
+  );
+}
+
+function shopifyProductSelectedOptionToProductSelectedOption(
+  shopifyProductSelectedOption
+) {
+  return new ProductSelectedOption(
+    shopifyProductSelectedOption.name,
+    shopifyProductSelectedOption.value
+  );
+}
+
+function shopifyProductVariantToProductVariant(shopifyProductVariant) {
+  return new ProductVariant(
+    shopifyProductVariant.id,
+    shopifyProductVariant.title,
+    shopifyProductVariant.image
+      ? shopifyProductImageToProductImage(shopifyProductVariant.image)
+      : null,
+    shopifyProductPriceToProductPrice(shopifyProductVariant.priceV2),
+    shopifyProductVariant.selectedOptions.map(
+      shopifyProductSelectedOptionToProductSelectedOption
+    )
+  );
 }
