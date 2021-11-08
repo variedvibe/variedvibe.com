@@ -36,11 +36,12 @@
     <ul class="thanks-list">
       <li>
         <a
+          class="content-link"
           title="Instagram - Aurora Photo"
           target="_blank"
           rel="noopener"
           href="https://www.instagram.com/auroraprophoto/"
-          >Aurora Adams; <em>Model Photography</em></a
+          >Aurora Adams; <em>model photography</em></a
         >
       </li>
       <li>Our various models; <em>friends and partners in style</em></li>
@@ -73,14 +74,5 @@
   }
   .thanks-list {
     text-align: left;
-  }
-  .thanks-list a {
-    text-decoration-line: underline;
-    text-decoration-style: dotted;
-    text-decoration-color: var(--gray-mid);
-    text-underline-offset: 0.1em;
-  }
-  .thanks-list em {
-    color: var(--gray-mid);
   }
 </style>

@@ -123,6 +123,11 @@ hr,
   border-bottom-color: var(--gray-mid);
 }
 
+em {
+  font-style: italic;
+  color: var(--gray-mid);
+}
+
 html::-webkit-scrollbar {
   width: 10px;
   background-color: var(--black);
@@ -177,4 +182,12 @@ html::-webkit-scrollbar-thumb:active {
 
 .modal-open {
   overflow: hidden;
+}
+
+.content-link,
+.content-link:link {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--gray-mid);
+  text-underline-offset: 0.1em;
 }
