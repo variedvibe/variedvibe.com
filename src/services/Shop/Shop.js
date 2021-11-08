@@ -93,6 +93,8 @@ function shopifyProductImageToProductImage(shopifyProductImage) {
   return new ProductImage(
     shopifyProductImage.id,
     shopifyProductImage.src,
+    shopifyProductImage.width,
+    shopifyProductImage.height,
     shopifyProductImage.altText,
     shopifyImageSrcToSrcSet(shopifyProductImage.src)
   );

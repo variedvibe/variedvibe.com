@@ -22,6 +22,8 @@
         title={product.name}
         src={image.src}
         srcset={image.srcSet}
+        width={image.width}
+        height={image.height}
         on:click={lightbox.toggleShow(i)}
       />
     {/each}

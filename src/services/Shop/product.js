@@ -19,12 +19,16 @@ export class Product {
 export class ProductImage {
   id;
   src;
+  width;
+  height;
   altText;
   srcSet;
 
-  constructor(id, src, altText, srcSet) {
+  constructor(id, src, width, height, altText, srcSet) {
     this.id = id;
     this.src = src;
+    this.width = width;
+    this.height = height;
     this.altText = altText;
     this.srcSet = srcSet;
   }

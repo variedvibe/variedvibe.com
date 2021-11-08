@@ -14,6 +14,8 @@
     title={product.name}
     src={product.images[0]?.src}
     srcset={product.images[0]?.srcSet}
+    width={product.images[0]?.width}
+    height={product.images[0]?.height}
   />
   {#if product.images[1]}
     <img
@@ -22,6 +24,8 @@
       title={product.name}
       src={product.images[1].src}
       srcset={product.images[1].srcSet}
+      width={product.images[1].width}
+      height={product.images[1].height}
     />
   {/if}
   <p>{product.name}</p>
