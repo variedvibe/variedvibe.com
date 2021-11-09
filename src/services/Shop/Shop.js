@@ -92,7 +92,8 @@ function shopifyProductToProduct(shopifyProduct) {
     shopifyProduct.descriptionHtml,
     shopifyProduct.images.map(shopifyProductImageToProductImage),
     shopifyProduct.options.map(shopifyProductOptionToProductOption),
-    shopifyProduct.variants.map(shopifyProductVariantToProductVariant)
+    shopifyProduct.variants.map(shopifyProductVariantToProductVariant),
+    shopifyProduct.availableForSale
   );
 
   return product;
@@ -171,6 +172,7 @@ function shopifyProductVariantToProductVariant(shopifyProductVariant) {
     shopifyProductPriceToProductPrice(shopifyProductVariant.priceV2),
     shopifyProductVariant.selectedOptions.map(
       shopifyProductSelectedOptionToProductSelectedOption
-    )
+    ),
+    shopifyProductVariant.available
   );
 }

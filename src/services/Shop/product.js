@@ -7,6 +7,7 @@ export class Product {
   images = [];
   options = [];
   variants = [];
+  isForSale = false;
 
   constructor(
     id,
@@ -16,7 +17,8 @@ export class Product {
     descriptionHtml,
     images,
     options,
-    variants
+    variants,
+    isForSale
   ) {
     this.id = id;
     this.slug = slug;
@@ -26,6 +28,26 @@ export class Product {
     this.images = images;
     this.options = options;
     this.variants = variants;
+    this.isForSale = isForSale;
+  }
+
+  getVariantForSelectedOptions(selectedOptions) {
+    return this.variants.find((variant) => {
+      return (
+        variant.selectedOptions.every((option) =>
+          selectedOptions.some((other) => option.isEqual(other))
+        ) &&
+        selectedOptions.every((option) =>
+          variant.selectedOptions.some((other) => option.isEqual(other))
+        )
+      );
+    });
+  }
+
+  isAvailableForSale() {
+    return (
+      this.isForSale && this.variants.some((variant) => variant.isAvailable)
+    );
   }
 }
 
@@ -67,6 +89,13 @@ export class ProductPrice {
     this.amount = amount;
     this.currencyCode = currencyCode;
   }
+
+  format(locale) {
+    return new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency: this.currencyCode,
+    }).format(this.amount);
+  }
 }
 
 export class ProductSelectedOption {
@@ -77,6 +106,14 @@ export class ProductSelectedOption {
     this.name = name;
     this.value = value;
   }
+
+  valueOf() {
+    return { name: this.name, value: this.value };
+  }
+
+  isEqual(other) {
+    return this.name === other.name && this.value === other.value;
+  }
 }
 
 export class ProductVariant {
@@ -85,12 +122,14 @@ export class ProductVariant {
   image;
   price;
   selectedOptions = [];
+  isAvailable = false;
 
-  constructor(id, name, image, price, selectedOptions) {
+  constructor(id, name, image, price, selectedOptions, isAvailable) {
     this.id = id;
     this.name = name;
     this.image = image;
     this.price = price;
     this.selectedOptions = selectedOptions;
+    this.isAvailable = isAvailable;
   }
 }
