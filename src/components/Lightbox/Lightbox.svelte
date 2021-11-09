@@ -67,6 +67,8 @@
         title={image.title}
         src={image.src}
         srcset={image.srcSet}
+        width={image.width}
+        height={image.height}
       />
     {/each}
   </div>
