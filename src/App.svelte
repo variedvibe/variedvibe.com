@@ -6,7 +6,7 @@
 
   import Serviceworker from "/src/components/Serviceworker.svelte";
 
-  import _ from "./global.css"; // Global styles
+  import "./global.css"; // Global styles
 
   const googleAnalyticsId = "G-9TWM0P60LB";
 </script>

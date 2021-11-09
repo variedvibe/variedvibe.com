@@ -10,6 +10,7 @@
   --black: #000;
   --main-bg-color: var(--black);
   --main-fg-color: var(--gray-light);
+  --error-bg-color: #ffd6d6;
   --main-font-normal: "Roboto Condensed", -apple-system-condensed,
     sanfranciscocondensed-regular, sanfranciscocondensed,
     "San Francisco Condensed", avenirnextcondensed-regular, avenirnextcondensed,
@@ -125,6 +126,53 @@ hr,
 
 em {
   font-style: italic;
+  color: var(--gray-mid);
+}
+
+dl {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+dt,
+dd {
+  display: inline-block;
+}
+
+dd {
+  margin-left: 40px;
+  flex: 1;
+  text-align: right;
+}
+
+dd.strong {
+  font-weight: bold;
+}
+
+input,
+select,
+textarea {
+  font-size: 1em;
+  padding: 5px;
+}
+
+input.error:invalid,
+select.error:invalid,
+textarea.error:invalid {
+  background-color: var(--error-bg-color);
+  color: var(--black);
+}
+select.error:invalid option {
+  background-color: var(--white);
+}
+
+input:not(:focus):invalid,
+select:not(:focus):invalid,
+textarea:not(:focus):invalid,
+input:not(:focus):placeholder-shown,
+select:not(:focus):placeholder-shown,
+textarea:not(:focus):placeholder-shown {
   color: var(--gray-mid);
 }
 
