@@ -4,3 +4,11 @@
   to = "/index.html"
   status = 200
   force = false
+
+# Set custom headers for specific URLS.
+[[headers]]
+  for = "/*"
+    [headers.values]
+    # This app is a compiled FE, allow all shouldn't be problematic.
+    # NOTE: This allows Google/Bing's cache to properly render our pages.
+    Access-Control-Allow-Origin = "*"
