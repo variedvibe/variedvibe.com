@@ -1,5 +1,5 @@
 <!--
-   Navigation component 
+   Navigation component
    Props:
      children=${layout.children} (optional) array of nodes
      maxDepth=Infinite (optional) depth of descendent tree
@@ -10,7 +10,7 @@
      <Navigation maxDepth=2 children={$layout.children} />
 -->
 <script>
-  import { url, isActive, layout } from "@roxi/routify";
+  import { url, isActive, layout, beforeUrlChange } from "@roxi/routify";
 
   export let items = $layout.children;
   export let maxDepth = Infinity;
@@ -21,35 +21,139 @@
   $: getClass = (path) => ($isActive(path) ? "active" : "");
   $: shouldExplode = (path) =>
     (explode === "selected" && $isActive(path)) || explode === "all";
+
+  let menuShown = false;
+
+  export function toggleMenu(show) {
+    menuShown = show ?? menuShown;
+
+    document.body.classList.toggle("modal-open", menuShown);
+
+    if (menuShown) {
+      window.addEventListener("keydown", keyPressHandler);
+    } else {
+      window.removeEventListener("keydown", keyPressHandler);
+    }
+  }
+
+  $: menuShown, toggleMenu();
+  $: getMenuShownClass = () => (menuShown ? "menu-shown" : "");
+
+  // Close the menu before the URL changes
+  $beforeUrlChange(() => {
+    toggleMenu(false);
+
+    // Return true to allow the URL to change
+    return true;
+  });
+
+  function keyPressHandler(ev) {
+    switch (ev.key) {
+      case "Escape":
+        toggleMenu(false);
+        break;
+    }
+  }
 </script>
 
-<ul>
-  {#each items as { path, title, children }}
-    <li data-nav-depth={_depth}>
-      <!-- we use $url to resolve the path  -->
-      <a href={$url(path)} class={getClass(path)}>{title}</a>
+<div class="container {getMenuShownClass()}">
+  <input
+    class="nav-menu-toggle ui-action"
+    name="nav-menu-toggle"
+    type="checkbox"
+    bind:checked={menuShown}
+  />
+  <label class="nav-menu-toggle ui-action" for="nav-menu-toggle">
+    <span class="ui-icon" title="Toggle Menu">
+      <i><u class="visually-hidden">Toggle Menu</u></i>
+    </span>
+  </label>
 
-      <!-- parse nested children here -->
-      {#if items && _depth < maxDepth && shouldExplode(path)}
-        <svelte:self items={children} {maxDepth} {_depth} />
-      {/if}
-    </li>
-  {/each}
-</ul>
+  <div class="nav-menu">
+    <ul>
+      {#each items as { path, title, children }}
+        <li data-nav-depth={_depth}>
+          <!-- we use $url to resolve the path  -->
+          <a
+            href={$url(path)}
+            class={getClass(path)}
+            on:click={() => toggleMenu(false)}>{title}</a
+          >
+
+          <!-- parse nested children here -->
+          {#if items && _depth < maxDepth && shouldExplode(path)}
+            <svelte:self items={children} {maxDepth} {_depth} />
+          {/if}
+        </li>
+      {/each}
+    </ul>
+  </div>
+</div>
 
 <style>
+  .container {
+    --ui-icon-size: 20px;
+  }
+  @media (max-width: 400px) {
+    .container {
+      --ui-icon-size: 14px;
+    }
+  }
+  @media (max-width: 600px) and (min-width: 401px) {
+    .container {
+      --ui-icon-size: 16px;
+    }
+  }
+
+  input.nav-menu-toggle {
+    position: absolute;
+    display: block;
+    width: var(--ui-icon-size);
+    height: var(--ui-icon-size);
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 10;
+    -webkit-touch-callout: none;
+  }
+  label.nav-menu-toggle {
+    position: relative;
+    display: block;
+    width: var(--ui-icon-size);
+    height: var(--ui-icon-size);
+  }
+  @media (min-width: 801px) {
+    input.nav-menu-toggle {
+      display: none;
+    }
+    label.nav-menu-toggle {
+      display: none;
+    }
+  }
+
+  .nav-menu-toggle .ui-icon {
+    width: 100%;
+    height: 100%;
+    background-image: url("/assets/ui-icons/hamburger-menu.svg");
+    filter: invert(1);
+  }
+  .menu-shown .nav-menu-toggle .ui-icon {
+    background-image: url("/assets/ui-icons/close-line.svg");
+    filter: invert(1);
+  }
+
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    font-size: 20px;
-    line-height: 0;
+    font-size: 1.1em;
+    line-height: 1;
   }
   li {
-    flex: 1;
     display: inline-block;
     padding: 0;
-    margin: 0 10px;
+    margin: 0 8px;
   }
   li:first-child {
     margin-left: 0;
@@ -57,28 +161,33 @@
   li:last-child {
     margin-right: 0;
   }
-  @media (max-width: 300px) {
-    ul {
-      font-size: 12px;
+  @media (max-width: 800px) {
+    .nav-menu {
+      position: absolute;
+      z-index: 50;
+      width: 100vw;
+      height: 0;
+      top: var(--header-height);
+      left: 0;
+      visibility: hidden;
+      overflow-y: hidden;
+      background-color: var(--main-bg-color);
+      transition-property: height, visibility;
+      transition-duration: var(--animation-speed-fast);
+      transition-timing-function: var(--animation-timing-function-natural);
+    }
+    input[name="nav-menu-toggle"]:checked ~ .nav-menu {
+      height: 100vh;
+      visibility: visible;
     }
     li {
-      margin: 0 5px;
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin: 10px auto;
     }
-  }
-  @media (max-width: 400px) and (min-width: 301px) {
-    ul {
-      font-size: 14px;
-    }
-    li {
-      margin: 0 5px;
-    }
-  }
-  @media (max-width: 600px) and (min-width: 401px) {
-    ul {
-      font-size: 16px;
-    }
-    li {
-      margin: 0 5px;
+    li a {
+      display: inline-block;
     }
   }
 

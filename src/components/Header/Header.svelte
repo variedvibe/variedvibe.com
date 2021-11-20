@@ -20,7 +20,7 @@
       >
     </h1>
 
-    <nav id="top-site-nav">
+    <nav id="top-site-nav" role="navigation">
       <Navigation maxDepth="1" items={navItems} />
     </nav>
 
@@ -32,16 +32,25 @@
 
 <style>
   header {
+    --header-height: 80px;
+
     display: flex;
     width: 100%;
-    padding: 2px 0;
+    height: var(--header-height);
     position: sticky;
     top: 0;
     z-index: 100;
     background: var(--main-bg-color);
   }
+  @media (max-width: 600px) {
+    header {
+      --header-height: 50px;
+    }
+  }
   @media (max-height: 500px) {
     header {
+      --header-height: 60px;
+
       position: unset;
     }
   }
@@ -53,23 +62,13 @@
     flex: 1;
     display: inline-block;
     align-self: center;
-    height: 80px;
+    height: 100%;
     padding: 0;
     margin: 0;
     background-image: url("/assets/logo-horizontal.svg");
     background-repeat: no-repeat;
     background-position: left center;
     background-size: contain;
-  }
-  @media (max-width: 600px) {
-    #main-logo {
-      height: 50px;
-    }
-  }
-  @media (max-height: 500px) {
-    #main-logo {
-      height: 60px;
-    }
   }
   #main-logo a {
     display: block;
@@ -81,12 +80,12 @@
     display: inline-flex;
     flex-direction: row;
     padding: 0;
-    margin: 10px auto;
     align-self: center;
+    align-items: center;
     justify-self: center;
     justify-content: center;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 800px) {
     nav#top-site-nav {
       flex: 1.5;
       justify-content: flex-end;
@@ -105,7 +104,7 @@
     justify-self: center;
     justify-content: flex-end;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 800px) {
     nav#top-social-links {
       display: none;
     }

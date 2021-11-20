@@ -30,6 +30,7 @@
   --heading-secondary-font-size: 1.5em;
   --important-font-size: 1.2em;
   --small-font-size: 0.8em;
+  --ui-icon-size: 0.6rem;
   --animation-speed-normal: 500ms;
   --animation-speed-fast: 250ms;
   --animation-speed-slow: 750ms;
@@ -238,4 +239,13 @@ html::-webkit-scrollbar-thumb:active {
   text-decoration-style: dotted;
   text-decoration-color: var(--gray-mid);
   text-underline-offset: 0.1em;
+}
+
+.ui-icon {
+  display: block;
+  width: var(--ui-icon-size);
+  height: var(--ui-icon-size);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }

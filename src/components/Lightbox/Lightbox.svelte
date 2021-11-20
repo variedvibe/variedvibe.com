@@ -143,8 +143,6 @@
     right: 0;
   }
   #close .ui-icon {
-    width: 0.6em;
-    height: 0.6em;
     background-image: url("/assets/ui-icons/close-line.svg");
     filter: invert(1);
   }
@@ -171,10 +169,6 @@
   }
   .navigation.disabled {
     display: none;
-  }
-  .navigation .ui-icon {
-    width: 0.6em;
-    height: 0.6em;
   }
   .navigation#previous {
     left: 0;
