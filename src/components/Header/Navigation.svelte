@@ -96,12 +96,12 @@
   }
   @media (max-width: 400px) {
     .container {
-      --ui-icon-size: 14px;
+      --ui-icon-size: 16px;
     }
   }
   @media (max-width: 600px) and (min-width: 401px) {
     .container {
-      --ui-icon-size: 16px;
+      --ui-icon-size: 18px;
     }
   }
 
