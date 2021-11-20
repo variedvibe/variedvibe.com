@@ -57,7 +57,9 @@
 
 <div class="container {getClass()}">
   <div id="close" class="ui-action" on:click={toggleShow}>
-    <span class="ui-icon" />
+    <span class="ui-icon" title="Close">
+      <i><u class="visually-hidden">Close</u></i>
+    </span>
   </div>
   <div id="image" on:click={toggleShow}>
     {#each images as image, i}
@@ -77,14 +79,18 @@
     class="ui-action navigation {!hasPrevious && 'disabled'}"
     on:click={previous}
   >
-    <span class="ui-icon" />
+    <span class="ui-icon" title="Previous">
+      <i><u class="visually-hidden">Previous</u></i>
+    </span>
   </div>
   <div
     id="next"
     class="ui-action navigation {!hasNext && 'disabled'}"
     on:click={next}
   >
-    <span class="ui-icon" />
+    <span class="ui-icon" title="Next">
+      <i><u class="visually-hidden">Next</u></i>
+    </span>
   </div>
 </div>
 
