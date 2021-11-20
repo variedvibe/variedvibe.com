@@ -10,7 +10,7 @@
      <Navigation maxDepth=2 children={$layout.children} />
 -->
 <script>
-  import { url, isActive, layout, beforeUrlChange } from "@roxi/routify";
+  import { url, isActive, layout, afterPageLoad } from "@roxi/routify";
 
   export let items = $layout.children;
   export let maxDepth = Infinity;
@@ -39,12 +39,9 @@
   $: menuShown, toggleMenu();
   $: getMenuShownClass = () => (menuShown ? "menu-shown" : "");
 
-  // Close the menu before the URL changes
-  $beforeUrlChange(() => {
+  // Close the menu after loading the page
+  $afterPageLoad(() => {
     toggleMenu(false);
-
-    // Return true to allow the URL to change
-    return true;
   });
 
   function keyPressHandler(ev) {
@@ -180,11 +177,21 @@
       height: 100vh;
       visibility: visible;
     }
-    li {
+    ul {
+      font-size: 1.4em;
+    }
+    li,
+    li:first-child,
+    li:last-child {
       display: block;
-      width: 100%;
+      width: 80%;
       text-align: center;
-      margin: 10px auto;
+      margin: 15px auto;
+      padding-bottom: 15px;
+      border: none;
+      border-bottom-style: solid;
+      border-bottom-width: 2px;
+      border-bottom-color: var(--gray-mid-darker);
     }
     li a {
       display: inline-block;
