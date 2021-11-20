@@ -214,7 +214,7 @@ html::-webkit-scrollbar-thumb:active {
 }
 @media (max-width: 600px) {
   .page-width-wrapper {
-    padding: 0 5px;
+    padding: 0 10px;
   }
 }
 
