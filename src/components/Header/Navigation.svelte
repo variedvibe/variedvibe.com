@@ -193,6 +193,10 @@
       border-bottom-width: 2px;
       border-bottom-color: var(--gray-mid-darker);
     }
+    li:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
     li a {
       display: inline-block;
     }
