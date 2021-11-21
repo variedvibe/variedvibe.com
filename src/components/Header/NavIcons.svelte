@@ -59,10 +59,23 @@
     display: block;
     position: relative;
   }
+  .ui-icon {
+    filter: invert(100%);
+    transition: filter var(--animation-speed-normal)
+      var(--animation-timing-function-natural);
+  }
+  .ui-icon:hover {
+    filter: invert(100%) brightness(47.5%);
+  }
+  @media (hover: none) {
+    /* Reset normal hover effects, so mobile doesn't try and show them */
+    .ui-icon:hover {
+      filter: invert(100%);
+    }
+  }
 
   .ui-action.contact-us {
     background-image: url("/assets/ui-icons/email.svg");
-    filter: invert(1);
   }
 
   .ui-action.shopping-cart .ui-icon {
