@@ -12,7 +12,7 @@
     <a
       class="ui-action ui-icon contact-us"
       title="Contact Us"
-      href={$url("contact-us")}
+      href={$url("/contact-us")}
     >
       <i><u class="visually-hidden">Contact Us</u></i>
     </a>
