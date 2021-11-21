@@ -8,7 +8,7 @@
   let linkHref = !isDisabled ? $url(href ?? `/products/${product.slug}`) : "";
 </script>
 
-<a class="product {isDisabled && 'disabled'}" href={linkHref}>
+<a class="product" class:disabled={isDisabled} href={linkHref}>
   <img
     alt={product.images[0]?.altText ?? product.name}
     title={product.name}

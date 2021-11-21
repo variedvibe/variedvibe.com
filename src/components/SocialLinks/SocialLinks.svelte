@@ -1,10 +1,8 @@
 <script>
   export let inFooter = false;
-
-  let getClass = () => (inFooter ? "in-footer" : "");
 </script>
 
-<ul class={getClass()}>
+<ul class:in-footer={inFooter}>
   <li>
     <a
       class="social-icon icon-instagram"

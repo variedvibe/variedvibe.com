@@ -20,7 +20,7 @@
     formError = new Error(errorSlugInvalidForm);
   }
 
-  function formInput(event) {
+  function formInput() {
     formError = null;
   }
 
@@ -140,7 +140,7 @@
           />
         </span>
 
-        <span class="form-status {formError ? 'error' : ''}">
+        <span class="form-status" class:error={formError}>
           {#if formError}
             {#if formError.message == errorSlugInvalidForm}
               {messageErrorInvalidForm}

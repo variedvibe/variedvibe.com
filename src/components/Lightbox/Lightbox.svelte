@@ -49,13 +49,11 @@
     window.removeEventListener("keydown", keyPressHandler);
   });
 
-  $: getClass = () => (shown ? "shown" : "hidden");
-  $: getImageClass = (index) => (index === current ? "active" : "");
   $: hasPrevious = current > 0;
   $: hasNext = current < images.length - 1;
 </script>
 
-<div class="container {getClass()}">
+<div class="container" class:hidden={!shown}>
   <div id="close" class="ui-action" on:click={toggleShow}>
     <span class="ui-icon" title="Close">
       <i><u class="visually-hidden">Close</u></i>
@@ -64,7 +62,7 @@
   <div id="image" on:click={toggleShow}>
     {#each images as image, i}
       <img
-        class={getImageClass(i)}
+        class:active={current === i}
         alt={image.altText}
         title={image.title}
         src={image.src}
@@ -76,7 +74,8 @@
   </div>
   <div
     id="previous"
-    class="ui-action navigation {!hasPrevious && 'disabled'}"
+    class="ui-action navigation"
+    class:disabled={!hasPrevious}
     on:click={previous}
   >
     <span class="ui-icon" title="Previous">
@@ -85,7 +84,8 @@
   </div>
   <div
     id="next"
-    class="ui-action navigation {!hasNext && 'disabled'}"
+    class="ui-action navigation"
+    class:disabled={!hasNext}
     on:click={next}
   >
     <span class="ui-icon" title="Next">

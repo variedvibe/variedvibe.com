@@ -18,7 +18,6 @@
   export let explode = "selected"; // "selected", "all" or false
 
   _depth++;
-  $: getClass = (path) => ($isActive(path) ? "active" : "");
   $: shouldExplode = (path) =>
     (explode === "selected" && $isActive(path)) || explode === "all";
 
@@ -37,7 +36,6 @@
   }
 
   $: menuShown, toggleMenu();
-  $: getMenuShownClass = () => (menuShown ? "menu-shown" : "");
 
   // Close the menu after loading the page
   $afterPageLoad(() => {
@@ -53,7 +51,7 @@
   }
 </script>
 
-<div class="container {getMenuShownClass()}">
+<div class="container" class:menu-shown={menuShown}>
   <input
     class="nav-menu-toggle ui-action"
     name="nav-menu-toggle"
@@ -71,7 +69,7 @@
       {#each items as { path, title, children }}
         <li data-nav-depth={_depth}>
           <!-- we use $url to resolve the path  -->
-          <a href={$url(path)} class="{getClass(path)}}">{title}</a>
+          <a href={$url(path)} class:active={$isActive(path)}>{title}</a>
 
           <!-- parse nested children here -->
           {#if items && _depth < maxDepth && shouldExplode(path)}
