@@ -21,17 +21,21 @@
 
 <style>
   ul.nav-icons {
+    display: flex;
     list-style: none;
     padding: 0;
     margin: 0;
     line-height: 1;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
   }
   li {
     flex: 1;
-    display: inline-block;
+    display: block;
     padding: 0;
-    margin: 0 5px;
-    vertical-align: middle;
+    margin: 0 8px;
+    text-align: center;
   }
   li:first-child {
     margin-left: 0;
@@ -41,7 +45,7 @@
   }
   @media (max-width: 800px) {
     li:last-child {
-      margin-right: 10px;
+      margin-right: 16px;
     }
   }
   .ui-icon.shopping-cart {

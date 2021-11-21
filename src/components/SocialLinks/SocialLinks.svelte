@@ -53,13 +53,16 @@
 
 <style>
   ul {
+    display: flex;
     list-style: none;
     padding: 0;
     margin: 0;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
   }
   li {
-    flex: 1;
-    display: inline-block;
+    display: block;
     padding: 0;
     margin: 0 5px;
   }

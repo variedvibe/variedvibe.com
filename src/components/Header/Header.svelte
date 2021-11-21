@@ -45,11 +45,6 @@
   }
   @media (max-width: 400px) {
     header {
-      --ui-icon-size: 16px;
-    }
-  }
-  @media (max-width: 600px) and (min-width: 401px) {
-    header {
       --ui-icon-size: 18px;
     }
   }
@@ -75,7 +70,7 @@
   #main-logo {
     flex: 1;
     order: 0;
-    display: inline-block;
+    display: block;
     align-self: center;
     height: 100%;
     padding: 0;

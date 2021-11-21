@@ -123,17 +123,21 @@
   }
 
   ul {
+    display: flex;
     list-style: none;
     padding: 0;
     margin: 0;
     font-size: 1.1em;
     line-height: 1;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
   }
   li {
-    display: inline-block;
+    display: block;
     padding: 0;
     margin: 0 8px;
-    vertical-align: middle;
+    text-align: center;
   }
   li:first-child {
     margin-left: 0;
@@ -161,6 +165,7 @@
       visibility: visible;
     }
     ul {
+      flex-direction: column;
       font-size: 1.4em;
     }
     li,
@@ -181,7 +186,8 @@
       border-bottom: none;
     }
     li a {
-      display: inline-block;
+      display: block;
+      width: 100%;
     }
   }
 
