@@ -69,7 +69,11 @@
       {#each items as { path, title, children }}
         <li data-nav-depth={_depth}>
           <!-- we use $url to resolve the path  -->
-          <a href={$url(path)} class:active={$isActive(path)}>{title}</a>
+          <a
+            href={$url(path)}
+            class:active={$isActive(path)}
+            on:click={() => $isActive(path) && toggleMenu(false)}>{title}</a
+          >
 
           <!-- parse nested children here -->
           {#if items && _depth < maxDepth && shouldExplode(path)}
