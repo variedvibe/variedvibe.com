@@ -11,6 +11,7 @@
   --main-bg-color: var(--black);
   --main-fg-color: var(--gray-light);
   --error-bg-color: #ffd6d6;
+  --error-fg-color: #ff9696;
   --main-font-normal: "Roboto Condensed", -apple-system-condensed,
     sanfranciscocondensed-regular, sanfranciscocondensed,
     "San Francisco Condensed", avenirnextcondensed-regular, avenirnextcondensed,
@@ -153,9 +154,16 @@ dd.strong {
 
 input,
 select,
-textarea {
-  font-size: 1em;
+textarea,
+button {
+  box-sizing: border-box;
   padding: 5px;
+  font-size: 1em;
+}
+textarea {
+  font-family: var(--main-font-normal);
+  resize: vertical;
+  min-height: 2em;
 }
 
 input.error:invalid,

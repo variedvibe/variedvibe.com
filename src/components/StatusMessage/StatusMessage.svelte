@@ -1,6 +1,8 @@
 <script context="module">
   export const messageErrorGeneric =
     "😓 Sorry. Something went wrong. Please try again later.";
+  export const messageErrorInvalidForm =
+    "Invalid entry. Please check your inputs.";
   export const messageLoading = "Loading...";
 </script>
 
