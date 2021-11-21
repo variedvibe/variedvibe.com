@@ -71,11 +71,7 @@
       {#each items as { path, title, children }}
         <li data-nav-depth={_depth}>
           <!-- we use $url to resolve the path  -->
-          <a
-            href={$url(path)}
-            class={getClass(path)}
-            on:click={() => toggleMenu(false)}>{title}</a
-          >
+          <a href={$url(path)} class="{getClass(path)}}">{title}</a>
 
           <!-- parse nested children here -->
           {#if items && _depth < maxDepth && shouldExplode(path)}
@@ -88,20 +84,6 @@
 </div>
 
 <style>
-  .container {
-    --ui-icon-size: 20px;
-  }
-  @media (max-width: 400px) {
-    .container {
-      --ui-icon-size: 16px;
-    }
-  }
-  @media (max-width: 600px) and (min-width: 401px) {
-    .container {
-      --ui-icon-size: 18px;
-    }
-  }
-
   input.nav-menu-toggle {
     position: absolute;
     display: block;
@@ -151,6 +133,7 @@
     display: inline-block;
     padding: 0;
     margin: 0 8px;
+    vertical-align: middle;
   }
   li:first-child {
     margin-left: 0;
@@ -167,14 +150,14 @@
       top: var(--header-height);
       left: 0;
       visibility: hidden;
-      overflow-y: hidden;
+      overflow-y: auto;
       background-color: var(--main-bg-color);
       transition-property: height, visibility;
       transition-duration: var(--animation-speed-fast);
       transition-timing-function: var(--animation-timing-function-natural);
     }
     input[name="nav-menu-toggle"]:checked ~ .nav-menu {
-      height: 100vh;
+      height: calc(100vh - var(--header-height));
       visibility: visible;
     }
     ul {

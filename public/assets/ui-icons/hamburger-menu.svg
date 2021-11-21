@@ -1,1 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.879px" height="103.609px" viewBox="0 0 122.879 103.609" enable-background="new 0 0 122.879 103.609" xml:space="preserve"><g><path fill-rule="evenodd" clip-rule="evenodd" d="M10.368,0h102.144c5.703,0,10.367,4.665,10.367,10.367v0 c0,5.702-4.664,10.368-10.367,10.368H10.368C4.666,20.735,0,16.07,0,10.368v0C0,4.665,4.666,0,10.368,0L10.368,0z M10.368,82.875 h102.144c5.703,0,10.367,4.665,10.367,10.367l0,0c0,5.702-4.664,10.367-10.367,10.367H10.368C4.666,103.609,0,98.944,0,93.242l0,0 C0,87.54,4.666,82.875,10.368,82.875L10.368,82.875z M10.368,41.438h102.144c5.703,0,10.367,4.665,10.367,10.367l0,0 c0,5.702-4.664,10.368-10.367,10.368H10.368C4.666,62.173,0,57.507,0,51.805l0,0C0,46.103,4.666,41.438,10.368,41.438 L10.368,41.438z"/></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="122.8"
+   height="122.8"
+   viewBox="0 0 122.80001 122.8"
+   enable-background="new 0 0 122.879 103.609"
+   xml:space="preserve"
+   sodipodi:docname="hamburger-menu.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+     id="defs9" /><sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="6.8298015"
+     inkscape:cx="61.42199"
+     inkscape:cy="52.71017"
+     inkscape:window-width="1920"
+     inkscape:window-height="992"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" /><g
+     id="g4"
+     transform="matrix(0.99935709,0,0,0.99935709,0,9.6288072)"><path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       d="m 10.368,0 h 102.144 c 5.703,0 10.367,4.665 10.367,10.367 v 0 c 0,5.702 -4.664,10.368 -10.367,10.368 H 10.368 C 4.666,20.735 0,16.07 0,10.368 v 0 C 0,4.665 4.666,0 10.368,0 Z m 0,82.875 h 102.144 c 5.703,0 10.367,4.665 10.367,10.367 v 0 c 0,5.702 -4.664,10.367 -10.367,10.367 H 10.368 C 4.666,103.609 0,98.944 0,93.242 v 0 C 0,87.54 4.666,82.875 10.368,82.875 Z m 0,-41.437 h 102.144 c 5.703,0 10.367,4.665 10.367,10.367 v 0 c 0,5.702 -4.664,10.368 -10.367,10.368 H 10.368 C 4.666,62.173 0,57.507 0,51.805 v 0 C 0,46.103 4.666,41.438 10.368,41.438 Z"
+       id="path2" /></g></svg>

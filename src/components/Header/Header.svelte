@@ -2,7 +2,7 @@
   import { url, layout } from "@roxi/routify";
 
   import Navigation from "./Navigation.svelte";
-  import SocialLinks from "/src/components/SocialLinks/SocialLinks.svelte";
+  import NavIcons from "./NavIcons.svelte";
 
   export let home = {
     path: $url("/"),
@@ -24,15 +24,16 @@
       <Navigation maxDepth="1" items={navItems} />
     </nav>
 
-    <nav id="top-social-links">
-      <SocialLinks />
+    <nav id="top-nav-icons" role="navigation">
+      <NavIcons />
     </nav>
   </div>
 </header>
 
 <style>
   header {
-    --header-height: 80px;
+    --header-height: 60px;
+    --ui-icon-size: 20px;
 
     display: flex;
     width: 100%;
@@ -42,6 +43,16 @@
     z-index: 100;
     background: var(--main-bg-color);
   }
+  @media (max-width: 400px) {
+    header {
+      --ui-icon-size: 16px;
+    }
+  }
+  @media (max-width: 600px) and (min-width: 401px) {
+    header {
+      --ui-icon-size: 18px;
+    }
+  }
   @media (max-width: 600px) {
     header {
       --header-height: 50px;
@@ -49,17 +60,21 @@
   }
   @media (max-height: 500px) {
     header {
-      --header-height: 60px;
-
       position: unset;
     }
   }
   header .page-width-wrapper {
     display: flex;
+    flex-direction: row;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    height: 100%;
   }
   #main-logo {
     flex: 1;
+    order: 0;
     display: inline-block;
     align-self: center;
     height: 100%;
@@ -77,12 +92,12 @@
   }
   nav#top-site-nav {
     flex: 2;
+    order: 1;
     display: inline-flex;
     flex-direction: row;
     padding: 0;
     align-self: center;
     align-items: center;
-    justify-self: center;
     justify-content: center;
   }
   @media (max-width: 800px) {
@@ -91,22 +106,23 @@
       justify-content: flex-end;
     }
   }
-  nav#top-social-links {
+  nav#top-nav-icons {
     flex: 1;
+    order: 2;
     display: inline-flex;
     flex-direction: row;
     padding: 0;
-    margin: 10px auto;
-    margin-right: 0;
-    font-size: 0;
-    line-height: 0;
     align-self: center;
-    justify-self: center;
+    align-items: center;
     justify-content: flex-end;
   }
   @media (max-width: 800px) {
-    nav#top-social-links {
-      display: none;
+    nav#top-site-nav {
+      flex: 0;
+      order: 2;
+    }
+    nav#top-nav-icons {
+      order: 1;
     }
   }
 </style>
