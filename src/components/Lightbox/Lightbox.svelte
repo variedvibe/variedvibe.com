@@ -9,17 +9,11 @@
 
   let shown = false;
 
-  export function toggleShow(index) {
+  export function toggleShow(index, show) {
     current = index;
-    shown = !shown;
+    shown = show ?? !shown;
 
     document.body.classList.toggle("modal-open", shown);
-
-    if (shown) {
-      window.addEventListener("keydown", keyPressHandler);
-    } else {
-      window.removeEventListener("keydown", keyPressHandler);
-    }
   }
 
   export function previous() {
@@ -30,10 +24,10 @@
     hasNext && current++;
   }
 
-  function keyPressHandler(ev) {
-    switch (ev.key) {
+  function keyPressHandler(event) {
+    switch (event.key) {
       case "Escape":
-        toggleShow();
+        toggleShow(0, false);
         break;
       case "ArrowLeft":
         previous();
@@ -46,20 +40,21 @@
 
   onDestroy(() => {
     document.body.classList.remove("modal-open");
-    window.removeEventListener("keydown", keyPressHandler);
   });
 
   $: hasPrevious = current > 0;
   $: hasNext = current < images.length - 1;
 </script>
 
+<svelte:window on:keydown={keyPressHandler} />
+
 <div class="container" class:hidden={!shown}>
-  <div id="close" class="ui-action" on:click={toggleShow}>
+  <div id="close" class="ui-action" on:click={() => toggleShow(0, false)}>
     <span class="ui-icon" title="Close">
       <i><u class="visually-hidden">Close</u></i>
     </span>
   </div>
-  <div id="image" on:click={toggleShow}>
+  <div id="image" on:click={() => toggleShow(0, false)}>
     {#each images as image, i}
       <img
         class:active={current === i}

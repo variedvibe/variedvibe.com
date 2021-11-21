@@ -83,7 +83,7 @@
         srcset={image.srcSet}
         width={image.width}
         height={image.height}
-        on:click={lightbox.toggleShow(i)}
+        on:click={lightbox.toggleShow(i, true)}
       />
     {/each}
   </div>

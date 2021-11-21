@@ -30,12 +30,6 @@
     menuShown = show ?? menuShown;
 
     document.body.classList.toggle("modal-open", menuShown);
-
-    if (menuShown) {
-      window.addEventListener("keydown", keyPressHandler);
-    } else {
-      window.removeEventListener("keydown", keyPressHandler);
-    }
   }
 
   $: menuShown, toggleMenu();
@@ -45,23 +39,26 @@
     toggleMenu(false);
   });
 
-  // Close the menu if clicked outside of the nav-menu
-  document.addEventListener("click", (e) => {
+  function bodyClickHandler(event) {
     const clickedInNavMenu = document
       .getElementById("nav-menu-container")
-      .contains(e.target);
+      .contains(event.target);
 
-    !clickedInNavMenu && toggleMenu(false);
-  });
+    // Close the menu if clicked outside of the nav-menu
+    !clickedInNavMenu && menuShown && toggleMenu(false);
+  }
 
-  function keyPressHandler(ev) {
-    switch (ev.key) {
+  function keyPressHandler(event) {
+    switch (event.key) {
       case "Escape":
         toggleMenu(false);
         break;
     }
   }
 </script>
+
+<svelte:window on:keydown={keyPressHandler} />
+<svelte:body on:click={bodyClickHandler} />
 
 <div class="container" class:menu-shown={menuShown}>
   <input
