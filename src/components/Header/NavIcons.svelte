@@ -1,11 +1,17 @@
 <script>
   import { url } from "@roxi/routify";
+  import { cartQuantity } from "/src/services/Shop/stores.js";
 </script>
 
 <ul class="nav-icons">
   <li>
-    <a class="ui-action ui-icon shopping-cart" title="Coming soon..." href>
+    <a class="ui-action shopping-cart" title="Coming soon..." href>
       <i><u class="visually-hidden">Shopping Cart</u></i>
+
+      <span class="ui-icon" />
+      <span class="ui-icon-badge" class:hidden={$cartQuantity < 1}
+        >{$cartQuantity}</span
+      >
     </a>
   </li>
   <li>
@@ -48,12 +54,23 @@
       margin-right: 16px;
     }
   }
-  .ui-icon.shopping-cart {
+
+  .ui-action {
+    display: block;
+    position: relative;
+  }
+
+  .ui-action.contact-us {
+    background-image: url("/assets/ui-icons/email.svg");
+    filter: invert(1);
+  }
+
+  .ui-action.shopping-cart .ui-icon {
     background-image: url("/assets/ui-icons/shopping-bag.svg");
     filter: invert(0.5);
   }
-  .ui-icon.contact-us {
-    background-image: url("/assets/ui-icons/email.svg");
-    filter: invert(1);
+  .ui-icon-badge {
+    background-color: var(--white);
+    color: var(--black);
   }
 </style>

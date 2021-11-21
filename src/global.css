@@ -257,3 +257,20 @@ html::-webkit-scrollbar-thumb:active {
   background-repeat: no-repeat;
   background-size: contain;
 }
+.ui-icon-badge {
+  display: block;
+  position: absolute;
+  bottom: -0.25em;
+  right: -0.25em;
+  z-index: 1;
+  width: 1em;
+  height: 1em;
+  padding: 0.15em;
+  border-radius: 1em;
+  font-size: calc(var(--ui-icon-size) / 2);
+  font-weight: bold;
+  text-align: center;
+}
+.ui-icon-badge.hidden {
+  display: none;
+}

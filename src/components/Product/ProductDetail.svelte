@@ -1,6 +1,7 @@
 <script>
   import Lightbox from "/src/components/Lightbox/Lightbox.svelte";
   import { ProductSelectedOption } from "/src/services/Shop/product.js";
+  import { CartEntry, cart } from "/src/services/Shop/stores.js";
 
   export let product;
 
@@ -41,7 +42,12 @@
 
   function submit(event) {
     event.preventDefault();
-    // Nothing for now... #ComingSoon
+
+    const form = event.target;
+
+    const quantity = form.elements.quantity.valueAsNumber;
+
+    cart.add(new CartEntry(selectedVariant.id, quantity));
   }
 </script>
 
