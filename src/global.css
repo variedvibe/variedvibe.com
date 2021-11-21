@@ -249,6 +249,13 @@ html::-webkit-scrollbar-thumb:active {
   text-underline-offset: 0.1em;
 }
 
+.status-message.error {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--error-fg-color);
+  text-underline-offset: 0.1em;
+}
+
 .ui-icon {
   display: block;
   width: var(--ui-icon-size);

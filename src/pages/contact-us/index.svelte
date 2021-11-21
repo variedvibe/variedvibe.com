@@ -33,6 +33,10 @@
     sendSuccess = false;
     formError = null;
 
+    for (const element of form.elements) {
+      element.classList.remove("error");
+    }
+
     let response;
 
     try {
@@ -140,7 +144,7 @@
           />
         </span>
 
-        <span class="form-status" class:error={formError}>
+        <span class="form-status status-message" class:error={formError}>
           {#if formError}
             {#if formError.message == errorSlugInvalidForm}
               {messageErrorInvalidForm}
@@ -233,11 +237,5 @@ ASAP."
     margin-right: 10px;
     padding: 2px 0;
     text-align: left;
-  }
-  form .form-status.error {
-    text-decoration-line: underline;
-    text-decoration-style: dotted;
-    text-decoration-color: var(--error-fg-color);
-    text-underline-offset: 0.1em;
   }
 </style>

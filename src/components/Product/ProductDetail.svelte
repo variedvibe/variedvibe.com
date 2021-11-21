@@ -1,7 +1,13 @@
 <script>
   import Lightbox from "/src/components/Lightbox/Lightbox.svelte";
+  import {
+    messageErrorGeneric,
+    messageErrorInvalidForm,
+  } from "/src/components/StatusMessage/StatusMessage.svelte";
   import { ProductSelectedOption } from "/src/services/Shop/product.js";
   import { CartEntry, cart } from "/src/services/Shop/stores.js";
+
+  const errorSlugInvalidForm = "ERR_INVALID_FORM";
 
   export let product;
 
@@ -19,6 +25,8 @@
   );
 
   let selectedVariant;
+
+  let formStatus = "Online orders coming soon...";
 
   $: displayVariant = selectedVariant ?? product.variants[0];
 
@@ -38,6 +46,12 @@
 
   function invalid(event) {
     event.target.classList.add("error");
+    formStatus = new Error(errorSlugInvalidForm);
+  }
+
+  function formInput() {
+    // TODO: Add this back when we're no longer "coming soon"
+    //formStatus = null;
   }
 
   function submit(event) {
@@ -45,9 +59,16 @@
 
     const form = event.target;
 
+    for (const element of form.elements) {
+      element.classList.remove("error");
+    }
+
     const quantity = form.elements.quantity.valueAsNumber;
 
     cart.add(new CartEntry(selectedVariant.id, quantity));
+
+    formStatus = "Added to cart!";
+    form.reset();
   }
 </script>
 
@@ -77,7 +98,12 @@
           {displayVariant.price.format("en-US") ?? "$--"}
         </dd>
       </dl>
-      <form on:submit={submit} on:invalid|capture={invalid}>
+      <form
+        method="POST"
+        on:submit={submit}
+        on:invalid|capture={invalid}
+        on:input={formInput}
+      >
         {#each product.options as option}
           <span class="form-element product-option">
             <label class="visually-hidden" for={option.name}
@@ -117,7 +143,20 @@
             disabled
           />
         </span>
-        <span class="coming-soon">Online orders coming soon...</span>
+        <span
+          class="form-status status-message coming-soon"
+          class:error={formStatus instanceof Error}
+        >
+          {#if formStatus instanceof Error}
+            {#if formStatus.message == errorSlugInvalidForm}
+              {messageErrorInvalidForm}
+            {:else}
+              {messageErrorGeneric}
+            {/if}
+          {:else}
+            {formStatus}
+          {/if}
+        </span>
       </form>
     </div>
   </div>
@@ -192,10 +231,12 @@
   form .add-to-cart input[type="submit"] {
     width: 100%;
   }
-  .coming-soon {
+  .form-status {
     flex: 1 1 100%;
     margin-top: 10px;
     text-align: center;
+  }
+  .coming-soon {
     font-style: italic;
   }
   @media (max-width: 1050px) {
