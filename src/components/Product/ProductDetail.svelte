@@ -5,7 +5,8 @@
     messageErrorInvalidForm,
   } from "/src/components/StatusMessage/StatusMessage.svelte";
   import { ProductSelectedOption } from "/src/services/Shop/product.js";
-  import { CartEntry, cart } from "/src/services/Shop/stores.js";
+  import { CartEntry } from "/src/services/Shop/cart.js";
+  import { cart } from "/src/services/Shop/stores.js";
 
   const errorSlugInvalidForm = "ERR_INVALID_FORM";
 
@@ -65,7 +66,9 @@
 
     const quantity = form.elements.quantity.valueAsNumber;
 
-    cart.add(new CartEntry(selectedVariant.id, quantity));
+    cart.add(
+      new CartEntry(product.id, product.slug, selectedVariant.id, quantity)
+    );
 
     formStatus = "Added to cart!";
     form.reset();
