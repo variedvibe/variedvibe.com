@@ -17,6 +17,9 @@
   export let _depth = 0;
   export let explode = "selected"; // "selected", "all" or false
 
+  $: isUrlActive = (path) =>
+    $isActive(path) || $url(path) === window.location.pathname;
+
   _depth++;
   $: shouldExplode = (path) =>
     (explode === "selected" && $isActive(path)) || explode === "all";
@@ -42,6 +45,15 @@
     toggleMenu(false);
   });
 
+  // Close the menu if clicked outside of the nav-menu
+  document.addEventListener("click", (e) => {
+    const clickedInNavMenu = document
+      .getElementById("nav-menu-container")
+      .contains(e.target);
+
+    !clickedInNavMenu && toggleMenu(false);
+  });
+
   function keyPressHandler(ev) {
     switch (ev.key) {
       case "Escape":
@@ -64,15 +76,15 @@
     </span>
   </label>
 
-  <div class="nav-menu">
+  <div id="nav-menu-container" class="nav-menu">
     <ul>
       {#each items as { path, title, children }}
         <li data-nav-depth={_depth}>
           <!-- we use $url to resolve the path  -->
           <a
             href={$url(path)}
-            class:active={$isActive(path)}
-            on:click={() => $isActive(path) && toggleMenu(false)}>{title}</a
+            class:active={isUrlActive(path)}
+            on:click={() => isUrlActive(path) && toggleMenu(false)}>{title}</a
           >
 
           <!-- parse nested children here -->
