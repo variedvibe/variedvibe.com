@@ -1,5 +1,7 @@
 import { writable, derived } from "svelte/store";
 
+const localStorageKeyCart = "vv-cart";
+
 export class CartEntry {
   variantId;
   quantity;
@@ -11,7 +13,13 @@ export class CartEntry {
 }
 
 export const cart = (() => {
-  let { subscribe, set, update } = writable([]); // CartEntry[]
+  let stored = JSON.parse(localStorage.getItem(localStorageKeyCart));
+
+  let { subscribe, set, update } = writable(stored ?? []); // CartEntry[]
+
+  subscribe((entries) =>
+    localStorage.setItem(localStorageKeyCart, JSON.stringify(entries))
+  );
 
   return {
     subscribe,
@@ -26,6 +34,7 @@ export const cart = (() => {
 
         return entries;
       }),
+    clear: () => set([]),
   };
 })();
 
