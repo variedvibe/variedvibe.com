@@ -172,8 +172,8 @@
       display: block;
       width: 80%;
       text-align: center;
-      margin: 15px auto;
-      padding-bottom: 15px;
+      margin: 0 auto;
+      padding: 15px 0;
       border: none;
       border-bottom-style: solid;
       border-bottom-width: 2px;
