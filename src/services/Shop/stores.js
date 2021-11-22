@@ -9,7 +9,11 @@ export const checkoutId = (() => {
 
   let { subscribe, set } = writable(stored); // string
 
-  subscribe((id) => localStorage.setItem(localStorageKeyCheckoutId, id));
+  subscribe((id) =>
+    id
+      ? localStorage.setItem(localStorageKeyCheckoutId, id)
+      : localStorage.removeItem(localStorageKeyCheckoutId)
+  );
 
   return {
     subscribe,
