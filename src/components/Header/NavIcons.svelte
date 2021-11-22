@@ -5,7 +5,11 @@
 
 <ul class="nav-icons">
   <li>
-    <a class="ui-action shopping-cart" title="Coming soon..." href>
+    <a
+      class="ui-action shopping-cart"
+      title="Coming soon..."
+      href={"" ?? $url("/cart")}
+    >
       <i><u class="visually-hidden">Shopping Cart</u></i>
 
       <span class="ui-icon" />
