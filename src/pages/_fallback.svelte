@@ -8,9 +8,8 @@
 
 <div class="container">
   <h2>Hmmm... You seem lost.</h2>
-  <p>
-    Let's try bringing you back <a class="go-home" href={$url("/")}>home</a>.
-  </p>
+  <p>Let's try bringing you back home.</p>
+  <a class="link-button" href={$url("/")}>Go Home</a>
 </div>
 
 <style>
@@ -21,7 +20,7 @@
   p {
     font-size: var(--important-font-size);
   }
-  .go-home {
-    font-weight: bold;
+  .link-button {
+    margin: 20px auto;
   }
 </style>
