@@ -229,7 +229,7 @@
   }
   form .add-to-cart {
     flex: 1;
-    margin-left: 20px;
+    margin-left: 10px;
   }
   form .add-to-cart input[type="submit"] {
     width: 100%;

@@ -216,10 +216,10 @@ ASAP."
     flex: 1;
   }
   form .name.first-name {
-    margin-right: 10px;
+    margin-right: 5px;
   }
   form .name.last-name {
-    margin-left: 10px;
+    margin-left: 5px;
   }
   form .name input {
     width: 100%;
