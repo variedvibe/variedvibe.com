@@ -164,12 +164,19 @@ button,
 a.link-button {
   display: inline-block;
   box-sizing: border-box;
-  min-width: 8em;
   padding: 0.5em;
   color: var(--black);
   font-family: var(--main-font-ui);
   font-size: 1em;
   text-transform: capitalize;
+}
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+button,
+.link-button,
+a.link-button {
+  min-width: 8em;
 }
 textarea {
   resize: vertical;
