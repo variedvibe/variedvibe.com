@@ -12,6 +12,8 @@
   --black: #000;
   --main-bg-color: var(--black);
   --main-fg-color: var(--gray-light);
+  --secondary-fg-color: var(--gray-mid-light);
+  --tertiary-fg-color: var(--gray-mid);
   --error-bg-color: #ffd6d6;
   --error-fg-color: #ff9696;
   --main-font-normal: "Roboto Condensed", -apple-system-condensed,
@@ -132,7 +134,7 @@ hr,
 
 em {
   font-style: italic;
-  color: var(--gray-mid);
+  color: var(--tertiary-fg-color);
 }
 
 dl {
