@@ -1,7 +1,24 @@
 import { writable, derived } from "svelte/store";
 import { CartEntry } from "./cart.js";
 
+const localStorageKeyCheckoutId = "vv-checkout-id";
 const localStorageKeyCart = "vv-cart";
+
+export const checkoutId = (() => {
+  let stored = localStorage.getItem(localStorageKeyCheckoutId);
+
+  let { subscribe, set } = writable(stored); // string
+
+  subscribe((id) => localStorage.setItem(localStorageKeyCheckoutId, id));
+
+  return {
+    subscribe,
+
+    set,
+
+    clear: () => set(null),
+  };
+})();
 
 export const cart = (() => {
   let stored = fetchStoredCart();

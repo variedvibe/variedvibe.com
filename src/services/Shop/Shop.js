@@ -1,13 +1,14 @@
 import Client from "shopify-buy";
 
+import { Checkout } from "./checkout.js";
 import {
   Product,
   ProductImage,
   ProductOption,
-  ProductPrice,
   ProductSelectedOption,
   ProductVariant,
 } from "./product.js";
+import { Price } from "./price.js";
 
 const shopifyDomain =
   import.meta.env.VITE_SHOPIFY_DOMAIN ?? import.meta.env.SHOPIFY_DOMAIN;
@@ -45,6 +46,18 @@ export function getBaseUrl() {
   return `https://${shopifyDomain}/`;
 }
 
+export async function getCheckout(id) {
+  let checkout = await shopifyClient.checkout.fetch(id);
+
+  return checkout ? new Checkout(shopifyClient, checkout.id, checkout) : null;
+}
+
+export async function createCheckout() {
+  let checkout = await shopifyClient.checkout.create();
+
+  return new Checkout(shopifyClient, checkout.id, checkout);
+}
+
 export async function getAllProducts() {
   let products = await shopifyClient.product.fetchAll();
 
@@ -57,6 +70,15 @@ export async function getFeaturedProducts() {
   );
 
   return collection?.products.map(shopifyProductToProduct) ?? [];
+}
+
+export async function getProductsById(ids) {
+  // Remove duplicate ids
+  ids = [...new Set(ids)];
+
+  let products = await shopifyClient.product.fetchMultiple(ids);
+
+  return products?.map(shopifyProductToProduct) ?? [];
 }
 
 export async function getProductById(id) {
@@ -146,13 +168,6 @@ function shopifyProductOptionToProductOption(shopifyProductOption) {
   );
 }
 
-function shopifyProductPriceToProductPrice(shopifyProductPrice) {
-  return new ProductPrice(
-    shopifyProductPrice.amount,
-    shopifyProductPrice.currencyCode
-  );
-}
-
 function shopifyProductSelectedOptionToProductSelectedOption(
   shopifyProductSelectedOption
 ) {
@@ -169,7 +184,10 @@ function shopifyProductVariantToProductVariant(shopifyProductVariant) {
     shopifyProductVariant.image
       ? shopifyProductImageToProductImage(shopifyProductVariant.image)
       : null,
-    shopifyProductPriceToProductPrice(shopifyProductVariant.priceV2),
+    new Price(
+      shopifyProductVariant.priceV2.amount,
+      shopifyProductVariant.priceV2.currencyCode
+    ),
     shopifyProductVariant.selectedOptions.map(
       shopifyProductSelectedOptionToProductSelectedOption
     ),
