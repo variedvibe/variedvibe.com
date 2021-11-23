@@ -142,18 +142,18 @@ dl {
   flex-direction: row;
   align-items: center;
 }
-
 dt,
 dd {
   display: inline-block;
 }
-
+dt {
+  text-align: left;
+}
 dd {
   margin-left: 40px;
   flex: 1;
   text-align: right;
 }
-
 dd.strong {
   font-weight: bold;
 }

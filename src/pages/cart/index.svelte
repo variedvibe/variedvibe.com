@@ -63,6 +63,22 @@
           </li>
         {/each}
       </ul>
+      <div class="cart-summary">
+        <dl>
+          <dt>Subtotal</dt>
+          <dd>{checkout.subtotalPrice.format("en-US") ?? "$--"}</dd>
+
+          <dt>Shipping</dt>
+          <dd>$--</dd>
+
+          <dt>Tax</dt>
+          <dd>{checkout.totalTaxPrice.format("en-US") ?? "$--"}</dd>
+        </dl>
+        <dl class="total">
+          <dt>Total</dt>
+          <dd>{checkout.totalPrice.format("en-US") ?? "$--"}</dd>
+        </dl>
+      </div>
     {:else}
       <h2>Your cart is empty.</h2>
       <p>Maybe check out some products.</p>
@@ -87,15 +103,26 @@
     text-decoration-color: var(--gray-mid);
     text-underline-offset: 0.1em;
   }
-  .cart-item-list {
+  .cart-item-list,
+  .cart-summary {
     display: block;
-    list-style-type: none;
-    margin: 4em auto;
     padding: 0;
   }
+  .cart-item-list {
+    list-style-type: none;
+    margin-top: 4em;
+  }
+  .cart-summary,
   .cart-item-list li {
     margin: 2.5em auto;
     padding-top: 2.5em;
+    border-top-style: solid;
+    border-top-width: 2px;
+    border-top-color: var(--gray-mid-darker);
+  }
+  .cart-summary,
+  .cart-item-list li,
+  .cart-summary dl.total {
     border-top-style: solid;
     border-top-width: 2px;
     border-top-color: var(--gray-mid-darker);
@@ -106,10 +133,32 @@
   .cart-item-list li:last-child {
     margin-bottom: 0;
   }
+  .cart-summary dl {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 50%;
+    margin: 0;
+    margin-left: auto;
+    font-size: 1.2em;
+    line-height: 1.4;
+  }
+  .cart-summary dl.total {
+    margin-top: 0.5em;
+    padding-top: 0.5em;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
   p {
     font-size: var(--important-font-size);
   }
   .link-button {
     margin: 20px auto;
+  }
+
+  @media (max-width: 500px) {
+    .cart-summary dl {
+      width: auto;
+      margin: 0;
+    }
   }
 </style>
