@@ -170,7 +170,6 @@ a.link-button {
   color: var(--black);
   font-family: var(--main-font-ui);
   font-size: 1em;
-  text-transform: capitalize;
 }
 input[type="button"],
 input[type="reset"],
@@ -189,6 +188,12 @@ select:disabled,
 textarea:disabled {
   background-color: var(--gray-mid-lighter);
   color: var(--gray-mid-dark);
+}
+input::placeholder,
+select::placeholder,
+textarea::placeholder,
+button::placeholder {
+  text-transform: capitalize;
 }
 input[type="button"],
 input[type="reset"],
