@@ -28,7 +28,23 @@
     </div>
   </div>
   <div class="price-actions">
-    {variant.price.format("en-US") ?? "$--"}
+    <div class="price-actions-main">
+      <span class="price">{variant.price.format("en-US") ?? "$--"}</span>
+      <span class="price-multiplier">
+        x
+        <input
+          type="number"
+          name="quantity"
+          placeholder="Quantity"
+          min="1"
+          max="100"
+          bind:value={cartEntry.quantity}
+        />
+      </span>
+    </div>
+    <div class="price-actions-footer">
+      <button>Remove</button>
+    </div>
   </div>
 </div>
 
@@ -36,16 +52,17 @@
   .container {
     display: flex;
     justify-content: center;
-    align-items: center;
     align-content: center;
+    align-items: stretch;
+    line-height: 1;
   }
   .product-image-link {
     flex: 0;
   }
   .product-image-link img {
     display: block;
-    width: 150px;
-    height: 225px;
+    width: 120px;
+    height: 180px;
     object-fit: cover;
     background-color: var(--gray-mid);
   }
@@ -56,28 +73,62 @@
   }
   .secondary-details {
     display: block;
+    line-height: 2;
     color: var(--secondary-fg-color);
   }
   .product-text-link {
     display: inline-block;
     font-size: 1.5em;
+    font-weight: bold;
   }
   .price-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
     flex: 1;
-    font-size: 1.5em;
     text-align: right;
+  }
+  .price-actions-footer {
+    margin-top: 2em;
+  }
+  .price {
+    display: bold;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  .price-multiplier {
+    display: block;
+    margin: 10px 0;
+    margin-bottom: 0;
+    margin-left: auto;
+  }
+  input[type="number"] {
+    width: 4em;
+    margin-left: 0.25em;
+    font-size: 0.8em;
+  }
+  .price-actions-footer button {
+    min-width: 5em;
+    font-size: 0.8em;
   }
 
   @media (max-width: 500px) {
     .container {
       flex-direction: column;
+      align-items: center;
     }
     .details {
       margin: 1em auto;
       text-align: center;
     }
     .price-actions {
+      align-items: center;
       text-align: center;
+    }
+    input[type="number"] {
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 </style>

@@ -94,8 +94,8 @@
     padding: 0;
   }
   .cart-item-list li {
-    margin: 4em auto;
-    padding-top: 4em;
+    margin: 2.5em auto;
+    padding-top: 2.5em;
     border-top-style: solid;
     border-top-width: 2px;
     border-top-color: var(--gray-mid-darker);
