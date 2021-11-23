@@ -81,23 +81,6 @@ export class ProductOption {
   }
 }
 
-export class ProductPrice {
-  amount;
-  currencyCode;
-
-  constructor(amount, currencyCode) {
-    this.amount = amount;
-    this.currencyCode = currencyCode;
-  }
-
-  format(locale) {
-    return new Intl.NumberFormat(locale, {
-      style: "currency",
-      currency: this.currencyCode,
-    }).format(this.amount);
-  }
-}
-
 export class ProductSelectedOption {
   name;
   value;
