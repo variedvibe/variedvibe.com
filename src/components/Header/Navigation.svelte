@@ -139,7 +139,8 @@
   }
   @media (hover: none) {
     /* Reset normal hover effects, so mobile doesn't try and show them */
-    .nav-menu-toggle .ui-icon {
+    .nav-menu-toggle .ui-icon,
+    .nav-menu-toggle:hover + .nav-menu-toggle .ui-icon {
       filter: invert(100%);
     }
   }
