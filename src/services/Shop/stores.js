@@ -1,8 +1,8 @@
 import { writable, derived } from "svelte/store";
 import { CartEntry } from "./cart.js";
 
-const localStorageKeyCheckoutId = "vv-checkout-id";
-const localStorageKeyCart = "vv-cart";
+const localStorageKeyCheckoutId = "vv:checkout-id";
+const localStorageKeyCart = "vv:cart";
 
 export const checkoutId = (() => {
   let stored = localStorage.getItem(localStorageKeyCheckoutId);
