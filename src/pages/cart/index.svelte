@@ -79,6 +79,9 @@
           <dd>{checkout.totalPrice.format("en-US") ?? "$--"}</dd>
         </dl>
       </div>
+      <button id="cart-checkout" title="Coming Soon..." disabled
+        >Check Out</button
+      >
     {:else}
       <h2>Your cart is empty.</h2>
       <p>Maybe check out some products.</p>
@@ -148,6 +151,13 @@
     font-size: 1.5em;
     font-weight: bold;
   }
+  #cart-checkout {
+    display: block;
+    min-width: 25%;
+    margin-top: 2.5em;
+    margin-left: auto;
+    margin-right: 0;
+  }
   p {
     font-size: var(--important-font-size);
   }
@@ -159,6 +169,10 @@
     .cart-summary dl {
       width: auto;
       margin: 0;
+    }
+    #cart-checkout {
+      min-width: 50%;
+      margin-right: auto;
     }
   }
 </style>
