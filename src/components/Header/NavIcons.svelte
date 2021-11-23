@@ -7,15 +7,17 @@
   <li>
     <a
       class="ui-action shopping-cart"
-      title="Coming soon..."
-      href={"" ?? $url("/cart")}
+      title="Shopping Cart"
+      href={$url("/cart")}
     >
       <i><u class="visually-hidden">Shopping Cart</u></i>
 
-      <span class="ui-icon" />
-      <span class="ui-icon-badge" class:hidden={$cartQuantity < 1}
-        >{$cartQuantity}</span
-      >
+      <div class="ui-icon-with-badge">
+        <span class="ui-icon" />
+        <span class="ui-icon-badge" class:hidden={$cartQuantity < 1}
+          >{$cartQuantity}</span
+        >
+      </div>
     </a>
   </li>
   <li>
@@ -68,13 +70,27 @@
     transition: filter var(--animation-speed-normal)
       var(--animation-timing-function-natural);
   }
-  .ui-icon:hover {
+  .ui-icon-badge {
+    background-color: var(--white);
+    color: var(--black);
+    transition: background-color var(--animation-speed-normal)
+      var(--animation-timing-function-natural);
+  }
+  .ui-icon:hover,
+  .ui-icon-with-badge:hover .ui-icon {
     filter: invert(100%) brightness(47.5%);
+  }
+  .ui-icon-with-badge:hover .ui-icon-badge {
+    background-color: var(--gray-mid);
   }
   @media (hover: none) {
     /* Reset normal hover effects, so mobile doesn't try and show them */
-    .ui-icon:hover {
+    .ui-icon:hover,
+    .ui-icon-with-badge:hover .ui-icon {
       filter: invert(100%);
+    }
+    .ui-icon-with-badge:hover .ui-icon-badge {
+      background-color: var(--white);
     }
   }
 
@@ -84,10 +100,5 @@
 
   .ui-action.shopping-cart .ui-icon {
     background-image: url("/assets/ui-icons/shopping-bag.svg");
-    filter: invert(0.5);
-  }
-  .ui-icon-badge {
-    background-color: var(--white);
-    color: var(--black);
   }
 </style>
