@@ -50,7 +50,7 @@
       --nav-item-margin: 8px;
     }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     header {
       --header-height: 50px;
     }
