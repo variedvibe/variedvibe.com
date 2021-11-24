@@ -38,9 +38,11 @@
     );
 
     checkout = await fetchCheckout();
-    checkout.replaceLineItems(cartLineItems);
 
-    products = await getProductsById(productIds);
+    [, products] = await Promise.all([
+      checkout.replaceLineItems(cartLineItems),
+      getProductsById(productIds),
+    ]);
   }
 </script>
 
