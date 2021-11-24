@@ -44,7 +44,7 @@
     z-index: 100;
     background: var(--main-bg-color);
   }
-  @media (max-width: 400px) {
+  @media (max-width: 350px) {
     header {
       --ui-icon-size: 18px;
       --nav-item-margin: 8px;
