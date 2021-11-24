@@ -66,32 +66,39 @@
     position: relative;
   }
   .ui-icon {
-    filter: invert(100%);
-    transition: filter var(--animation-speed-normal)
+    filter: invert(100%) brightness(86.5%);
+    transition: filter var(--animation-speed-very-fast)
       var(--animation-timing-function-natural);
   }
   .ui-icon-badge {
-    background-color: var(--white);
+    background-color: var(--gray-lighter);
     color: var(--black);
-    transition: background-color var(--animation-speed-normal)
+    transition: background-color var(--animation-speed-very-fast)
       var(--animation-timing-function-natural);
   }
   .ui-icon:hover,
   .ui-icon-with-badge:hover .ui-icon {
-    filter: invert(100%) brightness(47.5%);
+    filter: invert(100%) brightness(100%);
   }
   .ui-icon-with-badge:hover .ui-icon-badge {
-    background-color: var(--gray-mid);
+    background-color: var(--white);
   }
   @media (hover: none) {
     /* Reset normal hover effects, so mobile doesn't try and show them */
     .ui-icon:hover,
     .ui-icon-with-badge:hover .ui-icon {
-      filter: invert(100%);
+      filter: invert(100%) brightness(86.5%);
     }
     .ui-icon-with-badge:hover .ui-icon-badge {
-      background-color: var(--white);
+      background-color: var(--gray-lighter);
     }
+  }
+  .ui-icon:active,
+  .ui-icon-with-badge:active .ui-icon {
+    filter: invert(100%) brightness(46.5%);
+  }
+  .ui-icon-with-badge:active .ui-icon-badge {
+    background-color: var(--gray-mid);
   }
 
   .ui-action.contact-us {

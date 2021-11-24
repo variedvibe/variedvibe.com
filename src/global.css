@@ -39,8 +39,10 @@
   --small-font-size: 0.8em;
   --ui-icon-size: 0.6rem;
   --animation-speed-normal: 500ms;
+  --animation-speed-very-fast: 125ms;
   --animation-speed-fast: 250ms;
   --animation-speed-slow: 750ms;
+  --animation-speed-very-slow: 875ms;
   --animation-timing-function-natural: cubic-bezier(0.4, 0, 1, 1);
 }
 
@@ -76,7 +78,7 @@ body {
 a {
   color: var(--gray-light);
   text-decoration: none;
-  transition: color var(--animation-speed-fast)
+  transition: color var(--animation-speed-very-fast)
     var(--animation-timing-function-natural);
 }
 
@@ -87,7 +89,7 @@ a:visited {
 }
 
 a:hover {
-  color: var(--gray-mid);
+  color: var(--white);
 }
 @media (hover: none) {
   /* Reset normal hover effects, so mobile doesn't try and show them */
@@ -97,7 +99,7 @@ a:hover {
 }
 
 a:active {
-  color: var(--gray-dark);
+  color: var(--gray-mid);
 }
 
 h1,

@@ -126,23 +126,24 @@
     width: 100%;
     height: 100%;
     background-image: url("/assets/ui-icons/hamburger-menu.svg");
-    filter: invert(100%);
-    transition: filter var(--animation-speed-normal)
+    filter: invert(100%) brightness(86.5%);
+    transition: filter var(--animation-speed-very-fast)
       var(--animation-timing-function-natural);
   }
   .menu-shown .nav-menu-toggle .ui-icon {
     background-image: url("/assets/ui-icons/close-line.svg");
-    filter: invert(100%);
   }
   .nav-menu-toggle:hover + .nav-menu-toggle .ui-icon {
-    filter: invert(100%) brightness(47.5%);
+    filter: invert(100%) brightness(100%);
   }
   @media (hover: none) {
     /* Reset normal hover effects, so mobile doesn't try and show them */
-    .nav-menu-toggle .ui-icon,
     .nav-menu-toggle:hover + .nav-menu-toggle .ui-icon {
-      filter: invert(100%);
+      filter: invert(100%) brightness(86.5%);
     }
+  }
+  .nav-menu-toggle:active + .nav-menu-toggle .ui-icon {
+    filter: invert(100%) brightness(46.5%);
   }
 
   ul {
@@ -217,18 +218,18 @@
   a,
   a:link,
   a:visited {
-    color: var(--white);
+    color: var(--gray-lighter);
   }
   a:hover {
-    color: var(--gray-mid);
+    color: var(--white);
   }
   @media (hover: none) {
     /* Reset normal hover effects, so mobile doesn't try and show them */
     a:hover {
-      color: var(--white);
+      color: var(--gray-lighter);
     }
   }
   a:active {
-    color: var(--gray-dark);
+    color: var(--gray-mid);
   }
 </style>
