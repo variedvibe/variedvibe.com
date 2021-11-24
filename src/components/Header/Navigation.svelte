@@ -159,7 +159,7 @@
   li {
     display: block;
     padding: 0;
-    margin: 0 8px;
+    margin: 0 var(--nav-item-margin);
     text-align: center;
   }
   li:first-child {

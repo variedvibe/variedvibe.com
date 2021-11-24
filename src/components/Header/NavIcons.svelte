@@ -46,7 +46,7 @@
     flex: 1;
     display: block;
     padding: 0;
-    margin: 0 8px;
+    margin: 0 var(--nav-item-margin);
     text-align: center;
   }
   li:first-child {
@@ -57,7 +57,7 @@
   }
   @media (max-width: 800px) {
     li:last-child {
-      margin-right: 16px;
+      margin-right: calc(var(--nav-item-margin) * 2);
     }
   }
 

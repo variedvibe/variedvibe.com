@@ -33,7 +33,8 @@
 <style>
   header {
     --header-height: 60px;
-    --ui-icon-size: 20px;
+    --ui-icon-size: 22px;
+    --nav-item-margin: 10px;
 
     display: flex;
     width: 100%;
@@ -46,6 +47,7 @@
   @media (max-width: 400px) {
     header {
       --ui-icon-size: 18px;
+      --nav-item-margin: 8px;
     }
   }
   @media (max-width: 600px) {
