@@ -164,6 +164,8 @@ textarea,
 button,
 .link-button,
 a.link-button {
+  -webkit-appearance: none;
+  appearance: none;
   display: inline-block;
   box-sizing: border-box;
   padding: 0.5em;
@@ -178,6 +180,13 @@ button,
 .link-button,
 a.link-button {
   min-width: 8em;
+}
+select {
+  background-image: url(/assets/ui-icons/angle-down-arrow-line.svg);
+  background-origin: content-box;
+  background-position: 100% 50%;
+  background-size: 0.5em;
+  background-repeat: no-repeat;
 }
 textarea {
   resize: vertical;
@@ -203,8 +212,6 @@ button,
 .link-button:link,
 a.link-button,
 a.link-button:link {
-  -webkit-appearance: button;
-  appearance: button;
   background-color: var(--gray-lighter);
 }
 input[type="button"]:hover,
@@ -337,8 +344,8 @@ html::-webkit-scrollbar-thumb:active {
   width: var(--ui-icon-size);
   height: var(--ui-icon-size);
   background-position: center;
-  background-repeat: no-repeat;
   background-size: contain;
+  background-repeat: no-repeat;
 }
 .ui-icon-badge {
   display: block;
