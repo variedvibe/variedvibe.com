@@ -73,7 +73,7 @@
     </span>
   </label>
 
-  <div id="nav-menu-container" class="nav-menu">
+  <div id="nav-menu-container" class="nav-menu page-width-wrapper">
     <ul>
       {#each items as { path, title, children }}
         <li data-nav-depth={_depth}>
@@ -146,6 +146,9 @@
     filter: invert(100%) brightness(46.5%);
   }
 
+  .nav-menu {
+    box-sizing: border-box;
+  }
   ul {
     display: flex;
     list-style: none;
@@ -196,14 +199,15 @@
     li:first-child,
     li:last-child {
       display: block;
-      width: 80%;
-      text-align: center;
+      width: 90%;
+      max-width: 500px;
       margin: 0 auto;
       padding: 15px 0;
       border: none;
       border-bottom-style: solid;
       border-bottom-width: 2px;
       border-bottom-color: var(--gray-mid-darker);
+      text-align: center;
     }
     li:last-child {
       padding-bottom: 0;
