@@ -17,7 +17,6 @@ export const checkoutId = (() => {
 
   return {
     subscribe,
-
     set,
 
     clear: () => set(null),
@@ -35,6 +34,7 @@ export const cart = (() => {
 
   return {
     subscribe,
+    set,
 
     add: (cartEntry) =>
       update((entries) => {

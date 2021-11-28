@@ -64,6 +64,8 @@ export class Checkout {
     );
 
     this.#update(updatedCheckout);
+
+    return this;
   }
 
   async removeLineItems(itemIds) {
@@ -73,6 +75,8 @@ export class Checkout {
     );
 
     this.#update(updatedCheckout);
+
+    return this;
   }
 
   async replaceLineItems(items) {
@@ -82,6 +86,8 @@ export class Checkout {
     );
 
     this.#update(updatedCheckout);
+
+    return this;
   }
 
   async updateLineItems(items) {
@@ -91,6 +97,8 @@ export class Checkout {
     );
 
     this.#update(updatedCheckout);
+
+    return this;
   }
 
   #update(shopifyCheckout) {

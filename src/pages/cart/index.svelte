@@ -15,35 +15,40 @@
     messageErrorGeneric,
   } from "/src/components/StatusMessage/StatusMessage.svelte";
 
-  async function fetchCheckout() {
-    let checkout = $checkoutId
-      ? await getCheckout($checkoutId)
+  async function fetchCheckout(checkoutId) {
+    let checkout = checkoutId
+      ? await getCheckout(checkoutId)
       : await createCheckout();
 
-    $checkoutId = checkout.id;
-
-    return checkout;
+    return [checkout, checkout.id];
   }
 
   let checkout;
-
-  let productIds = $cart.map((cartEntry) => cartEntry.productId);
   let products = [];
 
+  $: productIds = $cart.map((cartEntry) => cartEntry.productId);
   $: productIdMap = new Map(products.map((product) => [product.id, product]));
+  $: cartLineItems = $cart.map(
+    (cartEntry) => new LineItem(null, cartEntry.variantId, cartEntry.quantity)
+  );
 
-  async function loadAll() {
-    let cartLineItems = $cart.map(
-      (cartEntry) => new LineItem(null, cartEntry.variantId, cartEntry.quantity)
-    );
+  let syncCheckoutWithCart = async (cartLineItems) => {
+    if (checkout) {
+      checkout = await checkout.replaceLineItems(cartLineItems);
+    }
+  };
 
-    checkout = await fetchCheckout();
+  $: syncCheckoutWithCart(cartLineItems);
+  $: (async () => {
+    if (productIds.length > 0) {
+      products = await getProductsById(productIds);
+    }
+  })();
 
-    [, products] = await Promise.all([
-      checkout.replaceLineItems(cartLineItems),
-      getProductsById(productIds),
-    ]);
-  }
+  let loadAll = async () => {
+    [checkout, $checkoutId] = await fetchCheckout($checkoutId);
+    await syncCheckoutWithCart(cartLineItems);
+  };
 </script>
 
 <div id="container" class="page-width-wrapper">
@@ -59,7 +64,7 @@
         {#each $cart as entry}
           <li>
             <CartItem
-              cartEntry={entry}
+              bind:cartEntry={entry}
               product={productIdMap.get(entry.productId)}
             />
           </li>
