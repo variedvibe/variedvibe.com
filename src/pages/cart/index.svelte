@@ -1,4 +1,5 @@
 <script>
+  import debounce from "lodash.debounce";
   import { url } from "@roxi/routify";
 
   import {
@@ -14,6 +15,8 @@
     messageLoading,
     messageErrorGeneric,
   } from "/src/components/StatusMessage/StatusMessage.svelte";
+
+  const debounceTimeout = 1000;
 
   async function fetchCheckout(checkoutId) {
     let checkout = checkoutId
@@ -37,17 +40,27 @@
       checkout = await checkout.replaceLineItems(cartLineItems);
     }
   };
+  let syncCheckoutWithCartDebounced = debounce(
+    syncCheckoutWithCart,
+    debounceTimeout
+  );
 
-  $: syncCheckoutWithCart(cartLineItems);
-  $: (async () => {
+  let loadProducts = async (productIds) => {
     if (productIds.length > 0) {
       products = await getProductsById(productIds);
     }
-  })();
+  };
+  let loadProductsDebounced = debounce(loadProducts, debounceTimeout);
+
+  $: syncCheckoutWithCartDebounced(cartLineItems);
+  $: loadProductsDebounced(productIds);
 
   let loadAll = async () => {
     [checkout, $checkoutId] = await fetchCheckout($checkoutId);
-    await syncCheckoutWithCart(cartLineItems);
+    await Promise.all([
+      syncCheckoutWithCart(cartLineItems),
+      loadProducts(productIds),
+    ]);
   };
 </script>
 
