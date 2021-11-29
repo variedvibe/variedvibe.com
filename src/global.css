@@ -185,6 +185,7 @@ button,
 .link-button,
 a.link-button {
   min-width: 8em;
+  text-align: center;
 }
 select {
   background-image: url(/assets/ui-icons/angle-down-arrow-line.svg);
