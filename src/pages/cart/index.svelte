@@ -1,5 +1,6 @@
 <script>
   import debounce from "lodash.debounce";
+  import { slide } from "svelte/transition";
   import { url } from "@roxi/routify";
 
   import {
@@ -74,8 +75,8 @@
         /> in your cart.
       </h2>
       <ul class="cart-item-list">
-        {#each $cart as entry}
-          <li>
+        {#each $cart as entry (entry.productId + entry.variantId)}
+          <li out:slide|local>
             <CartItem
               bind:cartEntry={entry}
               product={productIdMap.get(entry.productId)}

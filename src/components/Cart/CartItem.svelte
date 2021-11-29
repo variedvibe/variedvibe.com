@@ -1,6 +1,8 @@
 <script>
   import { url } from "@roxi/routify";
 
+  import { cart } from "/src/services/Shop/stores.js";
+
   export let cartEntry;
   export let product;
 
@@ -8,6 +10,10 @@
     (variant) => variant.id === cartEntry.variantId
   );
   let productLinkHref = $url(`/products/${product.slug}`);
+
+  function remove() {
+    cart.remove(cartEntry);
+  }
 </script>
 
 <div class="container">
@@ -43,7 +49,7 @@
       </span>
     </div>
     <div class="price-actions-footer">
-      <button>Remove</button>
+      <button on:click={remove}>Remove</button>
     </div>
   </div>
 </div>
