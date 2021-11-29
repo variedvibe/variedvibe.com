@@ -58,6 +58,7 @@
 
   let loadAll = async () => {
     [checkout, $checkoutId] = await fetchCheckout($checkoutId);
+
     await Promise.all([
       syncCheckoutWithCart(cartLineItems),
       loadProducts(productIds),
@@ -90,9 +91,9 @@
           <dd>{checkout.subtotalPrice.format("en-US") ?? "$--"}</dd>
 
           <dt>Shipping</dt>
-          <dd>$--</dd>
+          <dd class="price-note">Calculated in next steps</dd>
 
-          <dt>Tax</dt>
+          <dt>Taxes (estimated)</dt>
           <dd>{checkout.totalTaxPrice.format("en-US") ?? "$--"}</dd>
         </dl>
         <dl class="total">
@@ -100,9 +101,19 @@
           <dd>{checkout.totalPrice.format("en-US") ?? "$--"}</dd>
         </dl>
       </div>
-      <button id="cart-checkout" title="Coming Soon..." disabled
-        >Check Out</button
-      >
+      <div class="cart-actions">
+        <button id="cart-checkout" title="Coming Soon..." disabled
+          >Check Out</button
+        >
+        <!--
+        <a
+          id="cart-checkout"
+          class="link-button"
+          href={checkout.webUrl}
+          title="Coming Soon...">Check Out</a
+        >
+        -->
+      </div>
     {:else}
       <h2>Your cart is empty.</h2>
       <p>Maybe check out some products.</p>
@@ -172,11 +183,27 @@
     font-size: 1.5em;
     font-weight: bold;
   }
-  #cart-checkout {
-    display: block;
-    min-width: 25%;
+  .cart-summary dd.price-note {
+    font-size: var(--small-font-size);
+    color: var(--secondary-fg-color);
+  }
+  .cart-actions {
     margin-top: 2.5em;
     margin-left: auto;
+    width: 50%;
+    text-align: right;
+  }
+  .cart-actions button,
+  .cart-actions .link-button {
+    min-width: calc(50% - 8px);
+    margin: 0 5px;
+  }
+  .cart-actions button:first-child,
+  .cart-actions .link-button:first-child {
+    margin-left: 0;
+  }
+  .cart-actions button:last-child,
+  .cart-actions .link-button:last-child {
     margin-right: 0;
   }
   p {
@@ -191,9 +218,14 @@
       width: auto;
       margin: 0;
     }
-    #cart-checkout {
+    .cart-actions {
+      width: auto;
+      text-align: center;
+    }
+    .cart-actions button,
+    .cart-actions .link-button {
       min-width: 50%;
-      margin-right: auto;
+      margin: 0;
     }
   }
 </style>
