@@ -77,14 +77,16 @@
       </h2>
       <ul class="cart-item-list">
         {#each $cart as entry (entry.productId + entry.variantId)}
-          {#if productIdMap.has(entry.productId)}
-            <li out:slide|local>
-              <CartItem
-                bind:cartEntry={entry}
-                product={productIdMap.get(entry.productId)}
-              />
-            </li>
-          {/if}
+          <li out:slide|local>
+            {#if productIdMap.has(entry.productId)}
+              <div class="cart-item-container">
+                <CartItem
+                  bind:cartEntry={entry}
+                  product={productIdMap.get(entry.productId)}
+                />
+              </div>
+            {/if}
+          </li>
         {/each}
       </ul>
       <div class="cart-summary">
@@ -149,8 +151,11 @@
     list-style-type: none;
     margin-top: 4em;
   }
-  .cart-summary,
   .cart-item-list li {
+    display: block;
+  }
+  .cart-summary,
+  .cart-item-list li .cart-item-container {
     margin: 2.5em auto;
     padding-top: 2.5em;
     border-top-style: solid;
@@ -158,16 +163,16 @@
     border-top-color: var(--gray-mid-darker);
   }
   .cart-summary,
-  .cart-item-list li,
+  .cart-item-list li .cart-item-container,
   .cart-summary dl.total {
     border-top-style: solid;
     border-top-width: 2px;
     border-top-color: var(--gray-mid-darker);
   }
-  .cart-item-list li:first-child {
+  .cart-item-list li:first-child .cart-item-container {
     margin-top: 0;
   }
-  .cart-item-list li:last-child {
+  .cart-item-list li:last-child .cart-item-container {
     margin-bottom: 0;
   }
   .cart-summary dl {
