@@ -1,13 +1,26 @@
 import { writable, derived } from "svelte/store";
 import { CartEntry } from "./cart.js";
 
+const eventListenerKeyStorage = "storage";
+
 const localStorageKeyCheckoutId = "vv:checkout-id";
 const localStorageKeyCart = "vv:cart";
 
 export const checkoutId = (() => {
-  let stored = localStorage.getItem(localStorageKeyCheckoutId);
+  let stored = localStorage.getItem(localStorageKeyCheckoutId); // string
 
-  let { subscribe, set } = writable(stored); // string
+  let { subscribe, set } = writable(stored, (set) => {
+    const storageEventHandler = (event) => {
+      if (event.key === localStorageKeyCheckoutId) {
+        set(event.newValue);
+      }
+    };
+
+    window.addEventListener(eventListenerKeyStorage, storageEventHandler);
+
+    return () =>
+      window.removeEventListener(eventListenerKeyStorage, storageEventHandler);
+  });
 
   subscribe((id) =>
     id
@@ -24,9 +37,20 @@ export const checkoutId = (() => {
 })();
 
 export const cart = (() => {
-  let stored = fetchStoredCart();
+  let stored = fetchStoredCart(); // CartEntry[]
 
-  let { subscribe, set, update } = writable(stored ?? []); // CartEntry[]
+  let { subscribe, set, update } = writable(stored ?? [], (set) => {
+    const storageEventHandler = (event) => {
+      if (event.key === localStorageKeyCart) {
+        set(fetchStoredCart(event.newValue));
+      }
+    };
+
+    window.addEventListener(eventListenerKeyStorage, storageEventHandler);
+
+    return () =>
+      window.removeEventListener(eventListenerKeyStorage, storageEventHandler);
+  });
 
   subscribe((entries) =>
     localStorage.setItem(localStorageKeyCart, JSON.stringify(entries))
@@ -70,8 +94,10 @@ export const cartQuantity = derived(cart, ($cart) =>
   $cart.reduce((prev, cur) => prev + cur.quantity, 0)
 );
 
-function fetchStoredCart() {
-  let stored = JSON.parse(localStorage.getItem(localStorageKeyCart));
+function fetchStoredCart(rawStored) {
+  let stored = JSON.parse(
+    rawStored ?? localStorage.getItem(localStorageKeyCart)
+  );
 
   if (stored) {
     stored = stored.map((storedEntry) =>
