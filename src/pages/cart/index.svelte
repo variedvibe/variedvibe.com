@@ -102,7 +102,8 @@
             <dd class="price-note">Calculated in next steps</dd>
 
             <dt>Taxes (estimated)</dt>
-            <dd>{checkout.totalTaxPrice.format("en-US") ?? "$--"}</dd>
+            <dd class="price-note">Calculated in next steps</dd>
+            <!-- <dd>{checkout.totalTaxPrice.format("en-US") ?? "$--"}</dd> -->
           </dl>
           <dl class="total">
             <dt>Total</dt>
