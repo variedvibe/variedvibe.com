@@ -65,7 +65,7 @@ body {
   justify-content: center;
   background: var(--main-bg-color);
   font-family: var(--main-font-normal);
-  font-size: var(--main-font-size);
+  font-size: var(--normal-font-size);
   color: var(--main-fg-color);
 }
 
