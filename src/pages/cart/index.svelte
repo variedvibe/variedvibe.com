@@ -77,12 +77,14 @@
       </h2>
       <ul class="cart-item-list">
         {#each $cart as entry (entry.productId + entry.variantId)}
-          <li out:slide|local>
-            <CartItem
-              bind:cartEntry={entry}
-              product={productIdMap.get(entry.productId)}
-            />
-          </li>
+          {#if productIdMap.has(entry.productId)}
+            <li out:slide|local>
+              <CartItem
+                bind:cartEntry={entry}
+                product={productIdMap.get(entry.productId)}
+              />
+            </li>
+          {/if}
         {/each}
       </ul>
       <div class="cart-summary">
