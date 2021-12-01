@@ -28,6 +28,7 @@
   }
 
   let checkout;
+  let checkoutLoading = true;
   let products = [];
 
   $: productIds = $cart.map((cartEntry) => cartEntry.productId);
@@ -40,6 +41,8 @@
     if (checkout) {
       checkout = await checkout.replaceLineItems(cartLineItems);
     }
+
+    checkoutLoading = false;
   };
   let syncCheckoutWithCartDebounced = debounce(
     syncCheckoutWithCart,
@@ -53,7 +56,7 @@
   };
   let loadProductsDebounced = debounce(loadProducts, debounceTimeout);
 
-  $: syncCheckoutWithCartDebounced(cartLineItems);
+  $: syncCheckoutWithCartDebounced(cartLineItems), (checkoutLoading = true);
   $: loadProductsDebounced(productIds);
 
   let loadAll = async () => {
@@ -89,27 +92,28 @@
           </li>
         {/each}
       </ul>
-      <div class="cart-summary">
-        <dl>
-          <dt>Subtotal</dt>
-          <dd>{checkout.subtotalPrice.format("en-US") ?? "$--"}</dd>
+      <div class="cart-summary-actions-container">
+        <div class="cart-summary">
+          <dl>
+            <dt>Subtotal</dt>
+            <dd>{checkout.subtotalPrice.format("en-US") ?? "$--"}</dd>
 
-          <dt>Shipping</dt>
-          <dd class="price-note">Calculated in next steps</dd>
+            <dt>Shipping</dt>
+            <dd class="price-note">Calculated in next steps</dd>
 
-          <dt>Taxes (estimated)</dt>
-          <dd>{checkout.totalTaxPrice.format("en-US") ?? "$--"}</dd>
-        </dl>
-        <dl class="total">
-          <dt>Total</dt>
-          <dd>{checkout.totalPrice.format("en-US") ?? "$--"}</dd>
-        </dl>
-      </div>
-      <div class="cart-actions">
-        <button id="cart-checkout" title="Coming Soon..." disabled
-          >Check Out</button
-        >
-        <!--
+            <dt>Taxes (estimated)</dt>
+            <dd>{checkout.totalTaxPrice.format("en-US") ?? "$--"}</dd>
+          </dl>
+          <dl class="total">
+            <dt>Total</dt>
+            <dd>{checkout.totalPrice.format("en-US") ?? "$--"}</dd>
+          </dl>
+        </div>
+        <div class="cart-actions">
+          <button id="cart-checkout" title="Coming Soon..." disabled
+            >Check Out</button
+          >
+          <!--
         <a
           id="cart-checkout"
           class="link-button"
@@ -117,6 +121,10 @@
           title="Coming Soon...">Check Out</a
         >
         -->
+        </div>
+        {#if checkoutLoading}
+          <div class="cart-summary-actions-loading">Loading...</div>
+        {/if}
       </div>
     {:else}
       <h2>Your cart is empty.</h2>
@@ -130,6 +138,8 @@
 
 <style>
   #container {
+    --border-width: 2px;
+
     margin: 0 auto;
     text-align: center;
   }
@@ -154,19 +164,22 @@
   .cart-item-list li {
     display: block;
   }
+  .cart-summary-actions-container {
+    position: relative;
+  }
   .cart-summary,
   .cart-item-list li .cart-item-container {
     margin: 2.5em auto;
     padding-top: 2.5em;
     border-top-style: solid;
-    border-top-width: 2px;
+    border-top-width: var(--border-width);
     border-top-color: var(--gray-mid-darker);
   }
   .cart-summary,
   .cart-item-list li .cart-item-container,
   .cart-summary dl.total {
     border-top-style: solid;
-    border-top-width: 2px;
+    border-top-width: var(--border-width);
     border-top-color: var(--gray-mid-darker);
   }
   .cart-item-list li:first-child .cart-item-container {
@@ -212,6 +225,17 @@
   .cart-actions button:last-child,
   .cart-actions .link-button:last-child {
     margin-right: 0;
+  }
+  .cart-summary-actions-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    position: absolute;
+    top: var(--border-width);
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
   }
   p {
     font-size: var(--important-font-size);
