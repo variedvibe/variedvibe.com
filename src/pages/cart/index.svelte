@@ -82,7 +82,7 @@
   };
   let loadProductsDebounced = debounce(loadProducts, debounceTimeout);
 
-  $: syncCheckoutWithCartDebounced(cartLineItems), (checkoutLoading = true);
+  $: (checkoutLoading = true), syncCheckoutWithCartDebounced(cartLineItems);
   $: loadProductsDebounced(productIds);
 
   let loadAll = async () => {
