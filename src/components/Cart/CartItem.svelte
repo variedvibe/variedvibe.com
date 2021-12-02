@@ -35,18 +35,22 @@
   </div>
   <div class="price-actions">
     <div class="price-actions-main">
-      <span class="price">{variant.price.format("en-US") ?? "$--"}</span>
-      <span class="price-multiplier">
-        x
-        <input
-          type="number"
-          name="quantity"
-          placeholder="Quantity"
-          min="1"
-          max="100"
-          bind:value={cartEntry.quantity}
-        />
-      </span>
+      {#if variant.isAvailable}
+        <span class="price">{variant.price.format("en-US") ?? "$--"}</span>
+        <span class="price-multiplier">
+          x
+          <input
+            type="number"
+            name="quantity"
+            placeholder="Quantity"
+            min="1"
+            max="100"
+            bind:value={cartEntry.quantity}
+          />
+        </span>
+      {:else}
+        <span class="variant-error">Unavailable</span>
+      {/if}
     </div>
     <div class="price-actions-footer">
       <button on:click={remove}>Remove</button>
@@ -98,7 +102,8 @@
   .price-actions-footer {
     margin-top: 2em;
   }
-  .price {
+  .price,
+  .variant-error {
     display: bold;
     font-size: 1.5em;
     font-weight: bold;
@@ -113,6 +118,9 @@
     width: 4em;
     margin-left: 0.25em;
     font-size: 0.8em;
+  }
+  .variant-error {
+    color: var(--error-fg-color);
   }
   .price-actions-footer button {
     min-width: 5em;

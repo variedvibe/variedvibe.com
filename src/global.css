@@ -14,8 +14,8 @@
   --main-fg-color: var(--gray-light);
   --secondary-fg-color: var(--gray-mid-light);
   --tertiary-fg-color: var(--gray-mid);
-  --error-bg-color: #ffd6d6;
-  --error-fg-color: #ff9696;
+  --error-bg-color: #fcc;
+  --error-fg-color: #f33;
   --main-font-normal: "Roboto Condensed", -apple-system-condensed,
     sanfranciscocondensed-regular, sanfranciscocondensed,
     "San Francisco Condensed", avenirnextcondensed-regular, avenirnextcondensed,

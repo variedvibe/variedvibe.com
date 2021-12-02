@@ -25,11 +25,9 @@
     (option) => new ProductSelectedOption(option.name, null)
   );
 
-  let selectedVariant;
+  let selectedVariant = product.variants[0];
 
   let formStatus = "Online orders coming soon...";
-
-  $: displayVariant = selectedVariant ?? product.variants[0];
 
   function changeOption(event) {
     const selected = new ProductSelectedOption(
@@ -98,7 +96,7 @@
       <dl>
         <dt>Price</dt>
         <dd class="strong">
-          {displayVariant.price.format("en-US") ?? "$--"}
+          {selectedVariant.price.format("en-US") ?? "$--"}
         </dd>
       </dl>
       <form
@@ -141,9 +139,9 @@
             type="submit"
             id="submit"
             name="submit"
-            value="Add To Cart"
+            value={selectedVariant.isAvailable ? "Add To Cart" : "Unavailable"}
             title="Coming Soon..."
-            disabled
+            disabled={true || !selectedVariant.isAvailable}
           />
         </span>
         <span
