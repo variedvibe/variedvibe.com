@@ -1,5 +1,6 @@
 <script>
   import debounce from "lodash.debounce";
+  import retry from "async-retry";
   import { slide } from "svelte/transition";
   import { url } from "@roxi/routify";
 
@@ -8,6 +9,7 @@
     createCheckout,
     getProductsById,
   } from "/src/services/Shop/Shop.js";
+  import { isTemporary } from "/src/services/Shop/errors.js";
   import { checkoutId, cart, cartQuantity } from "/src/services/Shop/stores.js";
   import { LineItem } from "/src/services/Shop/checkout.js";
 
@@ -17,7 +19,13 @@
     messageErrorGeneric,
   } from "/src/components/StatusMessage/StatusMessage.svelte";
 
-  const debounceTimeout = 1000;
+  const debounceTimeout = 1000; // milliseconds
+  const retryOptions = {
+    retries: 3,
+    factor: 2,
+    minTimeout: debounceTimeout,
+    randomize: true,
+  };
 
   async function fetchCheckout(checkoutId) {
     let checkout = checkoutId
@@ -39,10 +47,19 @@
 
   let syncCheckoutWithCart = async (cartLineItems) => {
     if (checkout) {
-      checkout = await checkout.replaceLineItems(cartLineItems);
-    }
+      await retry(async (bail) => {
+        try {
+          checkout = await checkout.replaceLineItems(cartLineItems);
+        } catch (e) {
+          if (!isTemporary(e)) {
+            bail(e);
+            return;
+          }
+        }
+      }, retryOptions);
 
-    checkoutLoading = false;
+      checkoutLoading = false;
+    }
   };
   let syncCheckoutWithCartDebounced = debounce(
     syncCheckoutWithCart,
@@ -51,7 +68,16 @@
 
   let loadProducts = async (productIds) => {
     if (productIds.length > 0) {
-      products = await getProductsById(productIds);
+      await retry(async (bail) => {
+        try {
+          products = await getProductsById(productIds);
+        } catch (e) {
+          if (!isTemporary(e)) {
+            bail(e);
+            return;
+          }
+        }
+      }, retryOptions);
     }
   };
   let loadProductsDebounced = debounce(loadProducts, debounceTimeout);

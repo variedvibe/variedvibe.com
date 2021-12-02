@@ -1,8 +1,6 @@
 <script>
-  import {
-    getProductBySlug,
-    errorSlugUnknownProduct,
-  } from "/src/services/Shop/Shop.js";
+  import { getProductBySlug } from "/src/services/Shop/Shop.js";
+  import { ErrorTypes, getErrorType } from "/src/services/Shop/errors.js";
   import { goto } from "@roxi/routify";
 
   import { pageMeta } from "/src/components/Meta/PageMeta/stores.js";
@@ -20,9 +18,8 @@
     try {
       product = await getProductBySlug(slug);
     } catch (e) {
-      if (e.message === errorSlugUnknownProduct) {
+      if (getErrorType(e) === ErrorTypes.UnknownProduct) {
         $goto("/404", null, true, false);
-        return;
       }
 
       throw e;

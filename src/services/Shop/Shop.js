@@ -1,5 +1,6 @@
 import Client from "shopify-buy";
 
+import { errorSlugUnknownProduct } from "./errors.js";
 import { Checkout } from "./checkout.js";
 import {
   Product,
@@ -39,8 +40,6 @@ const srcSetImageSizes = {
   "2000x2000": "2000w",
   "4000x4000": "4000w",
 };
-
-export const errorSlugUnknownProduct = "ERR_UNKNOWN_PRODUCT";
 
 export function getBaseUrl() {
   return `https://${shopifyDomain}/`;
