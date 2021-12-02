@@ -285,5 +285,8 @@
       min-width: 50%;
       margin: 0;
     }
+    .cart-summary-actions-loading {
+      width: 100%;
+    }
   }
 </style>
