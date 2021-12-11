@@ -110,7 +110,12 @@
             <label class="visually-hidden" for={option.name}
               >{option.name}</label
             >
-            <select name={option.name} on:change={changeOption} required>
+            <select
+              name={option.name}
+              on:change={changeOption}
+              autocomplete="off"
+              required
+            >
               <!-- Placeholder value -->
               <option value="" hidden selected>{option.name}</option>
 
@@ -127,6 +132,7 @@
             id="quantity"
             name="quantity"
             placeholder="Quantity"
+            autocomplete="off"
             min="1"
             max="100"
             value="1"

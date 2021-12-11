@@ -109,6 +109,7 @@
             id="email"
             name="email"
             placeholder="Email"
+            autocomplete="email"
             required
           />
         </span>
@@ -119,6 +120,7 @@
             id="first-name"
             name="first_name"
             placeholder="First Name"
+            autocomplete="given-name"
             required
           />
         </span>
@@ -129,6 +131,7 @@
             id="last-name"
             name="last_name"
             placeholder="Last Name"
+            autocomplete="family-name"
             required
           />
         </span>
@@ -138,6 +141,7 @@
             id="message"
             name="message"
             placeholder="Message"
+            autocomplete="off"
             rows="10"
             minlength="25"
             required

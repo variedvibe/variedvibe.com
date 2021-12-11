@@ -41,6 +41,7 @@
             type="number"
             name="quantity"
             placeholder="Quantity"
+            autocomplete="off"
             min="1"
             max="100"
             bind:value={cartEntry.quantity}
