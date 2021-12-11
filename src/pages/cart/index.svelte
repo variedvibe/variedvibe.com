@@ -50,6 +50,7 @@
         .get(cartEntry.productId)
         ?.getVariantForId(cartEntry.variantId).isAvailable
   );
+  $: isValidCart = $cartQuantity > 0 && allEntriesAvailable;
 
   let syncCheckoutWithCart = async (cartLineItems) => {
     if (checkout) {
@@ -133,7 +134,7 @@
         <div class="cart-summary">
           <dl>
             <dt>Subtotal</dt>
-            {#if allEntriesAvailable}
+            {#if isValidCart}
               <dd>{checkout.subtotalPrice.format("en-US") ?? "$--"}</dd>
             {:else}
               <dd class="price-note error">Invalid cart</dd>
@@ -148,7 +149,7 @@
           </dl>
           <dl class="total">
             <dt>Total</dt>
-            {#if allEntriesAvailable}
+            {#if isValidCart}
               <dd>{checkout.totalPrice.format("en-US") ?? "$--"}</dd>
             {:else}
               <dd class="price-note error">Invalid cart</dd>
@@ -161,17 +162,14 @@
           </p>
         {/if}
         <div class="cart-actions">
-          <button id="cart-checkout" title="Coming Soon..." disabled
-            >Check Out</button
+          <a
+            id="cart-checkout"
+            class="link-button"
+            class:disabled={!isValidCart}
+            aria-disabled={!isValidCart || null}
+            href={isValidCart ? checkout.webUrl : null}
+            title="Proceed to Check Out">Check Out</a
           >
-          <!--
-        <a
-          id="cart-checkout"
-          class="link-button"
-          href={checkout.webUrl}
-          title="Coming Soon...">Check Out</a
-        >
-        -->
         </div>
         {#if checkoutLoading}
           <div class="cart-summary-actions-loading">Loading...</div>
@@ -266,16 +264,13 @@
     margin-top: 2.5em;
     text-align: right;
   }
-  .cart-actions button,
   .cart-actions .link-button {
     min-width: calc(50% - 8px);
     margin: 0 5px;
   }
-  .cart-actions button:first-child,
   .cart-actions .link-button:first-child {
     margin-left: 0;
   }
-  .cart-actions button:last-child,
   .cart-actions .link-button:last-child {
     margin-right: 0;
   }
@@ -303,7 +298,6 @@
       width: auto;
       text-align: center;
     }
-    .cart-actions button,
     .cart-actions .link-button {
       min-width: 50%;
       margin: 0;

@@ -250,9 +250,12 @@ input[type="button"]:disabled,
 input[type="reset"]:disabled,
 input[type="submit"]:disabled,
 button:disabled,
-.link-button:disabled,
-a.link-button:disabled {
+.link-button.disabled,
+a.link-button.disabled {
   background-color: var(--gray-mid);
+}
+a.link-button.disabled {
+  cursor: default;
 }
 
 input.error:invalid,
