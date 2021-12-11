@@ -5,7 +5,7 @@
   export let href = null;
 
   let isDisabled = !product.id && !product.slug;
-  let linkHref = !isDisabled ? $url(href ?? `/products/${product.slug}`) : "";
+  let linkHref = !isDisabled ? $url(href ?? `/products/${product.slug}`) : null;
 </script>
 
 <a class="product" class:disabled={isDisabled} href={linkHref}>
@@ -36,9 +36,6 @@
     display: block;
     position: relative;
     text-align: center;
-  }
-  .product.disabled {
-    pointer-events: none;
   }
   .product img {
     display: block;

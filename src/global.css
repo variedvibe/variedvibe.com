@@ -254,7 +254,7 @@ button:disabled,
 a.link-button.disabled {
   background-color: var(--gray-mid);
 }
-a.link-button.disabled {
+a.disabled {
   cursor: default;
 }
 
