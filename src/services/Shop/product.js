@@ -31,6 +31,14 @@ export class Product {
     this.isForSale = isForSale;
   }
 
+  getOptionForId(optionId) {
+    return this.options.find((option) => option.id === optionId);
+  }
+
+  getVariantForId(variantId) {
+    return this.variants.find((variant) => variant.id === variantId);
+  }
+
   getVariantForSelectedOptions(selectedOptions) {
     return this.variants.find((variant) => {
       return (

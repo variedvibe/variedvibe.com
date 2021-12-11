@@ -6,9 +6,7 @@
   export let cartEntry;
   export let product;
 
-  let variant = product.variants.find(
-    (variant) => variant.id === cartEntry.variantId
-  );
+  let variant = product.getVariantForId(cartEntry.variantId);
   let productLinkHref = $url(`/products/${product.slug}`);
 
   function remove() {

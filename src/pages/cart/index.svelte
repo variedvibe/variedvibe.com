@@ -44,6 +44,12 @@
   $: cartLineItems = $cart.map(
     (cartEntry) => new LineItem(null, cartEntry.variantId, cartEntry.quantity)
   );
+  $: allEntriesAvailable = $cart.every(
+    (cartEntry) =>
+      productIdMap
+        .get(cartEntry.productId)
+        ?.getVariantForId(cartEntry.variantId).isAvailable
+  );
 
   let syncCheckoutWithCart = async (cartLineItems) => {
     if (checkout) {
@@ -108,7 +114,12 @@
         {#each $cart as entry (entry.productId + entry.variantId)}
           <li out:slide|local>
             {#if productIdMap.has(entry.productId)}
-              <div class="cart-item-container">
+              <div
+                class="cart-item-container"
+                class:unavailable={!productIdMap
+                  .get(entry.productId)
+                  ?.getVariantForId(entry.variantId).isAvailable}
+              >
                 <CartItem
                   bind:cartEntry={entry}
                   product={productIdMap.get(entry.productId)}
@@ -122,7 +133,11 @@
         <div class="cart-summary">
           <dl>
             <dt>Subtotal</dt>
-            <dd>{checkout.subtotalPrice.format("en-US") ?? "$--"}</dd>
+            {#if allEntriesAvailable}
+              <dd>{checkout.subtotalPrice.format("en-US") ?? "$--"}</dd>
+            {:else}
+              <dd class="price-note error">Invalid cart</dd>
+            {/if}
 
             <dt>Shipping</dt>
             <dd class="price-note">Calculated in next steps</dd>
@@ -133,9 +148,18 @@
           </dl>
           <dl class="total">
             <dt>Total</dt>
-            <dd>{checkout.totalPrice.format("en-US") ?? "$--"}</dd>
+            {#if allEntriesAvailable}
+              <dd>{checkout.totalPrice.format("en-US") ?? "$--"}</dd>
+            {:else}
+              <dd class="price-note error">Invalid cart</dd>
+            {/if}
           </dl>
         </div>
+        {#if !allEntriesAvailable}
+          <p class="cart-notes error">
+            Some items in your cart are unavailable.
+          </p>
+        {/if}
         <div class="cart-actions">
           <button id="cart-checkout" title="Coming Soon..." disabled
             >Check Out</button
@@ -155,7 +179,7 @@
       </div>
     {:else}
       <h2>Your cart is empty.</h2>
-      <p>Maybe check out some products.</p>
+      <p class="important">Maybe check out some products.</p>
       <a class="link-button" href={$url("/products")}>Continue Shopping</a>
     {/if}
   {:catch}
@@ -179,48 +203,42 @@
     text-decoration-color: var(--gray-mid);
     text-underline-offset: 0.1em;
   }
-  .cart-item-list,
-  .cart-summary {
-    display: block;
-    padding: 0;
-  }
   .cart-item-list {
+    display: block;
     list-style-type: none;
     margin-top: 4em;
+    margin-bottom: 0;
+    padding: 0;
   }
   .cart-item-list li {
     display: block;
   }
-  .cart-summary-actions-container {
-    position: relative;
-  }
-  .cart-summary,
   .cart-item-list li .cart-item-container {
-    margin: 2.5em auto;
-    padding-top: 2.5em;
-    border-top-style: solid;
-    border-top-width: var(--border-width);
-    border-top-color: var(--gray-mid-darker);
+    padding: 2.5em 0;
   }
-  .cart-summary,
   .cart-item-list li .cart-item-container,
+  .cart-summary-actions-container,
   .cart-summary dl.total {
     border-top-style: solid;
     border-top-width: var(--border-width);
     border-top-color: var(--gray-mid-darker);
   }
-  .cart-item-list li:first-child .cart-item-container {
-    margin-top: 0;
+  .cart-summary-actions-container {
+    position: relative;
+    padding: 0;
+    padding-top: 2.5em;
   }
-  .cart-item-list li:last-child .cart-item-container {
-    margin-bottom: 0;
+  .cart-summary,
+  .cart-notes,
+  .cart-actions,
+  .cart-summary-actions-loading {
+    width: 50%;
+    margin-left: auto;
   }
   .cart-summary dl {
     display: grid;
     grid-template-columns: 50% 50%;
-    width: 50%;
     margin: 0;
-    margin-left: auto;
     font-size: 1.2em;
     line-height: 1.4;
   }
@@ -234,10 +252,18 @@
     font-size: var(--small-font-size);
     color: var(--secondary-fg-color);
   }
+  .cart-summary dd.price-note.error {
+    color: var(--error-fg-color);
+  }
+  .cart-notes {
+    margin-top: 2.5em;
+    margin-bottom: 0;
+  }
+  .cart-notes.error {
+    color: var(--error-fg-color);
+  }
   .cart-actions {
     margin-top: 2.5em;
-    margin-left: auto;
-    width: 50%;
     text-align: right;
   }
   .cart-actions button,
@@ -257,14 +283,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
     position: absolute;
     top: var(--border-width);
     bottom: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.8);
   }
-  p {
+  p.important {
     font-size: var(--important-font-size);
   }
   .link-button {
@@ -272,10 +297,8 @@
   }
 
   @media (max-width: 500px) {
-    .cart-summary dl {
-      width: auto;
-      margin: 0;
-    }
+    .cart-summary,
+    .cart-notes,
     .cart-actions {
       width: auto;
       text-align: center;
