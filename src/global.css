@@ -14,7 +14,8 @@
   --main-fg-color: var(--gray-light);
   --secondary-fg-color: var(--gray-mid-light);
   --tertiary-fg-color: var(--gray-mid);
-  --error-bg-color: #fcc;
+  --error-light-bg-color: #fcc;
+  --error-dark-bg-color: #300;
   --error-fg-color: #f33;
   --main-font-normal: "Roboto Condensed", -apple-system-condensed,
     sanfranciscocondensed-regular, sanfranciscocondensed,
@@ -38,12 +39,20 @@
   --important-font-size: 1.2em;
   --small-font-size: 0.8em;
   --ui-icon-size: 0.6rem;
+  --min-page-width: 280px;
+  --max-page-width: 1200px;
+  --page-horizontal-padding: 20px;
   --animation-speed-normal: 500ms;
   --animation-speed-very-fast: 125ms;
   --animation-speed-fast: 250ms;
   --animation-speed-slow: 750ms;
   --animation-speed-very-slow: 875ms;
   --animation-timing-function-natural: cubic-bezier(0.4, 0, 1, 1);
+}
+@media (max-width: 600px) {
+  :root {
+    --page-horizontal-padding: 10px;
+  }
 }
 
 html {
@@ -54,7 +63,7 @@ html {
 html,
 body {
   width: 100%;
-  min-width: 280px;
+  min-width: var(--min-page-width);
   box-sizing: border-box;
   padding: 0;
   margin: 0 auto;
@@ -261,7 +270,7 @@ a.disabled {
 input.error:invalid,
 select.error:invalid,
 textarea.error:invalid {
-  background-color: var(--error-bg-color);
+  background-color: var(--error-light-bg-color);
   color: var(--black);
 }
 select.error:invalid option {
@@ -308,14 +317,9 @@ html::-webkit-scrollbar-thumb:active {
 }
 
 .page-width-wrapper {
-  max-width: 1200px;
+  max-width: var(--max-page-width);
   margin: 0 auto;
-  padding: 0 20px;
-}
-@media (max-width: 600px) {
-  .page-width-wrapper {
-    padding: 0 10px;
-  }
+  padding: 0 var(--page-horizontal-padding);
 }
 
 .visually-hidden {
