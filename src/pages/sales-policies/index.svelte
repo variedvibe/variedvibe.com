@@ -27,7 +27,10 @@
           shipping cost.
         </li>
         <li>
-          Please <a class="content-link" href={$url("/contact-us")}>contact</a>
+          Please <a
+            class="content-link"
+            href={$url("/contact-us?topic=Return%2FRefund")}>contact</a
+          >
           customer service at
           <a
             class="content-link"

@@ -1,4 +1,6 @@
 <script>
+  import { params } from "@roxi/routify";
+
   import Hero from "/src/components/Hero/Hero.svelte";
   import StatusMessage, {
     messageErrorGeneric,
@@ -10,6 +12,8 @@
     import.meta.env.CONTACT_FORM_ACTION_URL;
 
   const errorSlugInvalidForm = "ERR_INVALID_FORM";
+
+  export let topic = $params.topic ?? null; // Prevent "undefined"
 
   let sending = false;
   let sendSuccess = false;
@@ -92,6 +96,7 @@
               name="subject"
               placeholder="Topic"
               list="topic-suggestions"
+              value={topic}
               required
             />
 
