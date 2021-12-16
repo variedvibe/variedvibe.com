@@ -83,7 +83,7 @@
     background-position: center;
     background-size: contain;
     filter: invert(100%) brightness(100%);
-    transition: filter var(--animation-speed-normal)
+    transition: filter var(--animation-speed-very-fast)
       var(--animation-timing-function-natural);
   }
   .in-footer a.social-icon {
@@ -97,6 +97,9 @@
     a.social-icon:hover {
       filter: invert(100%) brightness(33.33%);
     }
+  }
+  a.social-icon:active {
+    filter: invert(100%) brightness(26.5%);
   }
 
   a.social-icon.icon-instagram {
