@@ -13,6 +13,14 @@
 
   const errorSlugInvalidForm = "ERR_INVALID_FORM";
 
+  const availableTopics = [
+    "Just Saying Hi",
+    "I Need Help",
+    "Product Support",
+    "Return/Refund",
+    "Web Support",
+  ];
+
   export let topic = $params.topic ?? null; // Prevent "undefined"
 
   let sending = false;
@@ -101,11 +109,9 @@
             />
 
             <datalist id="topic-suggestions">
-              <option value="Just Saying Hi" />
-              <option value="I Need Help" />
-              <option value="Product Support" />
-              <option value="Return/Refund" />
-              <option value="Web Support" />
+              {#each availableTopics as topic}
+                <option value={topic}>{topic}</option>
+              {/each}
             </datalist>
           </span>
           <span class="form-element full-width email">
