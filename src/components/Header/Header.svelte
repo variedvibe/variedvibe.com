@@ -32,14 +32,13 @@
 
 <style>
   header {
-    --header-height: 60px;
     --ui-icon-size: 22px;
     --nav-item-margin: 10px;
 
     display: flex;
     width: 100%;
     height: var(--header-height);
-    position: sticky;
+    position: var(--header-position);
     top: 0;
     z-index: 100;
     background: var(--main-bg-color);
@@ -48,16 +47,6 @@
     header {
       --ui-icon-size: 18px;
       --nav-item-margin: 8px;
-    }
-  }
-  @media (max-width: 900px) {
-    header {
-      --header-height: 50px;
-    }
-  }
-  @media (max-height: 500px) {
-    header {
-      position: unset;
     }
   }
   header .page-width-wrapper {

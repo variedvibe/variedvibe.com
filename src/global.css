@@ -44,6 +44,9 @@
   --max-central-content-width: 500px;
   --page-horizontal-padding: 20px;
   --content-horizontal-margin: 5%;
+  --header-height: 60px;
+  --header-position: sticky;
+  --header-offset: var(--header-height);
   --hr-vertical-margin: 25px;
   --hr-border-style: solid;
   --hr-border-width: 2px;
@@ -60,10 +63,22 @@
     --page-horizontal-padding: 10px;
   }
 }
+@media (max-width: 900px) {
+  :root {
+    --header-height: 50px;
+  }
+}
+@media (max-height: 500px) {
+  :root {
+    --header-position: unset;
+    --header-offset: 0;
+  }
+}
 
 html {
   /* Browser-normalizations */
   -webkit-tap-highlight-color: transparent;
+  scroll-padding-top: var(--header-offset);
 }
 
 html,
