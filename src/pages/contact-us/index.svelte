@@ -65,117 +65,118 @@
 <Hero />
 
 <div class="container page-width-wrapper">
-  <section class="main">
-    <h2>Contact Us</h2>
+  <div class="content-width-wrapper">
+    <section class="main">
+      <h2>Contact Us</h2>
 
-    <p>
-      Have a question? An idea? Need support? Send us a message and we'll get
-      back to you as soon as we can.
-    </p>
-    <p />
-  </section>
-  <hr />
-  <section>
-    {#if !sendSuccess}
-      <form
-        action={formActionURL}
-        method="POST"
-        on:submit={submit}
-        on:invalid|capture={invalid}
-        on:input={formInput}
-      >
-        <span class="form-element full-width topic">
-          <label class="visually-hidden" for="topic">Topic</label>
-          <input
-            type="text"
-            id="topic"
-            name="subject"
-            placeholder="Topic"
-            list="topic-suggestions"
-            required
-          />
+      <p>
+        Have a question? An idea? Need support? Send us a message and we'll get
+        back to you as soon as we can.
+      </p>
+    </section>
+    <hr />
+    <section>
+      {#if !sendSuccess}
+        <form
+          action={formActionURL}
+          method="POST"
+          on:submit={submit}
+          on:invalid|capture={invalid}
+          on:input={formInput}
+        >
+          <span class="form-element full-width topic">
+            <label class="visually-hidden" for="topic">Topic</label>
+            <input
+              type="text"
+              id="topic"
+              name="subject"
+              placeholder="Topic"
+              list="topic-suggestions"
+              required
+            />
 
-          <datalist id="topic-suggestions">
-            <option value="Just Saying Hi" />
-            <option value="I Need Help" />
-            <option value="Product Support" />
-            <option value="Web Support" />
-          </datalist>
-        </span>
-        <span class="form-element full-width email">
-          <label class="visually-hidden" for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            autocomplete="email"
-            required
-          />
-        </span>
-        <span class="form-element name first-name">
-          <label class="visually-hidden" for="first-name">First Name</label>
-          <input
-            type="text"
-            id="first-name"
-            name="first_name"
-            placeholder="First Name"
-            autocomplete="given-name"
-            required
-          />
-        </span>
-        <span class="form-element name last-name">
-          <label class="visually-hidden" for="last-name">Last Name</label>
-          <input
-            type="text"
-            id="last-name"
-            name="last_name"
-            placeholder="Last Name"
-            autocomplete="family-name"
-            required
-          />
-        </span>
-        <span class="form-element full-width message">
-          <label class="visually-hidden" for="message">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            placeholder="Message"
-            autocomplete="off"
-            rows="10"
-            minlength="25"
-            required
-          />
-        </span>
+            <datalist id="topic-suggestions">
+              <option value="Just Saying Hi" />
+              <option value="I Need Help" />
+              <option value="Product Support" />
+              <option value="Web Support" />
+            </datalist>
+          </span>
+          <span class="form-element full-width email">
+            <label class="visually-hidden" for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              autocomplete="email"
+              required
+            />
+          </span>
+          <span class="form-element name first-name">
+            <label class="visually-hidden" for="first-name">First Name</label>
+            <input
+              type="text"
+              id="first-name"
+              name="first_name"
+              placeholder="First Name"
+              autocomplete="given-name"
+              required
+            />
+          </span>
+          <span class="form-element name last-name">
+            <label class="visually-hidden" for="last-name">Last Name</label>
+            <input
+              type="text"
+              id="last-name"
+              name="last_name"
+              placeholder="Last Name"
+              autocomplete="family-name"
+              required
+            />
+          </span>
+          <span class="form-element full-width message">
+            <label class="visually-hidden" for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Message"
+              autocomplete="off"
+              rows="10"
+              minlength="25"
+              required
+            />
+          </span>
 
-        <span class="form-status status-message" class:error={formError}>
-          {#if formError}
-            {#if formError.message == errorSlugInvalidForm}
-              {messageErrorInvalidForm}
-            {:else}
-              {messageErrorGeneric}
+          <span class="form-status status-message" class:error={formError}>
+            {#if formError}
+              {#if formError.message == errorSlugInvalidForm}
+                {messageErrorInvalidForm}
+              {:else}
+                {messageErrorGeneric}
+              {/if}
             {/if}
-          {/if}
-        </span>
+          </span>
 
-        <span class="form-element submit">
-          <label class="visually-hidden" for="submit">Send Message</label>
-          <input
-            type="submit"
-            id="submit"
-            name="submit"
-            value={sending ? "Please Wait" : "Send Message"}
-            disabled={sending}
-          />
-        </span>
-      </form>
-    {:else}
-      <StatusMessage
-        message="Message sent successfully! We'll get back to you
+          <span class="form-element submit">
+            <label class="visually-hidden" for="submit">Send Message</label>
+            <input
+              type="submit"
+              id="submit"
+              name="submit"
+              value={sending ? "Please Wait" : "Send Message"}
+              disabled={sending}
+            />
+          </span>
+        </form>
+      {:else}
+        <StatusMessage
+          message="Message sent successfully! We'll get back to you
 ASAP."
-      />
-    {/if}
-  </section>
+        />
+      {/if}
+    </section>
+  </div>
 </div>
 
 <style>
@@ -183,16 +184,13 @@ ASAP."
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .content-width-wrapper {
+    max-width: var(--max-central-content-width);
+    margin: 0 var(--content-horizontal-margin);
+  }
+  h2 {
     text-align: center;
-  }
-  section,
-  hr {
-    max-width: 500px;
-    margin: 0 5%;
-  }
-  hr {
-    width: 90%;
-    margin: 25px 5%;
   }
   section p {
     text-align: justify;

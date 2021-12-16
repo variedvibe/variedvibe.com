@@ -41,7 +41,13 @@
   --ui-icon-size: 0.6rem;
   --min-page-width: 280px;
   --max-page-width: 1200px;
+  --max-central-content-width: 500px;
   --page-horizontal-padding: 20px;
+  --content-horizontal-margin: 5%;
+  --hr-vertical-margin: 25px;
+  --hr-border-style: solid;
+  --hr-border-width: 2px;
+  --hr-border-color: var(--gray-mid);
   --animation-speed-normal: 500ms;
   --animation-speed-very-fast: 125ms;
   --animation-speed-fast: 250ms;
@@ -136,11 +142,11 @@ h3 {
 
 hr,
 .hr-border {
-  margin: 25px auto;
+  margin: var(--hr-vertical-margin) auto;
   border: none;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: var(--gray-mid);
+  border-bottom-style: var(--hr-border-style);
+  border-bottom-width: var(--hr-border-width);
+  border-bottom-color: var(--hr-border-color);
 }
 
 em {

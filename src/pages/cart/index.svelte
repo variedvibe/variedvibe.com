@@ -187,7 +187,7 @@
 
 <style>
   #container {
-    --border-width: 2px;
+    --item-vertical-spacing: 2em;
 
     margin: 0 auto;
     text-align: center;
@@ -212,19 +212,19 @@
     display: block;
   }
   .cart-item-list li .cart-item-container {
-    padding: 2.5em 0;
+    padding: var(--item-vertical-spacing) 0;
   }
   .cart-item-list li .cart-item-container,
   .cart-summary-actions-container,
   .cart-summary dl.total {
-    border-top-style: solid;
-    border-top-width: var(--border-width);
-    border-top-color: var(--gray-mid-darker);
+    border-top-style: var(--hr-border-style);
+    border-top-width: var(--hr-border-width);
+    border-top-color: var(--hr-border-color);
   }
   .cart-summary-actions-container {
     position: relative;
     padding: 0;
-    padding-top: 2.5em;
+    padding-top: var(--item-vertical-spacing);
   }
   .cart-summary,
   .cart-notes,
@@ -254,14 +254,14 @@
     color: var(--error-fg-color);
   }
   .cart-notes {
-    margin-top: 2.5em;
+    margin-top: var(--item-vertical-spacing);
     margin-bottom: 0;
   }
   .cart-notes.error {
     color: var(--error-fg-color);
   }
   .cart-actions {
-    margin-top: 2.5em;
+    margin-top: var(--item-vertical-spacing);
     text-align: right;
   }
   .cart-actions .link-button {
@@ -279,7 +279,7 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: var(--border-width);
+    top: var(--hr-border-width);
     bottom: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.8);
