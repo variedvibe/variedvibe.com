@@ -8,7 +8,9 @@
       <h2>Sales and Return Policies</h2>
     </section>
     <section>
-      <h3 id="return-policy">Our Return Policy</h3>
+      <h3 id="return-policy">
+        <a href="#return-policy">Our Return Policy</a>
+      </h3>
       <p>
         Your business is important to us! We want you to be more than happy and
         satisfied with your order and your product.
