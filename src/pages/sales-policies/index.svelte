@@ -29,7 +29,9 @@
         <li>
           Please <a class="content-link" href={$url("/contact-us")}>contact</a>
           customer service at
-          <a class="content-link" href="mailto:contact@variedvibe.com"
+          <a
+            class="content-link"
+            href="mailto:contact@variedvibe.com?subject=Return%2FRefund"
             >contact@variedvibe.com</a
           > for all returns.
         </li>
