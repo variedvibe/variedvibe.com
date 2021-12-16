@@ -129,12 +129,10 @@ h6 {
 h1 {
   /* NOTE: We should reserve this for our header logo */
 }
-
 h2 {
   margin: 0.625em 0;
   font-size: var(--heading-primary-font-size);
 }
-
 h3 {
   margin: 0.5em 0;
   font-size: var(--heading-secondary-font-size);
@@ -152,6 +150,9 @@ hr,
 em {
   font-style: italic;
   color: var(--tertiary-fg-color);
+}
+strong {
+  font-weight: bold;
 }
 
 dl {
