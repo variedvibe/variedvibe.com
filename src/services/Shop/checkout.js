@@ -57,6 +57,10 @@ export class Checkout {
     return this.#completedAt;
   }
 
+  isCompleted() {
+    return this.#completedAt != null;
+  }
+
   async addLineItems(items) {
     let updatedCheckout = await this.#shopClient.checkout.addLineItems(
       this.id,

@@ -95,6 +95,19 @@
   let loadAll = async () => {
     [checkout, $checkoutId] = await fetchCheckout($checkoutId);
 
+    // If the checkout has already been completed
+    if (checkout.isCompleted()) {
+      // Create a new checkout
+      checkout = await createCheckout();
+      $checkoutId = checkout.id;
+
+      // Clear the existing cart
+      //
+      // NOTE: Do this after creating the new checkout, so that we don't cause a
+      // reactive setting of cart items for the previous/completed checkout.
+      cart.clear();
+    }
+
     await Promise.all([
       syncCheckoutWithCart(cartLineItems),
       loadProducts(productIds),
