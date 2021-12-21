@@ -1,11 +1,13 @@
 export const ErrorTypes = Object.freeze({
   UnknownProduct: "Unknown product",
+  InvalidGid: "Invalid GID",
   RateLimit: "Rate limit",
 
   Unknown: undefined,
 });
 
 export const errorSlugUnknownProduct = "ERR_UNKNOWN_PRODUCT";
+export const errorSlugInvalidGid = "ERR_INVALID_GID";
 
 export function getErrorType(error) {
   const message = getErrorMessage(error);
@@ -15,6 +17,9 @@ export function getErrorType(error) {
       return ErrorTypes.RateLimit;
     case message === errorSlugUnknownProduct:
       return ErrorTypes.UnknownProduct;
+
+    case message === errorSlugInvalidGid:
+      return ErrorTypes.InvalidGid;
 
     default:
       return ErrorTypes.Unknown;

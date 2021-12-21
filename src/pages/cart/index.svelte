@@ -11,7 +11,7 @@
   } from "/src/services/Shop/Shop.js";
   import { isTemporary } from "/src/services/Shop/errors.js";
   import { checkoutId, cart, cartQuantity } from "/src/services/Shop/stores.js";
-  import { LineItem } from "/src/services/Shop/checkout.js";
+  import { CheckoutLineItem } from "/src/services/Shop/checkout.js";
 
   import CartItem from "/src/components/Cart/CartItem.svelte";
   import StatusMessage, {
@@ -42,7 +42,8 @@
   $: productIds = $cart.map((cartEntry) => cartEntry.productId);
   $: productIdMap = new Map(products.map((product) => [product.id, product]));
   $: cartLineItems = $cart.map(
-    (cartEntry) => new LineItem(null, cartEntry.variantId, cartEntry.quantity)
+    (cartEntry) =>
+      new CheckoutLineItem(null, cartEntry.variantId, cartEntry.quantity)
   );
   $: allEntriesAvailable = $cart.every(
     (cartEntry) =>

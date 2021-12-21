@@ -1,4 +1,4 @@
-import { Price } from "./price.js";
+import { shopifyOrderToOrder, shopifyPriceToPrice } from "./mappings.js";
 
 export class Checkout {
   #shopClient;
@@ -6,6 +6,7 @@ export class Checkout {
   #id;
 
   #lineItems;
+  #order;
   #webUrl;
   #subtotalPrice;
   #totalTaxPrice;
@@ -27,6 +28,10 @@ export class Checkout {
 
   get lineItems() {
     return this.#lineItems;
+  }
+
+  get order() {
+    return this.#order;
   }
 
   get webUrl() {
@@ -107,8 +112,14 @@ export class Checkout {
 
   #update(shopifyCheckout) {
     this.#lineItems = shopifyCheckout.lineItems.map(
-      (item) => new LineItem(item.id, item.variant.id, item.quantity)
+      (item) => new CheckoutLineItem(item.id, item.variant.id, item.quantity)
     );
+    this.#order = shopifyCheckout.order
+      ? shopifyOrderToOrder(
+          shopifyCheckout.order,
+          shopifyCheckout.orderStatusUrl
+        )
+      : null;
     this.#webUrl = shopifyCheckout.webUrl
       ? new URL(shopifyCheckout.webUrl)
       : null;
@@ -122,27 +133,18 @@ export class Checkout {
       ? new Date(shopifyCheckout.completedAt)
       : null;
     this.#subtotalPrice = shopifyCheckout.subtotalPriceV2
-      ? new Price(
-          shopifyCheckout.subtotalPriceV2.amount,
-          shopifyCheckout.subtotalPriceV2.currencyCode
-        )
+      ? shopifyPriceToPrice(shopifyCheckout.subtotalPriceV2)
       : null;
     this.#totalTaxPrice = shopifyCheckout.totalTaxV2
-      ? new Price(
-          shopifyCheckout.totalTaxV2.amount,
-          shopifyCheckout.totalTaxV2.currencyCode
-        )
+      ? shopifyPriceToPrice(shopifyCheckout.totalTaxV2)
       : null;
     this.#totalPrice = shopifyCheckout.totalPriceV2
-      ? new Price(
-          shopifyCheckout.totalPriceV2.amount,
-          shopifyCheckout.totalPriceV2.currencyCode
-        )
+      ? shopifyPriceToPrice(shopifyCheckout.totalPriceV2)
       : null;
   }
 }
 
-export class LineItem {
+export class CheckoutLineItem {
   id;
   variantId;
   quantity;
