@@ -20,6 +20,7 @@
     } catch (e) {
       if (getErrorType(e) === ErrorTypes.UnknownProduct) {
         $goto("/404", null, true, false);
+        return;
       }
 
       throw e;
@@ -39,7 +40,9 @@
   {#await product}
     <StatusMessage message={messageLoading} />
   {:then Product}
-    <ProductDetail product={Product} />
+    {#if Product}
+      <ProductDetail product={Product} />
+    {/if}
   {:catch}
     <StatusMessage message={messageErrorGeneric} />
   {/await}
