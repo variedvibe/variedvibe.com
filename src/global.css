@@ -56,6 +56,7 @@
   --animation-speed-fast: 250ms;
   --animation-speed-slow: 750ms;
   --animation-speed-very-slow: 875ms;
+  --animation-speed-spin-normal: 1500ms;
   --animation-timing-function-natural: cubic-bezier(0.4, 0, 1, 1);
 }
 @media (max-width: 600px) {
@@ -72,6 +73,46 @@
   :root {
     --header-position: unset;
     --header-offset: 0;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 0%;
+  }
+}
+
+@keyframes spin-with-pause {
+  0% {
+    transform: rotate(0deg);
+  }
+  80%,
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-with-pause {
+  0%,
+  80%,
+  100% {
+    opacity: 100%;
+  }
+  40% {
+    opacity: 0%;
   }
 }
 
@@ -398,4 +439,16 @@ html::-webkit-scrollbar-thumb:active {
 }
 .ui-icon-badge.hidden {
   display: none;
+}
+
+.load-spinner {
+  background-image: url(/assets/ui-icons/wait-loader.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: invert(100%);
+  animation-name: spin-with-pause;
+  animation-duration: var(--animation-speed-spin-normal);
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
