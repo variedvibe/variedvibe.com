@@ -147,7 +147,7 @@
             name="submit"
             value={selectedVariant.isAvailable ? "Add To Cart" : "Unavailable"}
             title="Coming Soon..."
-            disabled={true || !selectedVariant.isAvailable}
+            disabled={!selectedVariant.isAvailable}
           />
         </span>
         <span
