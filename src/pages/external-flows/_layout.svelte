@@ -4,7 +4,7 @@
 <div class="page-width-wrapper">
   <div class="loading">
     <h2>Processing</h2>
-    <p>Please wait... <span class="load-spinner" /></p>
+    <p>Please wait... <span class="loading-spinner" /></p>
   </div>
 
   <slot />
@@ -21,7 +21,7 @@
     line-height: 1em;
     font-size: var(--important-font-size);
   }
-  .load-spinner {
+  .loading-spinner {
     display: inline-block;
     width: 1em;
     height: 1em;

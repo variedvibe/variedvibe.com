@@ -56,7 +56,7 @@
   --animation-speed-fast: 250ms;
   --animation-speed-slow: 750ms;
   --animation-speed-very-slow: 875ms;
-  --animation-speed-spin-normal: 1500ms;
+  --animation-speed-loading-normal: 1500ms;
   --animation-timing-function-natural: cubic-bezier(0.4, 0, 1, 1);
 }
 @media (max-width: 600px) {
@@ -84,7 +84,6 @@
     transform: rotate(360deg);
   }
 }
-
 @keyframes pulse {
   0%,
   100% {
@@ -94,7 +93,14 @@
     opacity: 0%;
   }
 }
-
+@keyframes background-swipe {
+  0% {
+    background-position-x: 100%;
+  }
+  100% {
+    background-position-x: -100%;
+  }
+}
 @keyframes spin-with-pause {
   0% {
     transform: rotate(0deg);
@@ -104,7 +110,6 @@
     transform: rotate(360deg);
   }
 }
-
 @keyframes pulse-with-pause {
   0%,
   80%,
@@ -113,6 +118,15 @@
   }
   40% {
     opacity: 0%;
+  }
+}
+@keyframes background-swipe-with-pause {
+  0% {
+    background-position-x: 100%;
+  }
+  80%,
+  100% {
+    background-position-x: -100%;
   }
 }
 
@@ -441,14 +455,29 @@ html::-webkit-scrollbar-thumb:active {
   display: none;
 }
 
-.load-spinner {
+.loading-spinner {
   background-image: url(/assets/ui-icons/wait-loader.svg);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   filter: invert(100%);
   animation-name: spin-with-pause;
-  animation-duration: var(--animation-speed-spin-normal);
+  animation-duration: var(--animation-speed-loading-normal);
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
+}
+
+.loading-placeholder {
+  background-color: var(--gray-mid);
+  background-image: linear-gradient(
+    90deg,
+    var(--gray-mid) 0%,
+    var(--gray-mid-light) 25%,
+    var(--gray-mid) 50%
+  );
+  background-size: 200% 100%;
+  animation-name: background-swipe-with-pause;
+  animation-duration: var(--animation-speed-loading-normal);
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
