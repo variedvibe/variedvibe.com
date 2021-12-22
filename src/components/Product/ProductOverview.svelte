@@ -4,18 +4,27 @@
   export let product;
   export let href = null;
 
+  export let imageWidth = 250;
+  export let imageHeight = 375;
+
   let isDisabled = !product.id && !product.slug;
   let linkHref = !isDisabled ? $url(href ?? `/products/${product.slug}`) : null;
 </script>
 
-<a class="product" class:disabled={isDisabled} href={linkHref}>
+<a
+  class="product"
+  class:disabled={isDisabled}
+  href={linkHref}
+  style="--image-width: {imageWidth}px; --image-height: {imageHeight}px;"
+>
   <img
     alt={product.images[0]?.altText ?? product.name}
     title={product.name}
     src={product.images[0]?.src}
     srcset={product.images[0]?.srcSet}
-    width={product.images[0]?.width}
-    height={product.images[0]?.height}
+    sizes="{imageWidth}px"
+    width={imageWidth ?? product.images[0]?.width}
+    height={imageHeight ?? product.images[0]?.height}
   />
   {#if product.images[1]}
     <img
@@ -24,8 +33,9 @@
       title={product.name}
       src={product.images[1].src}
       srcset={product.images[1].srcSet}
-      width={product.images[1].width}
-      height={product.images[1].height}
+      sizes="{imageWidth}px"
+      width={imageWidth ?? product.images[1].width}
+      height={imageHeight ?? product.images[1].height}
     />
   {/if}
   <p>{product.name}</p>
@@ -39,8 +49,8 @@
   }
   .product img {
     display: block;
-    width: 250px;
-    height: 375px;
+    width: var(--image-width);
+    height: var(--image-height);
     object-fit: cover;
     background-color: var(--gray-mid);
     margin-bottom: 15px;
