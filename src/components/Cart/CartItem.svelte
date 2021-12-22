@@ -21,6 +21,7 @@
       title={product.name}
       src={product.images[0]?.src}
       srcset={product.images[0]?.srcSet}
+      sizes="120px"
       width={product.images[0]?.width}
       height={product.images[0]?.height}
     />

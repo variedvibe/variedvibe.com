@@ -62,8 +62,11 @@
         title={image.title}
         src={image.src}
         srcset={image.srcSet}
+        sizes="100vw"
         width={image.width}
         height={image.height}
+        loading="lazy"
+        decoding="async"
       />
     {/each}
   </div>

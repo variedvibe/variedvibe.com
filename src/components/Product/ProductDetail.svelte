@@ -82,6 +82,7 @@
         title={product.name}
         src={image.src}
         srcset={image.srcSet}
+        sizes="(min-width: 600px) 25vw, 50vw"
         width={image.width}
         height={image.height}
         on:click={lightbox.toggleShow(i, true)}
