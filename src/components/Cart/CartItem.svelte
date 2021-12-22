@@ -15,17 +15,19 @@
 </script>
 
 <div class="container">
-  <a class="product-image-link" href={productLinkHref}>
-    <img
-      alt={product.images[0]?.altText ?? product.name}
-      title={product.name}
-      src={product.images[0]?.src}
-      srcset={product.images[0]?.srcSet}
-      sizes="180px"
-      width={product.images[0]?.width}
-      height={product.images[0]?.height}
-    />
-  </a>
+  {#if product.images[0]}
+    <a class="product-image-link" href={productLinkHref}>
+      <img
+        alt={product.images[0].altText ?? product.name}
+        title={product.name}
+        src={product.images[0].src}
+        srcset={product.images[0].srcSet}
+        sizes="180px"
+        width={product.images[0].width}
+        height={product.images[0].height}
+      />
+    </a>
+  {/if}
   <div class="details">
     <a class="product-text-link" href={productLinkHref}>{product.name}</a>
     <div class="secondary-details">
