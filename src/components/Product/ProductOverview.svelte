@@ -22,7 +22,7 @@
     title={product.name}
     src={product.images[0]?.src}
     srcset={product.images[0]?.srcSet}
-    sizes="{imageWidth}px"
+    sizes="{imageHeight}px"
     width={imageWidth ?? product.images[0]?.width}
     height={imageHeight ?? product.images[0]?.height}
   />
@@ -33,7 +33,7 @@
       title={product.name}
       src={product.images[1].src}
       srcset={product.images[1].srcSet}
-      sizes="{imageWidth}px"
+      sizes="{imageHeight}px"
       width={imageWidth ?? product.images[1].width}
       height={imageHeight ?? product.images[1].height}
     />
