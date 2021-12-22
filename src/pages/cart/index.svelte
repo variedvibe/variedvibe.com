@@ -14,8 +14,8 @@
   import { CheckoutLineItem } from "/src/services/Shop/checkout.js";
 
   import CartItem from "/src/components/Cart/CartItem.svelte";
+  import LoadingMessage from "/src/components/StatusMessage/LoadingMessage.svelte";
   import StatusMessage, {
-    messageLoading,
     messageErrorGeneric,
   } from "/src/components/StatusMessage/StatusMessage.svelte";
 
@@ -118,7 +118,7 @@
 
 <div id="container" class="page-width-wrapper">
   {#await loadAll()}
-    <StatusMessage message={messageLoading} />
+    <LoadingMessage />
   {:then}
     {#if $cartQuantity > 0}
       <h2>
@@ -186,7 +186,9 @@
           >
         </div>
         {#if checkoutLoading}
-          <div class="cart-summary-actions-loading">Loading...</div>
+          <div class="cart-summary-actions-loading">
+            <LoadingMessage />
+          </div>
         {/if}
       </div>
     {:else}

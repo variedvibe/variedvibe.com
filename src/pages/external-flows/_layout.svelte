@@ -1,10 +1,16 @@
-<!-- routify:options index=false -->
 <!-- routify:options title="" -->
+<script>
+  import LoadingMessage, {
+    messageLoadingPleaseWait,
+  } from "/src/components/StatusMessage/LoadingMessage.svelte";
+</script>
+
+<!-- routify:options index=false -->
 
 <div class="page-width-wrapper">
   <div class="loading">
     <h2>Processing</h2>
-    <p>Please wait... <span class="loading-spinner" /></p>
+    <LoadingMessage message={messageLoadingPleaseWait} />
   </div>
 
   <slot />
@@ -16,16 +22,5 @@
     margin-top: 2em;
     padding: 0;
     text-align: center;
-  }
-  .loading p {
-    line-height: 1em;
-    font-size: var(--important-font-size);
-  }
-  .loading-spinner {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    line-height: 1em;
-    vertical-align: top;
   }
 </style>

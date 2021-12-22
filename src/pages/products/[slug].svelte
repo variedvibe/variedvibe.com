@@ -5,8 +5,8 @@
 
   import { pageMeta } from "/src/components/Meta/PageMeta/stores.js";
   import ProductDetail from "/src/components/Product/ProductDetail.svelte";
+  import LoadingMessage from "/src/components/StatusMessage/LoadingMessage.svelte";
   import StatusMessage, {
-    messageLoading,
     messageErrorGeneric,
   } from "/src/components/StatusMessage/StatusMessage.svelte";
 
@@ -38,7 +38,7 @@
 
 <div id="container" class="page-width-wrapper">
   {#await product}
-    <StatusMessage message={messageLoading} />
+    <LoadingMessage />
   {:then Product}
     {#if Product}
       <ProductDetail product={Product} />
