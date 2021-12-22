@@ -1,5 +1,6 @@
 <script>
   const defaultBackgroundColor = "#e0e0e0"; // Hard-coded to match the image
+  const defaultHeight = 320;
   const defaultImageSrc =
     "/assets/hero-images/reeves-flower-uniform-background.jpg";
   const defaultImageSrcSet = [
@@ -12,6 +13,7 @@
   ].join(", ");
 
   export let backgroundColor = defaultBackgroundColor;
+  export let height = defaultHeight;
   export let imageSrc = defaultImageSrc;
   export let imageSrcSet = "";
   export let addNoise = true;
@@ -22,8 +24,17 @@
   }
 </script>
 
-<section id="hero" style="--background-color: {backgroundColor}">
-  <img alt="hero" srcset={imageSrcSet} src={imageSrc} />
+<section
+  id="hero"
+  style="--background-color: {backgroundColor}; --height: {height}px;"
+>
+  <img
+    alt="hero"
+    src={imageSrc}
+    srcset={imageSrcSet}
+    sizes="max(100vw, {height}px)"
+    {height}
+  />
   {#if addNoise}
     <div id="noise-filter" class="overlay" />
   {/if}
@@ -39,7 +50,7 @@
     flex-wrap: nowrap;
     position: relative;
     width: 100%;
-    height: 320px;
+    height: var(--height);
     align-content: center;
     align-items: center;
     justify-content: center;
@@ -50,7 +61,7 @@
     position: relative;
     max-width: 100%;
     max-height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     z-index: 1;
   }
   .overlay {
