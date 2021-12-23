@@ -77,7 +77,7 @@
   }
   .product-image-link img {
     display: block;
-    width: 120px;
+    width: 180px;
     height: 180px;
     object-fit: cover;
     background-color: var(--gray-mid);
