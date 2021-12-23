@@ -1,4 +1,5 @@
 <script>
+  import debounce from "lodash.debounce";
   import { onDestroy } from "svelte";
 
   import LoadingSpinner from "/src/components/StatusMessage/LoadingSpinner.svelte";
@@ -41,6 +42,17 @@
     }
   }
 
+  function triggerImageElementReactivity() {
+    // Loading checks depend on the native "complete" read-only property.
+    // We can't check this value reactively, so we reassign the elements array
+    // in `on:load` to trigger a reactive check of the complete property.
+    imageElements = imageElements;
+  }
+  const triggerImageElementReactivityDebounced = debounce(
+    triggerImageElementReactivity,
+    250
+  );
+
   onDestroy(() => {
     document.body.classList.remove("modal-open");
   });
@@ -49,14 +61,14 @@
   $: hasNext = current < images.length - 1;
 </script>
 
-<svelte:window on:keydown={keyPressHandler} />
+<svelte:window
+  on:keydown={keyPressHandler}
+  on:resize={triggerImageElementReactivityDebounced}
+/>
 
 <div class="container" class:hidden={!shown}>
   <div id="image" on:click={() => toggleShow(0, false)}>
     {#each images as image, i}
-      <!-- Loading checks depend on the native "complete" read-only property. We
-can't check this value reactively, so we reassign the elements array in
-`on:load` to trigger a reactive check of the complete property. -->
       <img
         class:active={current === i}
         class:loading={!imageElements[i]?.complete}
@@ -70,7 +82,7 @@ can't check this value reactively, so we reassign the elements array in
         loading="lazy"
         decoding="async"
         bind:this={imageElements[i]}
-        on:load={() => (imageElements = imageElements)}
+        on:load={triggerImageElementReactivity}
       />
     {/each}
     <div id="loading">
