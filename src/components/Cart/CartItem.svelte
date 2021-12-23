@@ -9,22 +9,26 @@
   let variant = product.getVariantForId(cartEntry.variantId);
   let productLinkHref = $url(`/products/${product.slug}`);
 
+  // For our cart, we should show the secondary image if one exists, as that is
+  // often the image that is just of the product itself, and not on a model.
+  let productImage = product.images[1] ?? product.images[0];
+
   function remove() {
     cart.remove(cartEntry);
   }
 </script>
 
 <div class="container">
-  {#if product.images[0]}
+  {#if productImage}
     <a class="product-image-link" href={productLinkHref}>
       <img
-        alt={product.images[0].altText ?? product.name}
+        alt={productImage.altText ?? product.name}
         title={product.name}
-        src={product.images[0].src}
-        srcset={product.images[0].srcSet}
+        src={productImage.src}
+        srcset={productImage.srcSet}
         sizes="180px"
-        width={product.images[0].width}
-        height={product.images[0].height}
+        width={productImage.width}
+        height={productImage.height}
       />
     </a>
   {/if}
