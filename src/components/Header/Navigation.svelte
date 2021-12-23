@@ -60,7 +60,7 @@
 <svelte:window on:keydown={keyPressHandler} />
 <svelte:body on:click={bodyClickHandler} />
 
-<div class="container" class:menu-shown={menuShown}>
+<div class="container">
   <input
     class="nav-menu-toggle ui-action"
     name="nav-menu-toggle"
@@ -130,7 +130,7 @@
     transition: filter var(--animation-speed-very-fast)
       var(--animation-timing-function-natural);
   }
-  .menu-shown .nav-menu-toggle .ui-icon {
+  input[name="nav-menu-toggle"]:checked + .nav-menu-toggle .ui-icon {
     background-image: url("/assets/ui-icons/close-line.svg");
   }
   .nav-menu-toggle:hover + .nav-menu-toggle .ui-icon {
