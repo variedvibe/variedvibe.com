@@ -4,6 +4,8 @@
 </script>
 
 <script>
+  import LoadingSpinner from "./LoadingSpinner.svelte";
+
   export let message = messageLoadingGeneric;
   export let centered = true;
   export let withSpinner = true;
@@ -12,7 +14,7 @@
 <p class="loading-message" class:centered>
   {message}
   {#if withSpinner}
-    <span class="loading-spinner" />
+    <LoadingSpinner />
   {/if}
 </p>
 
@@ -23,12 +25,5 @@
   }
   .loading-message.centered {
     text-align: center;
-  }
-  .loading-spinner {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    line-height: 1em;
-    vertical-align: top;
   }
 </style>
