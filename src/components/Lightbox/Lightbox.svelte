@@ -1,6 +1,8 @@
 <script>
   import { onDestroy } from "svelte";
 
+  import LoadingSpinner from "/src/components/StatusMessage/LoadingSpinner.svelte";
+
   /**
    * Should be an array of objects with {src, altText, title, srcSet}.
    */
@@ -8,6 +10,7 @@
   export let current = 0;
 
   let shown = false;
+  let imageElements = [];
 
   export function toggleShow(index, show) {
     current = index;
@@ -49,15 +52,14 @@
 <svelte:window on:keydown={keyPressHandler} />
 
 <div class="container" class:hidden={!shown}>
-  <div id="close" class="ui-action" on:click={() => toggleShow(0, false)}>
-    <span class="ui-icon" title="Close">
-      <i><u class="visually-hidden">Close</u></i>
-    </span>
-  </div>
   <div id="image" on:click={() => toggleShow(0, false)}>
     {#each images as image, i}
+      <!-- Loading checks depend on the native "complete" read-only property. We
+can't check this value reactively, so we reassign the elements array in
+`on:load` to trigger a reactive check of the complete property. -->
       <img
         class:active={current === i}
+        class:loading={!imageElements[i]?.complete}
         alt={image.altText}
         title={image.title}
         src={image.src}
@@ -67,8 +69,18 @@
         height={image.height}
         loading="lazy"
         decoding="async"
+        bind:this={imageElements[i]}
+        on:load={() => (imageElements = imageElements)}
       />
     {/each}
+    <div id="loading">
+      <LoadingSpinner />
+    </div>
+  </div>
+  <div id="close" class="ui-action" on:click={() => toggleShow(0, false)}>
+    <span class="ui-icon" title="Close">
+      <i><u class="visually-hidden">Close</u></i>
+    </span>
   </div>
   <div
     id="previous"
@@ -112,6 +124,37 @@
   .container.hidden {
     display: none;
   }
+  #image {
+    flex: 1;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  img {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  img.active {
+    display: block;
+  }
+  #loading {
+    display: none;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: var(--important-font-size);
+  }
+  img.active.loading ~ #loading {
+    display: flex;
+  }
   .ui-action {
     display: flex;
     padding: 15px;
@@ -149,20 +192,6 @@
   #close .ui-icon {
     background-image: url("/assets/ui-icons/close-line.svg");
     filter: invert(1);
-  }
-  #image {
-    flex: 1;
-    max-width: 100%;
-    max-height: 100%;
-  }
-  img {
-    display: none;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-  img.active {
-    display: block;
   }
   .navigation {
     position: absolute;
