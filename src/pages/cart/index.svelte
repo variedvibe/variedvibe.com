@@ -308,6 +308,9 @@
   }
 
   @media (max-width: 500px) {
+    .cart-item-list {
+      margin-top: 3em;
+    }
     .cart-summary,
     .cart-notes,
     .cart-actions {

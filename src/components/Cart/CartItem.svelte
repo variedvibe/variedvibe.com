@@ -110,7 +110,7 @@
   }
   .price,
   .variant-error {
-    display: bold;
+    display: block;
     font-size: 1.5em;
     font-weight: bold;
   }
@@ -146,9 +146,21 @@
       align-items: center;
       text-align: center;
     }
+    .price,
+    .price-multiplier {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .price-multiplier {
+      margin-top: 0;
+      margin-left: 10px;
+    }
     input[type="number"] {
       margin-left: auto;
       margin-right: auto;
+    }
+    .price-actions-footer {
+      margin-top: 1.5em;
     }
   }
 </style>
