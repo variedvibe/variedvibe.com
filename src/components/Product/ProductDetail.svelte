@@ -1,4 +1,6 @@
 <script>
+  import { url } from "@roxi/routify";
+
   import Lightbox from "/src/components/Lightbox/Lightbox.svelte";
   import {
     messageErrorGeneric,
@@ -9,6 +11,12 @@
   import { cart } from "/src/services/Shop/stores.js";
 
   const errorSlugInvalidForm = "ERR_INVALID_FORM";
+  const FormStatuses = Object.freeze({
+    AddedToCart: 1,
+    ItemUnavailable: 2,
+
+    Unknown: undefined,
+  });
 
   export let product;
 
@@ -27,7 +35,7 @@
 
   let selectedVariant = product.variants[0];
 
-  let formStatus = "Online orders coming soon...";
+  let formStatus;
 
   function changeOption(event) {
     const selected = new ProductSelectedOption(
@@ -41,6 +49,10 @@
 
     selectedOptions[selectedIndex] = selected;
     selectedVariant = product.getVariantForSelectedOptions(selectedOptions);
+
+    if (!selectedVariant.isAvailable) {
+      formStatus = FormStatuses.ItemUnavailable;
+    }
   }
 
   function invalid(event) {
@@ -49,8 +61,7 @@
   }
 
   function formInput() {
-    // TODO: Add this back when we're no longer "coming soon"
-    //formStatus = null;
+    formStatus = null;
   }
 
   function submit(event) {
@@ -68,7 +79,7 @@
       new CartEntry(product.id, product.slug, selectedVariant.id, quantity)
     );
 
-    formStatus = "Added to cart!";
+    formStatus = FormStatuses.AddedToCart;
     form.reset();
   }
 </script>
@@ -152,7 +163,7 @@
           />
         </span>
         <span
-          class="form-status status-message coming-soon"
+          class="form-status status-message"
           class:error={formStatus instanceof Error}
         >
           {#if formStatus instanceof Error}
@@ -161,8 +172,13 @@
             {:else}
               {messageErrorGeneric}
             {/if}
+          {:else if formStatus === FormStatuses.AddedToCart}
+            Item added to <a class="content-link" href={$url("/cart")}>cart</a>!
+          {:else if formStatus === FormStatuses.ItemUnavailable}
+            Sorry, but this item is currently unavailable. 😞
           {:else}
-            {formStatus}
+            <!-- TODO: Remove when no longer "coming soon" -->
+            <em>Online orders coming soon...</em>
           {/if}
         </span>
       </form>
@@ -243,9 +259,6 @@
     flex: 1 1 100%;
     margin-top: 10px;
     text-align: center;
-  }
-  .coming-soon {
-    font-style: italic;
   }
   @media (max-width: 1050px) {
     .media {
