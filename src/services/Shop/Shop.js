@@ -24,7 +24,7 @@ export function getBaseUrl() {
 }
 
 export async function getCheckout(id) {
-  let checkout = await shopifyClient.checkout.fetch(id);
+  let checkout = await shopifyClient.checkout.fetch(asString(id));
 
   return checkout ? new Checkout(shopifyClient, checkout.id, checkout) : null;
 }
@@ -51,7 +51,7 @@ export async function getFeaturedProducts() {
 
 export async function getProductsById(ids) {
   // Remove duplicate ids
-  ids = [...new Set(ids)];
+  ids = [...new Set(ids.map(asString))];
 
   let products = await shopifyClient.product.fetchMultiple(ids);
 
@@ -59,7 +59,7 @@ export async function getProductsById(ids) {
 }
 
 export async function getProductById(id) {
-  let shopifyProduct = await shopifyClient.product.fetch(id);
+  let shopifyProduct = await shopifyClient.product.fetch(asString(id));
 
   if (!shopifyProduct) {
     throw new Error(errorSlugUnknownProduct);
@@ -69,7 +69,9 @@ export async function getProductById(id) {
 }
 
 export async function getProductBySlug(slug) {
-  let shopifyProduct = await shopifyClient.product.fetchByHandle(slug);
+  let shopifyProduct = await shopifyClient.product.fetchByHandle(
+    asString(slug)
+  );
 
   if (!shopifyProduct) {
     throw new Error(errorSlugUnknownProduct);
@@ -80,4 +82,12 @@ export async function getProductBySlug(slug) {
 
 export function getNullProduct() {
   return new Product("", "", "", "", "", [], [], []);
+}
+
+function asString(stringable) {
+  if (stringable.toString) {
+    return stringable.toString();
+  }
+
+  return stringable;
 }

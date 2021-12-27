@@ -1,3 +1,4 @@
+import { Gid } from "./gid.js";
 import { shopifyOrderToOrder, shopifyPriceToPrice } from "./mappings.js";
 
 export class Checkout {
@@ -24,6 +25,10 @@ export class Checkout {
 
   get id() {
     return this.#id;
+  }
+
+  get gid() {
+    return Gid.parse(atob(this.#id));
   }
 
   get lineItems() {
@@ -153,6 +158,10 @@ export class CheckoutLineItem {
     this.id = id;
     this.variantId = variantId;
     this.quantity = quantity;
+  }
+
+  get gid() {
+    return Gid.parse(atob(this.id));
   }
 
   asRaw() {

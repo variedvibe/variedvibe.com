@@ -2,6 +2,18 @@ import { errorSlugInvalidGid } from "./errors.js";
 
 const gidProtocol = "gid:";
 
+const shopifyGidNamespace = "shopify";
+const shopifyGidTypes = Object.freeze({
+  Product: "Product",
+  ProductImage: "ProductImage",
+  ProductOption: "ProductOption",
+  ProductVariant: "ProductVariant",
+  Checkout: "Checkout",
+  CheckoutLineItem: "CheckoutLineItem",
+
+  Unknown: undefined,
+});
+
 export class Gid {
   namespace;
   type;
@@ -38,4 +50,20 @@ export class Gid {
 
     return new this(gidParts[0], gidParts[1], gidParts[2], gidUrl.searchParams);
   }
+
+  toString() {
+    let gidUrl = new URL(
+      `${gidProtocol}//${this.namespace}/${this.type}/${this.id}`
+    );
+
+    if (this.params) {
+      gidUrl.search = this.params;
+    }
+
+    return gidUrl.toString();
+  }
+}
+
+export function shopifyProductGid(id, params) {
+  return new Gid(shopifyGidNamespace, shopifyGidTypes.Product, id, params);
 }

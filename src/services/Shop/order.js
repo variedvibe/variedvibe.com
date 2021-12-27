@@ -1,4 +1,4 @@
-import { Price } from "./price.js";
+import { Gid } from "./gid.js";
 
 export class Order {
   id;
@@ -38,6 +38,10 @@ export class Order {
     this.totalPrice = totalPrice;
     this.processedAt = processedAt;
   }
+
+  get gid() {
+    return Gid.parse(atob(this.id));
+  }
 }
 
 // NOTE: This may look like a CheckoutLineItem, but they actually can contain
@@ -52,5 +56,9 @@ export class OrderLineItem {
     this.id = id;
     this.variantId = variantId;
     this.quantity = quantity;
+  }
+
+  get gid() {
+    return Gid.parse(atob(this.id));
   }
 }

@@ -1,3 +1,5 @@
+import { Gid } from "./gid.js";
+
 export class Product {
   id;
   slug;
@@ -29,6 +31,10 @@ export class Product {
     this.options = options;
     this.variants = variants;
     this.isForSale = isForSale;
+  }
+
+  get gid() {
+    return Gid.parse(atob(this.id));
   }
 
   getOptionForId(optionId) {
@@ -75,6 +81,10 @@ export class ProductImage {
     this.altText = altText;
     this.srcSet = srcSet;
   }
+
+  get gid() {
+    return Gid.parse(atob(this.id));
+  }
 }
 
 export class ProductOption {
@@ -86,6 +96,10 @@ export class ProductOption {
     this.id = id;
     this.name = name;
     this.values = values;
+  }
+
+  get gid() {
+    return Gid.parse(atob(this.id));
   }
 }
 
@@ -122,5 +136,9 @@ export class ProductVariant {
     this.price = price;
     this.selectedOptions = selectedOptions;
     this.isAvailable = isAvailable;
+  }
+
+  get gid() {
+    return Gid.parse(atob(this.id));
   }
 }
