@@ -9,7 +9,9 @@
 
   let isDisabled = !product.id && !product.slug;
   let isEmpty = isDisabled && !product.name && product.images?.length == 0;
-  let linkHref = !isDisabled ? $url(href ?? `/products/${product.slug}`) : null;
+  let linkHref = !isDisabled
+    ? $url(href ?? `/products/${product.gid.id}/${product.slug}`)
+    : null;
 </script>
 
 <a

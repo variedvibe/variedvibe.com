@@ -7,7 +7,7 @@
   export let product;
 
   let variant = product.getVariantForId(cartEntry.variantId);
-  let productLinkHref = $url(`/products/${product.slug}`);
+  let productLinkHref = $url(`/products/${product.gid.id}/${product.slug}`);
 
   // For our cart, we should show the secondary image if one exists, as that is
   // often the image that is just of the product itself, and not on a model.
