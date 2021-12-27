@@ -1,5 +1,5 @@
 <script>
-  import { goto, params, redirect } from "@roxi/routify";
+  import { goto, url, params, redirect } from "@roxi/routify";
 
   import { getProductById, getProductBySlug } from "/src/services/Shop/Shop.js";
   import { shopifyProductGid } from "/src/services/Shop/gid.js";
@@ -44,15 +44,18 @@
       throw e;
     }
 
+    const canonicalUrlPath = $url(`./${product.gid.id}/${product.slug}`);
+
     // If the URL id or slug doesn't match the product, redirect so that we are
     // always displaying the canonical product URL.
     if (id !== product.gid.id || $params.slug !== product.slug) {
-      $redirect(`./${product.gid.id}/${product.slug}`);
+      $redirect(canonicalUrlPath);
       return;
     }
 
     $pageMeta.title = product.name;
     $pageMeta.description = product.description;
+    $pageMeta.url = canonicalUrlPath;
     $pageMeta.image = product.images[0]?.src;
 
     return product;
