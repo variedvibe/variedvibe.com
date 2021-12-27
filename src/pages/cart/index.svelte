@@ -116,6 +116,11 @@
   };
 </script>
 
+<svelte:head>
+  <!-- Tell search engines not to index this page -->
+  <meta name="robots" content="noindex" />
+</svelte:head>
+
 <div id="container" class="page-width-wrapper">
   {#await loadAll()}
     <LoadingMessage />
