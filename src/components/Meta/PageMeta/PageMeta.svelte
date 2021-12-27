@@ -37,19 +37,30 @@
   $: $pageMeta.type =
     type || $page.meta.image || $page.parent.meta.image || defaultType;
   $: $pageMeta.url =
-    canonicalUrl ||
-    $page.meta.url ||
-    $page.parent.meta.url ||
-    $url(new URL($page.path, baseUrl).toString());
+    canonicalUrl || $page.meta.url || $page.parent.meta.url || $page.path;
   $: $pageMeta.image =
     image || $page.meta.image || $page.parent.meta.image || defaultImageSrc;
 
-  // Set the meta tags
-  $: metatags.title = $pageMeta.title
+  // Normalize some values
+  $: $pageMeta.title = $pageMeta.title
     ? `${mainTitle} - ${$pageMeta.title}`
     : mainTitle;
-  $: metatags.description = $pageMeta.description ?? mainDescription;
+  $: $pageMeta.description = $pageMeta.description ?? mainDescription;
+  $: $pageMeta.url = !$pageMeta.url?.match(/\/_fallback$/) // Check fallback/404
+    ? new URL($url($pageMeta.url), baseUrl).toString()
+    : baseUrl.toString(); // Revert to the base URL for fallback/404 errors
+
+  // Set the meta tags that the routify helper understands
+  $: metatags.title = $pageMeta.title;
+  $: metatags.description = $pageMeta.description;
   $: metatags.type = $pageMeta.type;
   $: metatags.url = $pageMeta.url;
   $: metatags.image = $pageMeta.image ?? "";
 </script>
+
+<svelte:head>
+  <!-- Set the other metatags that the routify helpers can't -->
+  {#if $pageMeta.url}
+    <link rel="canonical" content={$pageMeta.url} />
+  {/if}
+</svelte:head>
