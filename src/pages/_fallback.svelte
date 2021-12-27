@@ -4,6 +4,11 @@
   import Hero from "/src/components/Hero/Hero.svelte";
 </script>
 
+<svelte:head>
+  <!-- Tell search engines not to index this error page -->
+  <meta name="robots" content="noindex" />
+</svelte:head>
+
 <Hero />
 
 <div class="container">
