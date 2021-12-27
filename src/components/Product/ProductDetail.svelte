@@ -1,5 +1,6 @@
 <script>
   import { url } from "@roxi/routify";
+  import { fly } from "svelte/transition";
 
   import Lightbox from "/src/components/Lightbox/Lightbox.svelte";
   import {
@@ -35,7 +36,7 @@
 
   let selectedVariant = product.variants[0];
 
-  let formStatus;
+  let formStatus = null;
 
   function changeOption(event) {
     const selected = new ProductSelectedOption(
@@ -162,25 +163,29 @@
             disabled={true || !selectedVariant.isAvailable}
           />
         </span>
-        <span
-          class="form-status status-message"
-          class:error={formStatus instanceof Error}
-        >
-          {#if formStatus instanceof Error}
-            {#if formStatus.message == errorSlugInvalidForm}
-              {messageErrorInvalidForm}
+        {#key formStatus}
+          <span
+            class="form-status status-message"
+            class:error={formStatus instanceof Error}
+            in:fly={{ y: -20 }}
+          >
+            {#if formStatus instanceof Error}
+              {#if formStatus.message == errorSlugInvalidForm}
+                {messageErrorInvalidForm}
+              {:else}
+                {messageErrorGeneric}
+              {/if}
+            {:else if formStatus === FormStatuses.AddedToCart}
+              Item added to <a class="content-link" href={$url("/cart")}>cart</a
+              >!
+            {:else if formStatus === FormStatuses.ItemUnavailable}
+              Sorry, but this item is currently unavailable. 😞
             {:else}
-              {messageErrorGeneric}
+              <!-- TODO: Remove when no longer "coming soon" -->
+              <em>Online orders coming soon...</em>
             {/if}
-          {:else if formStatus === FormStatuses.AddedToCart}
-            Item added to <a class="content-link" href={$url("/cart")}>cart</a>!
-          {:else if formStatus === FormStatuses.ItemUnavailable}
-            Sorry, but this item is currently unavailable. 😞
-          {:else}
-            <!-- TODO: Remove when no longer "coming soon" -->
-            <em>Online orders coming soon...</em>
-          {/if}
-        </span>
+          </span>
+        {/key}
       </form>
     </div>
   </div>
