@@ -1,3 +1,12 @@
+# Redirect our 404 error to our index, so that our SPA (JS) router handle it,
+# BUT make sure to send a proper 404 status code back, so that devices and
+# search engines can tell that its an actual error page.
+[[redirects]]
+  from = "/error-404"
+  to = "/index.html"
+  status = 404
+  force = false
+
 # Redirect all URLs to our index, so that our SPA (JS) router handle it.
 [[redirects]]
   from = "/*"
