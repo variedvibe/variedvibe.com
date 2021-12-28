@@ -1,5 +1,5 @@
 <script>
-  import { redirect, url, params } from "@roxi/routify";
+  import { url, params, redirect } from "@roxi/routify";
 
   import { getProductById, getProductBySlug } from "/src/services/Shop/Shop.js";
   import { shopifyProductGid } from "/src/services/Shop/gid.js";
@@ -37,7 +37,10 @@
       product = await productFetcher(productFetcherParam);
     } catch (e) {
       if (getErrorType(e) === ErrorTypes.UnknownProduct) {
-        $redirect("/error-404");
+        // We use the `window.location` API, rather than our router, to make
+        // sure that the redirect causes a redirect to our server-delivered
+        // error page, which will use a 404 status code in the response.
+        window.location.replace("/error-404");
         return;
       }
 

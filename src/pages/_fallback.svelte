@@ -1,7 +1,16 @@
 <script>
-  import { url } from "@roxi/routify";
+  import { url, route, leftover } from "@roxi/routify";
 
   import Hero from "/src/components/Hero/Hero.svelte";
+
+  const errorPagePath = "error-404";
+
+  // If we got here without a previous route, and the "leftover" in our fallback
+  // URL isn't of the error page URL, redirect outside of our router to trigger
+  // a server-delivered 404 status code.
+  if (!$route.last && $leftover !== errorPagePath) {
+    window.location.replace("/" + errorPagePath);
+  }
 </script>
 
 <svelte:head>
