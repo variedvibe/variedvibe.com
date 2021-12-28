@@ -1,5 +1,5 @@
 <script>
-  import { goto, url, params, redirect } from "@roxi/routify";
+  import { redirect, url, params } from "@roxi/routify";
 
   import { getProductById, getProductBySlug } from "/src/services/Shop/Shop.js";
   import { shopifyProductGid } from "/src/services/Shop/gid.js";
@@ -37,7 +37,7 @@
       product = await productFetcher(productFetcherParam);
     } catch (e) {
       if (getErrorType(e) === ErrorTypes.UnknownProduct) {
-        $goto("/404", null, true, false);
+        $redirect("/error-404");
         return;
       }
 
