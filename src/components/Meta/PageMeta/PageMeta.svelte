@@ -66,6 +66,6 @@
 <svelte:head>
   <!-- Set the other metatags that the routify helpers can't -->
   {#if $pageMeta.url}
-    <link rel="canonical" content={$pageMeta.url} />
+    <link rel="canonical" href={$pageMeta.url} />
   {/if}
 </svelte:head>
