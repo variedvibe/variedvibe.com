@@ -1,4 +1,3 @@
-<!-- routify:options title="" -->
 <script>
   import LoadingMessage, {
     messageLoadingPleaseWait,
