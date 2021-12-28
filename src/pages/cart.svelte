@@ -116,6 +116,9 @@
   };
 </script>
 
+<!-- routify:options title="Cart" -->
+<!-- routify:options index=false -->
+
 <svelte:head>
   <!-- Tell search engines not to index this page -->
   <meta name="robots" content="noindex" />

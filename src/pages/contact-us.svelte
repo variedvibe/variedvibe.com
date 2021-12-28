@@ -74,6 +74,9 @@
   }
 </script>
 
+<!-- routify:options title="Contact Us" -->
+<!-- routify:options index=100 -->
+
 <Hero />
 
 <div class="container page-width-wrapper">

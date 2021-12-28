@@ -2,6 +2,9 @@
   import { url } from "@roxi/routify";
 </script>
 
+<!-- routify:options title="Sales and Return Policies" -->
+<!-- routify:options index=false -->
+
 <div class="container page-width-wrapper">
   <div class="content-width-wrapper">
     <section class="main">

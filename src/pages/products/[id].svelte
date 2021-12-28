@@ -64,6 +64,8 @@
   export let product = fetchProduct();
 </script>
 
+<!-- routify:options title="Product" -->
+
 <div id="container" class="page-width-wrapper">
   {#await product}
     <LoadingMessage />

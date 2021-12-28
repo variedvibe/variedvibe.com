@@ -2,6 +2,9 @@
   import Hero from "/src/components/Hero/Hero.svelte";
 </script>
 
+<!-- routify:options title="About Us" -->
+<!-- routify:options index=1000 -->
+
 <Hero />
 
 <div class="container page-width-wrapper">
