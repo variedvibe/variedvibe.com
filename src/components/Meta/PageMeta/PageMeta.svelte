@@ -1,20 +1,25 @@
-<script>
-  import { page, url, metatags } from "@roxi/routify";
-  import { pageMeta } from "./stores.js";
-
-  const mainTitle = "Varied Vibe.";
-  const mainTagline = "It's a VIBE. What's yours?";
-  const mainDescription = "Denver apparel co. It's a VIBE. What's yours?";
-  const defaultType = "website";
-  const baseUrl = new URL(
+<script context="module">
+  export const baseUrl = new URL(
     import.meta.env.VITE_BASE_URL ??
       import.meta.env.BASE_URL ??
       "https://variedvibe.com/"
   );
-  const defaultImageSrc = new URL(
+
+  export const mainTitle = "Varied Vibe.";
+  export const mainTagline = "It's a VIBE. What's yours?";
+  export const mainDescription =
+    "Denver apparel co. It's a VIBE. What's yours?";
+
+  export const defaultType = "website";
+  export const defaultImageSrc = new URL(
     "/assets/logo-horizontal.svg",
     baseUrl
   ).toString();
+</script>
+
+<script>
+  import { page, url, metatags } from "@roxi/routify";
+  import { pageMeta } from "./stores.js";
 
   // Give optional props `null` default values
   export let title = null;
@@ -34,10 +39,10 @@
     title || $page.meta.title || $page.parent.meta.title || mainTagline;
   $: $pageMeta.description =
     description || $page.meta.description || $page.parent.meta.description;
-  $: $pageMeta.type =
-    type || $page.meta.image || $page.parent.meta.image || defaultType;
   $: $pageMeta.url =
     canonicalUrl || $page.meta.url || $page.parent.meta.url || $page.path;
+  $: $pageMeta.type =
+    type || $page.meta.image || $page.parent.meta.image || defaultType;
   $: $pageMeta.image =
     image || $page.meta.image || $page.parent.meta.image || defaultImageSrc;
 
@@ -53,8 +58,8 @@
   // Set the meta tags that the routify helper understands
   $: metatags.title = $pageMeta.title;
   $: metatags.description = $pageMeta.description;
-  $: metatags.type = $pageMeta.type;
   $: metatags.url = $pageMeta.url;
+  $: metatags.type = $pageMeta.type;
   $: metatags.image = $pageMeta.image ?? "";
 </script>
 
