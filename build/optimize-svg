@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Just use svgo...
+#
+# Yes, this is basically just an alias, for ease of consistency.
+#
+# https://github.com/svg/svgo
+svgo "$@"
