@@ -44,11 +44,25 @@ export class Gid {
     // removing empty parts.
     let gidParts = gidUrl.pathname.split("/").filter(Boolean);
 
-    if (gidUrl.protocol !== gidProtocol || gidParts.length < 3) {
+    // The namespace should technically be the "host" of the URL. However, not
+    // all browsers/clients will parse the URL the same way, so we'll fallback
+    // to the first part of the pathname.
+    let gidNamespace = gidUrl.host || gidParts.shift();
+
+    if (
+      gidUrl.protocol !== gidProtocol ||
+      !gidNamespace ||
+      gidParts.length < 2
+    ) {
       throw new Error(errorSlugInvalidGid);
     }
 
-    return new this(gidParts[0], gidParts[1], gidParts[2], gidUrl.searchParams);
+    return new this(
+      gidNamespace,
+      gidParts[0],
+      gidParts[1],
+      gidUrl.searchParams
+    );
   }
 
   toString() {
