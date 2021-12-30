@@ -159,30 +159,27 @@
             id="submit"
             name="submit"
             value={selectedVariant.isAvailable ? "Add To Cart" : "Unavailable"}
-            title="Coming Soon..."
-            disabled={true || !selectedVariant.isAvailable}
+            disabled={!selectedVariant.isAvailable}
           />
         </span>
         {#key formStatus}
           <span
             class="form-status status-message"
+            class:success={formStatus === FormStatuses.AddedToCart}
             class:error={formStatus instanceof Error}
             in:fly={{ y: -20 }}
           >
-            {#if formStatus instanceof Error}
+            {#if formStatus === FormStatuses.AddedToCart}
+              Item added to <a class="content-link" href={$url("/cart")}>cart</a
+              >!
+            {:else if formStatus === FormStatuses.ItemUnavailable}
+              Sorry, but this item is currently unavailable. 😞
+            {:else if formStatus instanceof Error}
               {#if formStatus.message == errorSlugInvalidForm}
                 {messageErrorInvalidForm}
               {:else}
                 {messageErrorGeneric}
               {/if}
-            {:else if formStatus === FormStatuses.AddedToCart}
-              Item added to <a class="content-link" href={$url("/cart")}>cart</a
-              >!
-            {:else if formStatus === FormStatuses.ItemUnavailable}
-              Sorry, but this item is currently unavailable. 😞
-            {:else}
-              <!-- TODO: Remove when no longer "coming soon" -->
-              <em>Online orders coming soon...</em>
             {/if}
           </span>
         {/key}
