@@ -41,10 +41,10 @@
         <li>
           <a
             class="content-link"
-            title="Instagram - Aurora Photo"
+            title="Instagram - Aurora Adams"
             target="_blank"
             rel="noopener"
-            href="https://www.instagram.com/auroraprophoto/"
+            href="https://www.instagram.com/fatesphoto/"
             >Aurora Adams; <em>model photography</em></a
           >
         </li>
