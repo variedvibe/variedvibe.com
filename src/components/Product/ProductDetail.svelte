@@ -97,7 +97,7 @@
         sizes="(min-width: 600px) 25vw, 50vw"
         width={image.width}
         height={image.height}
-        on:click={lightbox.toggleShow(i, true)}
+        on:click={lightbox.toggleShow(true, i)}
       />
     {/each}
   </div>
