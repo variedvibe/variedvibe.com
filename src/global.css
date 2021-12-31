@@ -363,26 +363,28 @@ textarea:not(:focus):placeholder-shown {
   color: var(--gray-mid);
 }
 
-html::-webkit-scrollbar {
-  width: 10px;
+html::-webkit-scrollbar,
+html::-webkit-scrollbar-corner {
   background-color: var(--black);
 }
-
 html::-webkit-scrollbar-thumb {
   border: 2px solid transparent;
   border-radius: 100px;
   background-color: var(--gray-mid-dark);
   background-clip: padding-box;
 }
-
+html::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+html::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
 html::-webkit-scrollbar:hover {
   background-color: var(--gray-dark);
 }
-
 html::-webkit-scrollbar-thumb:hover {
   background-color: var(--gray-mid);
 }
-
 html::-webkit-scrollbar-thumb:active {
   background-color: var(--gray-mid-light);
 }
