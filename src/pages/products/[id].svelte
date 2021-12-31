@@ -59,7 +59,7 @@
     $pageMeta.title = product.name;
     $pageMeta.description = product.description;
     $pageMeta.url = canonicalUrlPath;
-    $pageMeta.image = product.images[0]?.src;
+    $pageMeta.image = product.getImageForPresentation()?.src;
 
     return product;
   }

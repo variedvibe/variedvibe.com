@@ -37,6 +37,28 @@ export class Product {
     return Gid.parse(atob(this.id));
   }
 
+  getImageForPresentation() {
+    // The first image should be the image used for main "presentational"
+    // purposes. It's usually a photo of the product on a model or other
+    // "presented" manner. This image is less about showing the details of the
+    // product itself, and more about showing it off via a "look".
+    return this.images[0];
+  }
+
+  getImageForSummary(fallback = true) {
+    // The second image should be the image used for a "summary" view purposes.
+    // This image is usually a photo of the product in its entirety, intended to
+    // show the whole product, but not necessarily via a "look" or in close
+    // detail.
+    let image = this.images[1];
+
+    if (!image && fallback) {
+      image = this.images[0];
+    }
+
+    return image;
+  }
+
   getOptionForId(optionId) {
     return this.options.find((option) => option.id === optionId);
   }

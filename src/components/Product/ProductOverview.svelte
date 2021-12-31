@@ -12,6 +12,9 @@
   let linkHref = !isDisabled
     ? $url(href ?? `/products/${product.gid.id}/${product.slug}`)
     : null;
+
+  let imageMain = product.getImageForPresentation();
+  let imageAlternative = product.getImageForSummary(false);
 </script>
 
 <a
@@ -22,27 +25,27 @@
   style="--image-width: {imageWidth}px; --image-height: {imageHeight}px;"
 >
   <div class="image-container" class:loading-placeholder={isEmpty}>
-    {#if product.images[0]}
+    {#if imageMain}
       <img
-        alt={product.images[0].altText ?? product.name}
+        alt={imageMain.altText ?? product.name}
         title={product.name}
-        src={product.images[0].src}
-        srcset={product.images[0].srcSet}
+        src={imageMain.src}
+        srcset={imageMain.srcSet}
         sizes="{imageHeight}px"
-        width={imageWidth ?? product.images[0].width}
-        height={imageHeight ?? product.images[0].height}
+        width={imageWidth ?? imageMain.width}
+        height={imageHeight ?? imageMain.height}
       />
     {/if}
-    {#if product.images[1]}
+    {#if imageAlternative}
       <img
         class="alt-image"
-        alt={product.images[1].altText ?? product.name}
+        alt={imageAlternative.altText ?? product.name}
         title={product.name}
-        src={product.images[1].src}
-        srcset={product.images[1].srcSet}
+        src={imageAlternative.src}
+        srcset={imageAlternative.srcSet}
         sizes="{imageHeight}px"
-        width={imageWidth ?? product.images[1].width}
-        height={imageHeight ?? product.images[1].height}
+        width={imageWidth ?? imageAlternative.width}
+        height={imageHeight ?? imageAlternative.height}
       />
     {/if}
   </div>
