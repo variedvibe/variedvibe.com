@@ -34,8 +34,10 @@
   let selectedOptions = product.options.map(
     (option) => new ProductSelectedOption(option.name, null)
   );
-  let selectedVariant = product.variants[0];
-  let formStatus = null;
+  let selectedVariant = product.variants.find((variant) => variant.isAvailable);
+  let formStatus = !product.isAvailableForSale()
+    ? FormStatuses.ItemUnavailable
+    : null;
 
   function changeOption(event) {
     const selected = new ProductSelectedOption(
