@@ -353,6 +353,7 @@ button:disabled,
 .link-button.disabled,
 a.link-button.disabled {
   background-color: var(--gray-mid);
+  cursor: default;
 }
 a.disabled {
   cursor: default;
