@@ -284,7 +284,7 @@ button,
 a.link-button {
   min-width: 8em;
   text-align: center;
-  cursor: default;
+  cursor: pointer;
   user-select: none;
 }
 select {
