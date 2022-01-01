@@ -258,6 +258,7 @@ a.link-button {
   box-sizing: border-box;
   padding: 0.5em;
   border: 1px solid var(--gray-mid);
+  border-radius: 0;
   color: var(--black);
   font-family: var(--main-font-ui);
   font-size: 1em;
@@ -273,6 +274,8 @@ button,
 a.link-button {
   min-width: 8em;
   text-align: center;
+  cursor: default;
+  user-select: none;
 }
 select {
   background-image: url(/assets/ui-icons/angle-down-arrow-line.svg);
