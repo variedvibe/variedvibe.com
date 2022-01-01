@@ -14,6 +14,7 @@
   --main-fg-color: var(--gray-light);
   --secondary-fg-color: var(--gray-mid-light);
   --tertiary-fg-color: var(--gray-mid);
+  --backdrop-bg-color: rgba(0, 0, 0, 0.8);
   --error-light-bg-color: #fcc;
   --error-dark-bg-color: #300;
   --error-fg-color: #f33;
@@ -47,10 +48,12 @@
   --header-height: 60px;
   --header-position: sticky;
   --header-offset: var(--header-height);
+  --normal-border-radius: 8px;
   --hr-vertical-margin: 25px;
   --hr-border-style: solid;
   --hr-border-width: 2px;
   --hr-border-color: var(--gray-mid);
+  --normal-drop-shadow: drop-shadow(0 0 20px var(--gray-dark));
   --animation-speed-normal: 500ms;
   --animation-speed-very-fast: 125ms;
   --animation-speed-fast: 250ms;
@@ -208,13 +211,20 @@ h3 {
   font-size: var(--heading-secondary-font-size);
 }
 
-hr,
-.hr-border {
+hr {
   margin: var(--hr-vertical-margin) auto;
   border: none;
+}
+hr,
+.hr-border-bottom {
   border-bottom-style: var(--hr-border-style);
   border-bottom-width: var(--hr-border-width);
   border-bottom-color: var(--hr-border-color);
+}
+.hr-border-top {
+  border-top-style: var(--hr-border-style);
+  border-top-width: var(--hr-border-width);
+  border-top-color: var(--hr-border-color);
 }
 
 em {
@@ -418,6 +428,10 @@ html::-webkit-scrollbar-thumb:active {
 
 .modal-open {
   overflow: hidden;
+}
+.overlay-backdrop {
+  background-color: var(--backdrop-bg-color);
+  backdrop-filter: blur(5px);
 }
 
 .content-link,

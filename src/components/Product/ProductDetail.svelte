@@ -1,8 +1,10 @@
 <script>
   import { url } from "@roxi/routify";
-  import { fly } from "svelte/transition";
+  import { fly, fade } from "svelte/transition";
+  import { cubicInOut } from "svelte/easing";
 
   import Lightbox from "/src/components/Lightbox/Lightbox.svelte";
+  import ProductShopped from "./ProductShopped.svelte";
   import {
     messageErrorGeneric,
     messageErrorInvalidForm,
@@ -29,13 +31,10 @@
   }));
 
   let lightbox;
-
   let selectedOptions = product.options.map(
     (option) => new ProductSelectedOption(option.name, null)
   );
-
   let selectedVariant = product.variants[0];
-
   let formStatus = null;
 
   function changeOption(event) {
@@ -189,6 +188,16 @@
 </div>
 
 <Lightbox images={lightboxImages} bind:this={lightbox} />
+
+{#if formStatus === FormStatuses.AddedToCart}
+  <div transition:fade|local={{ duration: 125, easing: cubicInOut }}>
+    <ProductShopped
+      {product}
+      variant={selectedVariant}
+      on:close={() => (formStatus = null)}
+    />
+  </div>
+{/if}
 
 <style>
   .product {
