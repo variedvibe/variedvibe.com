@@ -261,6 +261,9 @@
   form select {
     width: 100%;
   }
+  form .product-quantity input {
+    max-width: 5em;
+  }
   form .add-to-cart {
     flex: 1;
     margin-left: 10px;
