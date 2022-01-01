@@ -257,6 +257,7 @@ a.link-button {
   display: inline-block;
   box-sizing: border-box;
   padding: 0.5em;
+  border: 1px solid var(--gray-mid);
   color: var(--black);
   font-family: var(--main-font-ui);
   font-size: 1em;
