@@ -186,7 +186,7 @@
         <div class="cart-actions">
           <a
             id="cart-checkout"
-            class="link-button"
+            class="link-button primary"
             class:disabled={!isValidCart}
             aria-disabled={!isValidCart || null}
             href={isValidCart ? checkout.webUrl : null}

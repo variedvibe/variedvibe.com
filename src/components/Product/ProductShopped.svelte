@@ -69,7 +69,8 @@
 
   <div class="actions">
     <button on:click={close}>Keep Shopping</button>
-    <a class="link-button" href={$url("/cart")} title="Go To Cart">Go To Cart</a
+    <a class="link-button primary" href={$url("/cart")} title="Go To Cart"
+      >Go To Cart</a
     >
   </div>
 </div>

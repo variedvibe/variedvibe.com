@@ -71,7 +71,7 @@
       var(--animation-timing-function-natural);
   }
   .ui-icon-badge {
-    background-color: var(--gray-lighter);
+    background-color: var(--accent-color-1-normal);
     color: var(--black);
     transition: background-color var(--animation-speed-very-fast)
       var(--animation-timing-function-natural);
@@ -81,7 +81,7 @@
     filter: invert(100%) brightness(100%);
   }
   .ui-icon-with-badge:hover .ui-icon-badge {
-    background-color: var(--white);
+    background-color: var(--accent-color-1-light);
   }
   @media (hover: none) {
     /* Reset normal hover effects, so mobile doesn't try and show them */
@@ -90,7 +90,7 @@
       filter: invert(100%) brightness(86.5%);
     }
     .ui-icon-with-badge:hover .ui-icon-badge {
-      background-color: var(--gray-lighter);
+      background-color: var(--accent-color-1-normal);
     }
   }
   .ui-icon:active,
