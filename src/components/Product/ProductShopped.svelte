@@ -137,6 +137,11 @@
   }
   .product-name {
     font-size: 1.5em;
+    font-weight: bold;
+  }
+  .secondary-details {
+    line-height: 2;
+    color: var(--secondary-fg-color);
   }
   .actions {
     display: flex;
