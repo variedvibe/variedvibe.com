@@ -194,7 +194,7 @@
           >
         </div>
         {#if checkoutLoading}
-          <div class="cart-summary-actions-loading">
+          <div class="cart-summary-actions-loading overlay-backdrop">
             <LoadingMessage />
           </div>
         {/if}
@@ -306,7 +306,6 @@
     top: var(--hr-border-width);
     bottom: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.8);
   }
   p.important {
     font-size: var(--important-font-size);
