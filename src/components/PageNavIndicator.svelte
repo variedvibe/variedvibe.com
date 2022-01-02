@@ -61,7 +61,7 @@
     margin: 0;
     padding: 0;
     border: none;
-    color: dodgerblue; /* TODO: Change to site-wide accent color once available */
+    color: var(--accent-color-1-normal);
     accent-color: currentColor;
     transition: opacity var(--animation-speed-normal)
       var(--animation-timing-function-natural);
