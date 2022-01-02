@@ -23,7 +23,7 @@
 <div class="container">
   <h2>Hmmm... You seem lost.</h2>
   <p>Let's try bringing you back home.</p>
-  <a class="link-button" href={$url("/")}>Go Home</a>
+  <a class="link-button primary" href={$url("/")}>Go Home</a>
 </div>
 
 <style>

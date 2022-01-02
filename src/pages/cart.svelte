@@ -202,7 +202,9 @@
     {:else}
       <h2>Your cart is empty.</h2>
       <p class="important">Maybe check out some products.</p>
-      <a class="link-button" href={$url("/products")}>Continue Shopping</a>
+      <a class="link-button primary" href={$url("/products")}
+        >Continue Shopping</a
+      >
     {/if}
   {:catch}
     <StatusMessage message={messageErrorGeneric} />
