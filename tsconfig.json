@@ -1,0 +1,6 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+
+  "include": ["src/**/*", "build/**/*", ".routify/*"],
+  "exclude": ["node_modules/*", "public/*", "api/*"],
+}

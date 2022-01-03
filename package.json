@@ -25,12 +25,15 @@
     "serve:vite": "vite preview",
     "build:pwa-bundle": "esbuild --bundle src/sw.js --outfile=dist/sw.generated.js --define:process.env.NODE_ENV=\"'production'\"",
     "build:pwa-inject": "workbox injectManifest",
-    "build-static:spank": "spank"
+    "build-static:spank": "spank",
+    "validate": "svelte-check"
   },
   "devDependencies": {
+    "@rollup/plugin-typescript": "^6.0.0",
     "@roxi/routify": "^2.14.0",
     "@squoosh/lib": "^0.4.0",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.10",
+    "@tsconfig/svelte": "^1.0.13",
     "cross-env": "^7.0.3",
     "esbuild": "^0.8.42",
     "fkill": "^7.1.0",
@@ -43,8 +46,11 @@
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^22.0.0",
     "svelte": "^3.35.0",
+    "svelte-check": "^1.0.0",
     "svelte-hmr": "^0.14.4",
     "svgo": "^2.8.0",
+    "tslib": "^2.0.0",
+    "typescript": "^4.5.4",
     "vite": "^2.3.7",
     "vite-main-js": "^0.0.1",
     "vite-plugin-html": "^2.1.1",
