@@ -3,4 +3,15 @@
 
   "include": ["src/**/*", "build/**/*", ".routify/*"],
   "exclude": ["node_modules/*", "public/*", "api/*"],
+
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+
+    // Rollup should allow for this to work
+    "module": "esnext",
+
+    // Allow for TS to understand things like `import.meta.env`
+    "types": ["vite/client"]
+  }
 }

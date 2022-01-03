@@ -9,9 +9,9 @@
     messageErrorGeneric,
     messageErrorInvalidForm,
   } from "/src/components/StatusMessage/StatusMessage.svelte";
-  import { ProductSelectedOption } from "/src/services/Shop/product.js";
-  import { CartEntry } from "/src/services/Shop/cart.js";
-  import { cart } from "/src/services/Shop/stores.js";
+  import { ProductSelectedOption } from "/src/services/Shop/product.ts";
+  import { CartEntry } from "/src/services/Shop/cart.ts";
+  import { cart } from "/src/services/Shop/stores.ts";
 
   const errorSlugInvalidForm = "ERR_INVALID_FORM";
   const FormStatuses = Object.freeze({

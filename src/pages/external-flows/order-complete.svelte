@@ -1,9 +1,9 @@
 <script>
   import { params, redirect } from "@roxi/routify";
 
-  import { Gid } from "/src/services/Shop/gid.js";
-  import { checkoutId, cart } from "/src/services/Shop/stores.js";
-  import { getCheckout } from "/src/services/Shop/Shop.js";
+  import { Gid } from "/src/services/Shop/gid.ts";
+  import { checkoutId, cart } from "/src/services/Shop/stores.ts";
+  import { getCheckout } from "/src/services/Shop/Shop.ts";
 
   (async () => {
     const checkoutToken = $params["checkout-token"];

@@ -1,13 +1,13 @@
 export class Price {
-  amount;
-  currencyCode;
+  amount: number;
+  currencyCode: string;
 
-  constructor(amount, currencyCode) {
+  constructor(amount: number, currencyCode: string) {
     this.amount = amount;
     this.currencyCode = currencyCode;
   }
 
-  format(locale) {
+  format(locale: string): string {
     return new Intl.NumberFormat(locale, {
       style: "currency",
       currency: this.currencyCode,

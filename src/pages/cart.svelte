@@ -8,10 +8,10 @@
     getCheckout,
     createCheckout,
     getProductsById,
-  } from "/src/services/Shop/Shop.js";
-  import { isTemporary } from "/src/services/Shop/errors.js";
-  import { checkoutId, cart, cartQuantity } from "/src/services/Shop/stores.js";
-  import { CheckoutLineItem } from "/src/services/Shop/checkout.js";
+  } from "/src/services/Shop/Shop.ts";
+  import { isTemporary } from "/src/services/Shop/errors.ts";
+  import { checkoutId, cart, cartQuantity } from "/src/services/Shop/stores.ts";
+  import { CheckoutLineItem } from "/src/services/Shop/checkout.ts";
 
   import CartItem from "/src/components/Cart/CartItem.svelte";
   import LoadingMessage from "/src/components/StatusMessage/LoadingMessage.svelte";

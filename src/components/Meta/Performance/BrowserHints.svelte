@@ -1,8 +1,8 @@
 <script>
-  import { getBaseUrl as getShopBaseUrl } from "/src/services/Shop/Shop.js";
+  import { getBaseUrl as getShopBaseUrl } from "/src/services/Shop/Shop.ts";
 
   const missionCriticalBaseURLs = [
-    getShopBaseUrl(),
+    getShopBaseUrl().toString(),
     "https://cdn.shopify.com/",
   ];
 

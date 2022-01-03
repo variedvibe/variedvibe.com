@@ -2,7 +2,7 @@
   import {
     getFeaturedProducts,
     getNullProduct,
-  } from "/src/services/Shop/Shop.js";
+  } from "/src/services/Shop/Shop.ts";
 
   import ProductGroup from "/src/components/Product/ProductGroup.svelte";
   import StatusMessage, {

@@ -4,9 +4,9 @@ import {
   ProductOption,
   ProductSelectedOption,
   ProductVariant,
-} from "./product.js";
-import { Price } from "./price.js";
-import { Order, OrderLineItem } from "./order.js";
+} from "./product";
+import { Price } from "./price";
+import { Order, OrderLineItem } from "./order";
 
 /**
  * srcSetImageSizes is a map of image sizes to their intrinsic widths, intended
@@ -15,7 +15,7 @@ import { Order, OrderLineItem } from "./order.js";
  *
  * See: https://shopify.dev/api/liquid/filters/url-filters#size-parameters
  */
-const srcSetImageSizes = {
+const srcSetImageSizes: Record<string, string> = {
   "250x250": "250w",
   "500x500": "500w",
   "750x750": "750w",
@@ -24,8 +24,9 @@ const srcSetImageSizes = {
   "4000x4000": "4000w",
 };
 
-export function shopifyProductToProduct(shopifyProduct) {
-  let product = new Product(
+// TODO: Type parameters when the client library adds types.
+export function shopifyProductToProduct(shopifyProduct: any): Product {
+  const product = new Product(
     shopifyProduct.id,
     shopifyProduct.handle,
     shopifyProduct.title,
@@ -34,27 +35,31 @@ export function shopifyProductToProduct(shopifyProduct) {
     shopifyProduct.images.map(shopifyProductImageToProductImage),
     shopifyProduct.options.map(shopifyProductOptionToProductOption),
     shopifyProduct.variants.map(shopifyProductVariantToProductVariant),
-    shopifyProduct.availableForSale
+    shopifyProduct.availableForSale,
   );
 
   return product;
 }
 
-export function shopifyProductImageToProductImage(shopifyProductImage) {
+// TODO: Type parameters when the client library adds types.
+export function shopifyProductImageToProductImage(
+  shopifyProductImage: any,
+): ProductImage {
   return new ProductImage(
     shopifyProductImage.id,
     shopifyProductImage.src,
     shopifyProductImage.width,
     shopifyProductImage.height,
     shopifyProductImage.altText,
-    shopifyImageSrcToSrcSet(shopifyProductImage.src)
+    shopifyImageSrcToSrcSet(shopifyProductImage.src),
   );
 }
 
-export function shopifyImageSrcToSrcSet(shopifyImageSrc) {
-  let srcSetArgs = [];
+// TODO: Type parameters when the client library adds types.
+export function shopifyImageSrcToSrcSet(shopifyImageSrc: any): string {
+  const srcSetArgs = [];
 
-  let srcURL = new URL(shopifyImageSrc);
+  const srcURL = new URL(shopifyImageSrc);
   let [filePath, extension, ...rest] = srcURL.pathname.split(".");
 
   // If there were more `.` separators...
@@ -62,16 +67,18 @@ export function shopifyImageSrcToSrcSet(shopifyImageSrc) {
     // Add the non-real extension back to the file path, and then grab the real
     // extension from the rest.
     filePath = `${filePath}.${extension}`;
-    extension = rest.pop();
+    if (rest.length > 0) {
+      extension = rest.pop()!;
+    }
 
     filePath = filePath + rest.join(".");
   }
 
   for (const size in srcSetImageSizes) {
-    let argURL = new URL(shopifyImageSrc);
+    const argURL = new URL(shopifyImageSrc);
     argURL.pathname = `${filePath}_${size}.${extension}`;
 
-    let arg = `${argURL.toString()} ${srcSetImageSizes[size]}`;
+    const arg = `${argURL.toString()} ${srcSetImageSizes[size]}`;
 
     srcSetArgs.push(arg);
   }
@@ -79,24 +86,31 @@ export function shopifyImageSrcToSrcSet(shopifyImageSrc) {
   return srcSetArgs.join(", ");
 }
 
-export function shopifyProductOptionToProductOption(shopifyProductOption) {
+// TODO: Type parameters when the client library adds types.
+export function shopifyProductOptionToProductOption(
+  shopifyProductOption: any,
+): ProductOption {
   return new ProductOption(
     shopifyProductOption.id,
     shopifyProductOption.name,
-    shopifyProductOption.values.map((v) => v.value)
+    shopifyProductOption.values.map((v: { value: string }) => v.value),
   );
 }
 
+// TODO: Type parameters when the client library adds types.
 export function shopifyProductSelectedOptionToProductSelectedOption(
-  shopifyProductSelectedOption
-) {
+  shopifyProductSelectedOption: any,
+): ProductSelectedOption {
   return new ProductSelectedOption(
     shopifyProductSelectedOption.name,
-    shopifyProductSelectedOption.value
+    shopifyProductSelectedOption.value,
   );
 }
 
-export function shopifyProductVariantToProductVariant(shopifyProductVariant) {
+// TODO: Type parameters when the client library adds types.
+export function shopifyProductVariantToProductVariant(
+  shopifyProductVariant: any,
+): ProductVariant {
   return new ProductVariant(
     shopifyProductVariant.id,
     shopifyProductVariant.title,
@@ -105,17 +119,22 @@ export function shopifyProductVariantToProductVariant(shopifyProductVariant) {
       : null,
     shopifyPriceToPrice(shopifyProductVariant.priceV2),
     shopifyProductVariant.selectedOptions.map(
-      shopifyProductSelectedOptionToProductSelectedOption
+      shopifyProductSelectedOptionToProductSelectedOption,
     ),
-    shopifyProductVariant.available
+    shopifyProductVariant.available,
   );
 }
 
-export function shopifyPriceToPrice(shopifyPrice) {
+// TODO: Type parameters when the client library adds types.
+export function shopifyPriceToPrice(shopifyPrice: any): Price {
   return new Price(shopifyPrice.amount, shopifyPrice.currencyCode);
 }
 
-export function shopifyOrderToOrder(shopifyOrder, shopifyOrderStatusUrl) {
+// TODO: Type parameters when the client library adds types.
+export function shopifyOrderToOrder(
+  shopifyOrder: any,
+  shopifyOrderStatusUrl: string,
+): Order {
   shopifyOrderStatusUrl = shopifyOrderStatusUrl ?? shopifyOrder.statusUrl;
 
   return new Order(
@@ -139,14 +158,17 @@ export function shopifyOrderToOrder(shopifyOrder, shopifyOrderStatusUrl) {
     shopifyOrder.totalPriceV2
       ? shopifyPriceToPrice(shopifyOrder.totalPriceV2)
       : null,
-    shopifyOrder.processedAt ? new Date(shopifyOrder.processedAt) : null
+    shopifyOrder.processedAt ? new Date(shopifyOrder.processedAt) : null,
   );
 }
 
-export function shopifyOrderLineItemToOrderLineItem(shopifyLineItem) {
+// TODO: Type parameters when the client library adds types.
+export function shopifyOrderLineItemToOrderLineItem(
+  shopifyLineItem: any,
+): OrderLineItem {
   return new OrderLineItem(
     shopifyLineItem.variableValues.id,
     shopifyLineItem.variant.id,
-    shopifyLineItem.quantity
+    shopifyLineItem.quantity,
   );
 }

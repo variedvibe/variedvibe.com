@@ -1,9 +1,9 @@
 <script>
   import { url, params, redirect } from "@roxi/routify";
 
-  import { getProductById, getProductBySlug } from "/src/services/Shop/Shop.js";
-  import { shopifyProductGid } from "/src/services/Shop/gid.js";
-  import { ErrorTypes, getErrorType } from "/src/services/Shop/errors.js";
+  import { getProductById, getProductBySlug } from "/src/services/Shop/Shop.ts";
+  import { shopifyProductGid } from "/src/services/Shop/gid.ts";
+  import { ErrorType, getErrorType } from "/src/services/Shop/errors.ts";
 
   import { pageMeta } from "/src/components/Meta/PageMeta/stores.js";
   import ProductDetail from "/src/components/Product/ProductDetail.svelte";
@@ -36,7 +36,7 @@
     try {
       product = await productFetcher(productFetcherParam);
     } catch (e) {
-      if (getErrorType(e) === ErrorTypes.UnknownProduct) {
+      if (getErrorType(e) === ErrorType.UnknownProduct) {
         // We use the `window.location` API, rather than our router, to make
         // sure that the redirect causes a redirect to our server-delivered
         // error page, which will use a 404 status code in the response.
