@@ -43,6 +43,11 @@
     }
   }
 
+  // Create a scroll handler that returns a scoped timeout.
+  //
+  // We use a timeout to determine when the scrolling has stopped after a
+  // certain amount of time, similar to a debounce. We have to do this since
+  // there's no such `scrollStopped` event.
   function createScrollHandler() {
     let scrollTimeout;
 
@@ -69,13 +74,14 @@
   );
 
   function scrollImageIntoView(imageIndex) {
-    if (!shown) {
+    if (!shown || isScrolling) {
       return;
     }
 
     const element = imageElements[imageIndex];
     const elementBounds = element.getBoundingClientRect();
 
+    // If the element isn't already in full view
     if (elementBounds.x !== 0) {
       element.scrollIntoView();
     }
@@ -93,29 +99,35 @@
   }
 
   onMount(() => {
-    const observerOptions = {
-      root: document.querySelector("#image-scroller"),
-      rootMargin: "0px",
-      threshold: 0.5, // 50% showing
-    };
-
+    // After mounting, setup an intersection observer.
+    // We wait until after mounting because otherwise the elements wouldn't have
+    // been created yet, since scripts run before the rest of the component is
+    // executed.
     const observerCallback = (entries) => {
       if (!isScrolling) {
         return;
       }
 
+      // Find the intersecting entry
       for (const entry of entries) {
         if (entry.isIntersecting) {
           let imageElementIndex = imageElements.findIndex(
             (element) => element === entry.target
           );
 
+          // If we found an element matching the intersecting entry
           if (imageElementIndex > -1) {
             current = imageElementIndex;
             return;
           }
         }
       }
+    };
+
+    const observerOptions = {
+      root: document.querySelector("#image-scroller"),
+      rootMargin: "0px",
+      threshold: 0.5, // 50% showing
     };
 
     const observer = new IntersectionObserver(
@@ -137,6 +149,16 @@
   $: shown && !isScrolling && scrollImageIntoView(current);
 </script>
 
+<!--
+When the viewport is resized it can trigger a new image to be loaded,
+due to srcset/sizes and responsive image handling.
+
+We listens to resize events to handle new images loading in by triggering
+reactivity which allows the image element `.complete` reactive listeners to
+properly update.
+
+(We use a debounced version because `resize` events can fire rapidly)
+-->
 <svelte:window
   on:keydown={keyPressHandler}
   on:resize={triggerImageElementReactivityDebounced}
@@ -232,13 +254,13 @@
     overscroll-behavior-x: contain;
     scroll-behavior: auto;
     scroll-snap-type: x mandatory;
-    touch-action: manipulation;
+    touch-action: manipulation; /* Improve response to touch */
 
     /* Disable scrollbar visibility */
-    -ms-overflow-style: none; /* IE and Edge */
+    -ms-overflow-style: none; /* IE/Edge */
     scrollbar-width: none; /* Firefox */
   }
-  /* Hide scrollbar for Chrome, Safari and Opera */
+  /* Hide scrollbar for Webkit/Blink */
   #image-scroller::-webkit-scrollbar {
     display: none;
     height: 0;
@@ -249,7 +271,7 @@
     height: 100%;
     object-fit: contain;
     flex: 1 0 100%;
-    touch-action: manipulation;
+    touch-action: manipulation; /* Improve response to touch */
     scroll-snap-align: center;
     scroll-snap-stop: always;
   }
@@ -281,7 +303,7 @@
     text-align: center;
     cursor: pointer;
     user-select: none;
-    touch-action: manipulation;
+    touch-action: manipulation; /* Improve response to touch */
   }
   .ui-action::before {
     content: "";
