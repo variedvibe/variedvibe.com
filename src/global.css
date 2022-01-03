@@ -454,6 +454,8 @@ html::-webkit-scrollbar-thumb:active {
 
 .modal-open {
   overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
 }
 .overlay-backdrop {
   background-color: var(--backdrop-bg-color);

@@ -1,6 +1,6 @@
 <script>
   import debounce from "lodash.debounce";
-  import { onDestroy } from "svelte";
+  import { onMount, onDestroy } from "svelte";
 
   import LoadingSpinner from "/src/components/StatusMessage/LoadingSpinner.svelte";
 
@@ -12,6 +12,7 @@
 
   let shown = false;
   let imageElements = [];
+  let isScrolling = false;
 
   export function toggleShow(show, index = 0) {
     shown = show ?? !shown;
@@ -42,6 +43,20 @@
     }
   }
 
+  function createScrollHandler() {
+    let scrollTimeout;
+
+    return () => {
+      isScrolling = true;
+
+      clearTimeout(scrollTimeout);
+
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 100);
+    };
+  }
+
   function triggerImageElementReactivity() {
     // Loading checks depend on the native "complete" read-only property.
     // We can't check this value reactively, so we reassign the elements array
@@ -53,12 +68,73 @@
     250
   );
 
+  function scrollImageIntoView(imageIndex) {
+    if (!shown) {
+      return;
+    }
+
+    const element = imageElements[imageIndex];
+    const elementBounds = element.getBoundingClientRect();
+
+    if (elementBounds.x !== 0) {
+      element.scrollIntoView();
+    }
+
+    // If the element doesn't have a width, than the element hasn't been shown
+    // yet...
+    //
+    // (this can happen with a race between reactivity of this function being
+    // called and the element triggering a non-hidden view, while the browser
+    // is also racing to paint the element into view)
+    if (elementBounds.width === 0) {
+      // Wait for the next animation frame (repaint) and try again
+      requestAnimationFrame(() => scrollImageIntoView(imageIndex));
+    }
+  }
+
+  onMount(() => {
+    const observerOptions = {
+      root: document.querySelector("#image-scroller"),
+      rootMargin: "0px",
+      threshold: 0.5, // 50% showing
+    };
+
+    const observerCallback = (entries) => {
+      if (!isScrolling) {
+        return;
+      }
+
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          let imageElementIndex = imageElements.findIndex(
+            (element) => element === entry.target
+          );
+
+          if (imageElementIndex > -1) {
+            current = imageElementIndex;
+            return;
+          }
+        }
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
+
+    for (const element of imageElements) {
+      observer.observe(element);
+    }
+  });
+
   onDestroy(() => {
     document.body.classList.remove("modal-open");
   });
 
   $: hasPrevious = current > 0;
   $: hasNext = current < images.length - 1;
+  $: shown && !isScrolling && scrollImageIntoView(current);
 </script>
 
 <svelte:window
@@ -67,7 +143,11 @@
 />
 
 <div class="container" class:hidden={!shown}>
-  <div id="image" on:click={() => toggleShow(false)}>
+  <div
+    id="image-scroller"
+    on:click={() => toggleShow(false)}
+    on:scroll={createScrollHandler()}
+  >
     {#each images as image, i}
       <img
         class:active={current === i}
@@ -136,16 +216,42 @@
   .container.hidden {
     display: none;
   }
-  #image {
+  #image-scroller {
     flex: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
     max-width: 100%;
     max-height: 100%;
+    overflow: hidden;
+    overflow-x: auto;
+    overflow-x: overlay;
+    overscroll-behavior-x: contain;
+    scroll-behavior: auto;
+    scroll-snap-type: x mandatory;
+    touch-action: manipulation;
+
+    /* Disable scrollbar visibility */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  #image-scroller::-webkit-scrollbar {
+    display: none;
+    height: 0;
+    opacity: 0;
   }
   img {
-    display: none;
     width: 100%;
     height: 100%;
     object-fit: contain;
+    flex: 1 0 100%;
+    touch-action: manipulation;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
   }
   img.active {
     display: block;
@@ -175,6 +281,7 @@
     text-align: center;
     cursor: pointer;
     user-select: none;
+    touch-action: manipulation;
   }
   .ui-action::before {
     content: "";
@@ -237,10 +344,10 @@
       padding-bottom: 18px;
     }
     .navigation#previous {
-      padding-right: 20%;
+      padding-right: 12%;
     }
     .navigation#next {
-      padding-left: 20%;
+      padding-left: 12%;
     }
 
     /* Reset normal hover effects, so mobile doesn't try and show them */
