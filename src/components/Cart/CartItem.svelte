@@ -10,6 +10,14 @@
   let variant = product.getVariantForId(cartEntry.variantId);
   let productLinkHref = $url(`/products/${product.gid.id}/${product.slug}`);
 
+  function ensureValidQuantityInput(event) {
+    const parsed = parseInt(event.target.value, 10);
+
+    if (!Number.isInteger(parsed) || parsed < 1) {
+      event.target.value = 1;
+    }
+  }
+
   function remove() {
     cart.remove(cartEntry);
   }
@@ -48,7 +56,9 @@
             autocomplete="off"
             min="1"
             max="100"
+            on:input={ensureValidQuantityInput}
             bind:value={cartEntry.quantity}
+            required
           />
         </span>
       {:else}
