@@ -182,6 +182,7 @@
       left: 0;
       visibility: hidden;
       overflow-y: auto;
+      overscroll-behavior: contain;
       background-color: var(--main-bg-color);
       transition-property: height, visibility;
       transition-duration: var(--animation-speed-fast);

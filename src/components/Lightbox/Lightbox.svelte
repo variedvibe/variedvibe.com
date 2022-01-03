@@ -234,6 +234,7 @@ properly update.
     max-height: 100vh;
     max-height: 100dvh;
     background-color: var(--black);
+    overscroll-behavior: contain;
   }
   .container.hidden {
     display: none;

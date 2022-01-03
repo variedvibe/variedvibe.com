@@ -85,6 +85,7 @@
     background-position: center;
     background-size: contain;
     backdrop-filter: contrast(0.85);
+    -webkit-backdrop-filter: contrast(0.85);
     filter: drop-shadow(1px 0px 0px var(--gray-mid-darker))
       drop-shadow(0px 1px 0px var(--gray-mid-darker))
       drop-shadow(-1px 0px 0px var(--gray-mid-darker))

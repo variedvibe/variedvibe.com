@@ -460,6 +460,7 @@ html::-webkit-scrollbar-thumb:active {
 .overlay-backdrop {
   background-color: var(--backdrop-bg-color);
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .content-link,

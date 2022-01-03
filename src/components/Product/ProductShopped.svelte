@@ -102,6 +102,7 @@
     padding: var(--page-horizontal-padding);
     box-sizing: border-box;
     overflow: auto;
+    overscroll-behavior: contain;
     background-color: var(--black);
     border-radius: var(--normal-border-radius);
     filter: var(--normal-drop-shadow);
