@@ -228,6 +228,14 @@
   a:hover {
     color: var(--white);
   }
+  a.active,
+  a.active:link,
+  a.active:visited {
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-color: var(--accent-color-1-normal);
+    text-underline-offset: 0.25em;
+  }
   @media (hover: none) {
     /* Reset normal hover effects, so mobile doesn't try and show them */
     a:hover {
