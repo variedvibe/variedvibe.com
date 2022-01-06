@@ -1,6 +1,6 @@
 <script>
   import { url } from "@roxi/routify";
-  import { cartQuantity } from "/src/services/Shop/stores.js";
+  import { cartQuantity } from "/src/services/Shop/stores.ts";
 </script>
 
 <ul class="nav-icons">

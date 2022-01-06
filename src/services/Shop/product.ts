@@ -1,26 +1,27 @@
-import { Gid } from "./gid.js";
+import type { Price } from "./price";
+import { Gid } from "./gid";
 
 export class Product {
-  id;
-  slug;
-  name;
-  description;
-  descriptionHtml;
-  images = [];
-  options = [];
-  variants = [];
+  id: string;
+  slug: string;
+  name: string;
+  description: string;
+  descriptionHtml: string;
+  images: ProductImage[] = [];
+  options: ProductOption[] = [];
+  variants: ProductVariant[] = [];
   isForSale = false;
 
   constructor(
-    id,
-    slug,
-    name,
-    description,
-    descriptionHtml,
-    images,
-    options,
-    variants,
-    isForSale
+    id: string,
+    slug: string,
+    name: string,
+    description: string,
+    descriptionHtml: string,
+    images = [],
+    options = [],
+    variants = [],
+    isForSale = false,
   ) {
     this.id = id;
     this.slug = slug;
@@ -33,19 +34,19 @@ export class Product {
     this.isForSale = isForSale;
   }
 
-  get gid() {
+  get gid(): Gid {
     return Gid.parse(atob(this.id));
   }
 
-  getImageForPresentation() {
+  getImageForPresentation(): ProductImage | null {
     // The first image should be the image used for main "presentational"
     // purposes. It's usually a photo of the product on a model or other
     // "presented" manner. This image is less about showing the details of the
     // product itself, and more about showing it off via a "look".
-    return this.images[0];
+    return this.images[0] ?? null;
   }
 
-  getImageForSummary(fallback = true) {
+  getImageForSummary(fallback = true): ProductImage | null {
     // The second image should be the image used for a "summary" view purposes.
     // This image is usually a photo of the product in its entirety, intended to
     // show the whole product, but not necessarily via a "look" or in close
@@ -56,18 +57,20 @@ export class Product {
       image = this.images[0];
     }
 
-    return image;
+    return image ?? null;
   }
 
-  getOptionForId(optionId) {
+  getOptionForId(optionId: string): ProductOption | undefined {
     return this.options.find((option) => option.id === optionId);
   }
 
-  getVariantForId(variantId) {
+  getVariantForId(variantId: string): ProductVariant | undefined {
     return this.variants.find((variant) => variant.id === variantId);
   }
 
-  getVariantForSelectedOptions(selectedOptions) {
+  getVariantForSelectedOptions(
+    selectedOptions: ProductSelectedOption[],
+  ): ProductVariant | undefined {
     return this.variants.find((variant) => {
       return (
         variant.selectedOptions.every((option) =>
@@ -80,7 +83,7 @@ export class Product {
     });
   }
 
-  isAvailableForSale() {
+  isAvailableForSale(): boolean {
     return (
       this.isForSale && this.variants.some((variant) => variant.isAvailable)
     );
@@ -88,14 +91,21 @@ export class Product {
 }
 
 export class ProductImage {
-  id;
-  src;
-  width;
-  height;
-  altText;
-  srcSet;
+  id: string;
+  src: string;
+  width: number;
+  height: number;
+  altText: string;
+  srcSet: string;
 
-  constructor(id, src, width, height, altText, srcSet) {
+  constructor(
+    id: string,
+    src: string,
+    width: number,
+    height: number,
+    altText: string,
+    srcSet: string,
+  ) {
     this.id = id;
     this.src = src;
     this.width = width;
@@ -104,54 +114,61 @@ export class ProductImage {
     this.srcSet = srcSet;
   }
 
-  get gid() {
+  get gid(): Gid {
     return Gid.parse(atob(this.id));
   }
 }
 
 export class ProductOption {
-  id;
-  name;
-  values = [];
+  id: string;
+  name: string;
+  values: string[] = [];
 
-  constructor(id, name, values) {
+  constructor(
+    id: string,
+    name: string,
+    values = [],
+  ) {
     this.id = id;
     this.name = name;
     this.values = values;
   }
 
-  get gid() {
+  get gid(): Gid {
     return Gid.parse(atob(this.id));
   }
 }
 
 export class ProductSelectedOption {
-  name;
-  value;
+  name: string;
+  value: string;
 
-  constructor(name, value) {
+  constructor(name: string, value: string) {
     this.name = name;
     this.value = value;
   }
 
-  valueOf() {
-    return { name: this.name, value: this.value };
-  }
-
-  isEqual(other) {
+  isEqual(other: this): boolean {
     return this.name === other.name && this.value === other.value;
   }
 }
 
 export class ProductVariant {
-  id;
-  name;
-  image;
-  price;
-  selectedOptions = [];
+  id: string;
+  name: string;
+  image: ProductImage | null;
+  price: Price;
+  selectedOptions: ProductSelectedOption[] = [];
   isAvailable = false;
 
-  constructor(id, name, image, price, selectedOptions, isAvailable) {
+  constructor(
+    id: string,
+    name: string,
+    image: ProductImage | null,
+    price: Price,
+    selectedOptions = [],
+    isAvailable = false,
+  ) {
     this.id = id;
     this.name = name;
     this.image = image;
@@ -160,7 +177,7 @@ export class ProductVariant {
     this.isAvailable = isAvailable;
   }
 
-  get gid() {
+  get gid(): Gid {
     return Gid.parse(atob(this.id));
   }
 }

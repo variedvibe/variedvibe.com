@@ -2,7 +2,7 @@
   import {
     getFeaturedProducts,
     getNullProduct,
-  } from "/src/services/Shop/Shop.js";
+  } from "/src/services/Shop/Shop.ts";
 
   import Hero from "/src/components/Hero/Hero.svelte";
   import ProductGroup from "/src/components/Product/ProductGroup.svelte";

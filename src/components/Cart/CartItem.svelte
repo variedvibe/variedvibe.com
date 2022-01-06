@@ -1,7 +1,7 @@
 <script>
   import { url } from "@roxi/routify";
 
-  import { cart } from "/src/services/Shop/stores.js";
+  import { cart } from "/src/services/Shop/stores.ts";
 
   export let cartEntry;
   export let product;
