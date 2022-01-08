@@ -20,6 +20,7 @@ module.exports = {
     "browserconfig.*",
     "assets/open-graph-image.*",
   ],
+
   maximumFileSizeToCacheInBytes: 10000000, // 10 MB,
   swSrc: "dist/sw.generated.js",
   swDest: "dist/sw.generated.js",
