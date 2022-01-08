@@ -312,12 +312,12 @@ properly update.
     z-index: -1;
     width: 1.5em;
     height: 1.5em;
-    background-color: rgba(64, 64, 64, 0.4);
+    background-color: rgba(64, 64, 64, 40%);
     border: 1px solid transparent;
     border-radius: 100px;
   }
   .ui-action:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 20%);
   }
   .ui-action .ui-icon {
     display: block;
