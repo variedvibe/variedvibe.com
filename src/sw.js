@@ -20,8 +20,10 @@ import { RoutifyPlugin, freshCacheData } from "@roxi/routify/workbox-plugin";
  **********/
 
 const entrypointUrl = "index.html"; // entrypoint
-const fallbackImage = "404.svg";
-const files = self.__WB_MANIFEST; // files matching globDirectory and globPattern in rollup.config.js
+const fallbackImage = null; // TODO: "404.svg";
+// @ts-ignore: Ignore the next line, as `self.__WB_MANIFEST` is used as the
+// replacement key when pre-processing via workbox injectManifest.
+const files = self.__WB_MANIFEST; // files matching globDirectory and globPattern in workbox-config.js
 
 const externalAssetsConfig = () => ({
   cacheName: "external",
@@ -42,13 +44,13 @@ const externalAssetsConfig = () => ({
 
 /**
  * precache all files
- * remember to precache __app.html and 404.svg if caching of all files is disabled
+ * remember to precache entrypointUrl and fallbackImage if caching of all files is disabled
  */
 precacheAndRoute(files);
 
 /** precache only fallback files */
 // precacheAndRoute(files.filter(file =>
-//   ['__app.html', '404.svg']
+//   [entrypointUrl, fallbackImage]
 //     .includes(file.url)
 // ))
 
@@ -65,9 +67,8 @@ clientsClaim(); // take control of client without having to wait for refresh
  * ROUTES *
  **********/
 
-// serve local pages from the SPA entry point (__app.html)
-// TODO: Investigate why this isn't working...
-//registerRoute(isLocalPage, matchPrecache(entrypointUrl));
+// serve local pages from cache first
+registerRoute(isLocalPage, new CacheFirst());
 
 // serve local assets from cache first
 registerRoute(isLocalAsset, new CacheFirst());
@@ -84,7 +85,8 @@ setCatchHandler(async ({ event }) => {
     case "document":
       return await matchPrecache(entrypointUrl);
     case "image":
-      return await matchPrecache(fallbackImage);
+    // TODO: Re-add once we have a fallback image
+    // return await matchPrecache(fallbackImage);
     default:
       return Response.error();
   }
