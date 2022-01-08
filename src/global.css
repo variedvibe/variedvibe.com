@@ -17,7 +17,7 @@
   --main-fg-color: var(--gray-light);
   --secondary-fg-color: var(--gray-mid-light);
   --tertiary-fg-color: var(--gray-mid);
-  --backdrop-bg-color: rgba(0, 0, 0, 0.8);
+  --backdrop-bg-color: rgba(0, 0, 0, 80%);
   --error-light-bg-color: #fcc;
   --error-dark-bg-color: #300;
   --error-fg-color: #f33;
@@ -93,10 +93,10 @@
 @keyframes pulse {
   0%,
   100% {
-    opacity: 100%;
+    opacity: 1;
   }
   50% {
-    opacity: 0%;
+    opacity: 0;
   }
 }
 @keyframes background-swipe {
@@ -120,10 +120,10 @@
   0%,
   80%,
   100% {
-    opacity: 100%;
+    opacity: 1;
   }
   40% {
-    opacity: 0%;
+    opacity: 0;
   }
 }
 @keyframes background-swipe-with-pause {
@@ -292,7 +292,7 @@ a.link-button {
   user-select: none;
 }
 select {
-  background-image: url(/assets/ui-icons/angle-down-arrow-line.svg);
+  background-image: url("/assets/ui-icons/angle-down-arrow-line.svg");
   background-origin: content-box;
   background-position: 100% 50%;
   background-size: 0.5em;
@@ -505,7 +505,7 @@ html::-webkit-scrollbar-thumb:active {
 }
 
 .loading-spinner {
-  background-image: url(/assets/ui-icons/wait-loader.svg);
+  background-image: url("/assets/ui-icons/wait-loader.svg");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;

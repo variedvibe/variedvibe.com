@@ -1,3 +1,10 @@
 {
-  "extends": ["stylelint-config-standard", "stylelint-config-prettier"]
+  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+  "rules": {
+    "declaration-block-no-redundant-longhand-properties": false,
+    "property-no-vendor-prefix": false,
+    "value-no-vendor-prefix": false,
+    "rule-empty-line-before": false,
+    "color-function-notation": "classic"
+  }
 }
