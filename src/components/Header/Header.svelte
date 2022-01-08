@@ -20,11 +20,11 @@
       >
     </h1>
 
-    <nav id="top-site-nav" role="navigation">
+    <nav id="top-site-nav">
       <Navigation maxDepth="1" items={navItems} />
     </nav>
 
-    <nav id="top-nav-icons" role="navigation">
+    <nav id="top-nav-icons">
       <NavIcons />
     </nav>
   </div>
