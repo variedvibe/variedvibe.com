@@ -128,9 +128,9 @@
     margin-left: auto;
   }
   input[type="number"] {
-    width: 4em;
+    width: 3.2em;
     margin-left: 0.25em;
-    font-size: 0.8em;
+    padding: 0.2em;
   }
   .variant-error {
     color: var(--error-fg-color);
@@ -163,8 +163,7 @@
       margin-left: 10px;
     }
     input[type="number"] {
-      margin-left: auto;
-      margin-right: auto;
+      margin-left: 0.1em;
     }
     .price-actions-footer {
       margin-top: 1.5em;
