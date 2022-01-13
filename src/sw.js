@@ -11,7 +11,11 @@ import {
   StaleWhileRevalidate,
 } from "workbox-strategies";
 import { skipWaiting, clientsClaim } from "workbox-core";
-import { precacheAndRoute, matchPrecache } from "workbox-precaching";
+import {
+  precacheAndRoute,
+  createHandlerBoundToURL,
+  matchPrecache,
+} from "workbox-precaching";
 import { ExpirationPlugin } from "workbox-expiration";
 import { RoutifyPlugin, freshCacheData } from "@roxi/routify/workbox-plugin";
 
@@ -67,8 +71,8 @@ clientsClaim(); // take control of client without having to wait for refresh
  * ROUTES *
  **********/
 
-// serve local pages from cache first
-registerRoute(isLocalPage, new CacheFirst());
+// serve local pages from our SPA entry point
+registerRoute(isLocalPage, createHandlerBoundToURL(entrypointUrl));
 
 // serve local assets from cache first
 registerRoute(isLocalAsset, new CacheFirst());
