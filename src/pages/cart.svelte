@@ -32,6 +32,14 @@
       ? await getCheckout(checkoutId)
       : await createCheckout();
 
+    // If no checkout was found, either the checkout ID was invalid or its
+    // possible that the checkout data has expired from the data source.
+    //
+    // Checkouts aren't guaranteed to stay around forever.
+    if (!checkout) {
+      checkout = await createCheckout();
+    }
+
     return [checkout, checkout.id];
   }
 
