@@ -14,7 +14,7 @@
         <li><a href={$url("/sales-policies")}>Sales and Refunds</a></li>
       </ul>
     </nav>
-    <span>Copyright © 2021 Varied Vibe.</span>
+    <span>Copyright © 2022 Varied Vibe.</span>
   </div>
 </footer>
 
