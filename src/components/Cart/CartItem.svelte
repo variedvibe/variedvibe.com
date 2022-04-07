@@ -11,9 +11,9 @@
   let productLinkHref = $url(`/products/${product.gid.id}/${product.slug}`);
 
   function ensureValidQuantityInput(event) {
-    const parsed = parseInt(event.target.value, 10);
+    const number = event.target.valueAsNumber;
 
-    if (!Number.isInteger(parsed) || parsed < 1) {
+    if (!Number.isInteger(number) || number < 1) {
       event.target.value = 1;
     }
   }
