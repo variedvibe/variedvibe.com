@@ -75,7 +75,11 @@
       element.classList.remove("error");
     }
 
-    const quantity = form.elements.quantity.valueAsNumber;
+    let quantity = Math.trunc(form.elements.quantity.valueAsNumber) || 1;
+
+    if (quantity < 1) {
+      quantity = 1;
+    }
 
     cart.add(
       new CartEntry(product.id, product.slug, selectedVariant.id, quantity)
