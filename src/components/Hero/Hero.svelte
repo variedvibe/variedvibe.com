@@ -34,7 +34,7 @@
   export let height = defaultHeight;
   export let imageSrc = defaultImageSrc;
   export let imageSrcSet = "";
-  export let useAltImages = true;
+  export let useAltImages = false;
   export let addNoise = true;
   export let addVibeOverlay = false;
   export let addLogoOverlay = true;
