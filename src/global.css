@@ -51,6 +51,7 @@
   --header-height: 60px;
   --header-position: sticky;
   --header-offset: var(--header-height);
+  --max-hero-height: 480px;
   --normal-border-radius: 8px;
   --hr-vertical-margin: 25px;
   --hr-border-style: solid;
@@ -68,6 +69,7 @@
 @media (max-width: 600px) {
   :root {
     --page-horizontal-padding: 10px;
+    --max-hero-height: 320px;
   }
 }
 @media (max-width: 900px) {
@@ -79,6 +81,7 @@
   :root {
     --header-position: unset;
     --header-offset: 0;
+    --max-hero-height: 320px;
   }
 }
 
