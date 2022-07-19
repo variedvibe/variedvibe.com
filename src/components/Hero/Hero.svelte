@@ -75,7 +75,11 @@
     <div id="vibe-overlay" class="overlay" />
   {/if}
   {#if addLogoOverlay}
-    <div id="logo-overlay" class="overlay" />
+    <div id="logo-overlay" class="overlay">
+      <div class="page-width-wrapper">
+        <img alt="Varied Vibe. Mark" src="/assets/mark-black.svg" width="100" />
+      </div>
+    </div>
   {/if}
 </section>
 
@@ -152,16 +156,14 @@
     z-index: 20;
   }
   #logo-overlay {
-    background-image: url("/assets/mark-black.svg");
-    background-repeat: no-repeat;
-    background-position: 20px 10px;
-    background-size: 100px;
     backdrop-filter: contrast(0.85);
     -webkit-backdrop-filter: contrast(0.85);
+    z-index: 20;
+  }
+  #logo-overlay img {
     filter: drop-shadow(1px 0px 0px var(--gray-mid-darker))
       drop-shadow(0px 1px 0px var(--gray-mid-darker))
       drop-shadow(-1px 0px 0px var(--gray-mid-darker))
       drop-shadow(0px -1px 0px var(--gray-mid-darker));
-    z-index: 20;
   }
 </style>
