@@ -10,7 +10,7 @@
     let checkoutGid;
 
     try {
-      checkoutGid = Gid.parse(atob($checkoutId));
+      checkoutGid = Gid.parse($checkoutId);
     } catch (e) {
       // Do nothing... leave undefined and we'll handle later
     }

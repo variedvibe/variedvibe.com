@@ -35,7 +35,7 @@ export class Product {
   }
 
   get gid(): Gid {
-    return Gid.parse(atob(this.id));
+    return Gid.parse(this.id);
   }
 
   getImageForPresentation(): ProductImage | null {
@@ -115,7 +115,7 @@ export class ProductImage {
   }
 
   get gid(): Gid {
-    return Gid.parse(atob(this.id));
+    return Gid.parse(this.id);
   }
 }
 
@@ -135,7 +135,7 @@ export class ProductOption {
   }
 
   get gid(): Gid {
-    return Gid.parse(atob(this.id));
+    return Gid.parse(this.id);
   }
 }
 
@@ -178,6 +178,6 @@ export class ProductVariant {
   }
 
   get gid(): Gid {
-    return Gid.parse(atob(this.id));
+    return Gid.parse(this.id);
   }
 }

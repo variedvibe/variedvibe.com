@@ -41,7 +41,7 @@ export class Order {
   }
 
   get gid(): Gid {
-    return Gid.parse(atob(this.id));
+    return Gid.parse(this.id);
   }
 }
 
@@ -60,6 +60,6 @@ export class OrderLineItem {
   }
 
   get gid(): Gid {
-    return Gid.parse(atob(this.id));
+    return Gid.parse(this.id);
   }
 }

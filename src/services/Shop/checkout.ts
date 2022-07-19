@@ -30,7 +30,7 @@ export class Checkout {
   }
 
   get gid(): Gid {
-    return Gid.parse(atob(this._id));
+    return Gid.parse(this._id);
   }
 
   get lineItems(): CheckoutLineItem[] {
@@ -165,7 +165,7 @@ export class CheckoutLineItem {
   }
 
   get gid(): Gid {
-    return Gid.parse(atob(this.id));
+    return Gid.parse(this.id);
   }
 
   asRaw(): object {
