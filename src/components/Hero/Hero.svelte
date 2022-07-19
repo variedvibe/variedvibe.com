@@ -11,11 +11,30 @@
     /*"/assets/hero-images/pops-tee-uniform-background-crop_2000x.jpg 2000w",*/
     /*"/assets/hero-images/pops-tee-uniform-background-crop_4000x.jpg 4000w",*/
   ].join(", ");
+  const altImages = {
+    "/assets/hero-images/three-graces-tee-uniform-background-crop.jpg": [
+      "/assets/hero-images/three-graces-tee-uniform-background-crop_250x.jpg 250w",
+      "/assets/hero-images/three-graces-tee-uniform-background-crop_500x.jpg 500w",
+      "/assets/hero-images/three-graces-tee-uniform-background-crop_750x.jpg 750w",
+      "/assets/hero-images/three-graces-tee-uniform-background-crop_1000x.jpg 1000w",
+      /*"/assets/hero-images/three-graces-tee-uniform-background-crop_2000x.jpg 2000w",*/
+      /*"/assets/hero-images/three-graces-tee-uniform-background-crop_4000x.jpg 4000w",*/
+    ].join(", "),
+    /*"/assets/hero-images/reeves-flower-uniform-background.jpg": [*/
+    /*  "/assets/hero-images/reeves-flower-uniform-background_250x.jpg 250w",*/
+    /*  "/assets/hero-images/reeves-flower-uniform-background_500x.jpg 500w",*/
+    /*  "/assets/hero-images/reeves-flower-uniform-background_750x.jpg 750w",*/
+    /*  "/assets/hero-images/reeves-flower-uniform-background_1000x.jpg 1000w",*/
+    /*  "/assets/hero-images/reeves-flower-uniform-background_2000x.jpg 2000w",*/
+    /*  "/assets/hero-images/reeves-flower-uniform-background_4000x.jpg 4000w",*/
+    /*].join(", "),*/
+  };
 
   export let backgroundColor = defaultBackgroundColor;
   export let height = defaultHeight;
   export let imageSrc = defaultImageSrc;
   export let imageSrcSet = "";
+  export let useAltImages = true;
   export let addNoise = true;
   export let addVibeOverlay = false;
   export let addLogoOverlay = true;
@@ -36,6 +55,19 @@
     sizes="max(100vw, min({height}px, var(--max-hero-height)))"
     {height}
   />
+  {#if useAltImages}
+    {#each Object.entries(altImages) as [src, srcSet], i}
+      <img
+        class="alt-image"
+        alt="hero"
+        {src}
+        srcset={srcSet}
+        sizes="max(100vw, min({height}px, var(--max-hero-height)))"
+        {height}
+        data-alt-image-number={i + 1}
+      />
+    {/each}
+  {/if}
   {#if addNoise}
     <div id="noise-filter" class="overlay" />
   {/if}
@@ -48,6 +80,17 @@
 </section>
 
 <style>
+  @keyframes opacity {
+    0%,
+    45% {
+      opacity: 0;
+    }
+    55%,
+    100% {
+      opacity: 1;
+    }
+  }
+
   #hero {
     display: flex;
     flex-direction: row;
@@ -68,6 +111,17 @@
     max-height: 100%;
     object-fit: contain;
     z-index: 1;
+  }
+  #hero img.alt-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    animation: opacity 10s;
+    animation-delay: 5s;
+    animation-timing-function: var(--animation-timing-function-natural);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-fill-mode: both;
   }
   .overlay {
     position: absolute;
