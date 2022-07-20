@@ -37,6 +37,10 @@
   export let addVibeOverlay = false;
   export let addLogoOverlay = true;
 
+  /**
+   * These calculations are thanks to:
+   * https://www.devtwins.com/blog/css-cross-fading-images
+   */
   const totalImageCount = 1 + Object.keys(altImages).length; // Main + Alt images
   const animationDuration =
     (imageDisplaySeconds + imageFadeSeconds) * totalImageCount;
