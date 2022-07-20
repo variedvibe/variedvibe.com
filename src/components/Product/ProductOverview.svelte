@@ -105,8 +105,8 @@
 
     .product img.alt-image {
       animation: opacity 5s;
+      animation-delay: 2.25s;
       animation-timing-function: var(--animation-timing-function-natural);
-      animation-delay: 1s;
       animation-iteration-count: infinite;
       animation-direction: alternate;
       animation-fill-mode: both;
