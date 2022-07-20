@@ -8,8 +8,6 @@
     "/assets/hero-images/pops-tee-uniform-background-crop_500x.jpg 500w",
     "/assets/hero-images/pops-tee-uniform-background-crop_750x.jpg 750w",
     "/assets/hero-images/pops-tee-uniform-background-crop_1000x.jpg 1000w",
-    /*"/assets/hero-images/pops-tee-uniform-background-crop_2000x.jpg 2000w",*/
-    /*"/assets/hero-images/pops-tee-uniform-background-crop_4000x.jpg 4000w",*/
   ].join(", ");
   const altImages = {
     "/assets/hero-images/three-graces-tee-uniform-background-crop.jpg": [
@@ -17,8 +15,6 @@
       "/assets/hero-images/three-graces-tee-uniform-background-crop_500x.jpg 500w",
       "/assets/hero-images/three-graces-tee-uniform-background-crop_750x.jpg 750w",
       "/assets/hero-images/three-graces-tee-uniform-background-crop_1000x.jpg 1000w",
-      /*"/assets/hero-images/three-graces-tee-uniform-background-crop_2000x.jpg 2000w",*/
-      /*"/assets/hero-images/three-graces-tee-uniform-background-crop_4000x.jpg 4000w",*/
     ].join(", "),
     /*"/assets/hero-images/reeves-flower-uniform-background.jpg": [*/
     /*  "/assets/hero-images/reeves-flower-uniform-background_250x.jpg 250w",*/
@@ -34,10 +30,25 @@
   export let height = defaultHeight;
   export let imageSrc = defaultImageSrc;
   export let imageSrcSet = "";
-  export let useAltImages = false;
+  export let useAltImages = true;
+  export let imageDisplaySeconds = 4.5;
+  export let imageFadeSeconds = 0.5;
   export let addNoise = true;
   export let addVibeOverlay = false;
   export let addLogoOverlay = true;
+
+  const totalImageCount = 1 + Object.keys(altImages).length; // Main + Alt images
+  const animationDuration =
+    (imageDisplaySeconds + imageFadeSeconds) * totalImageCount;
+  const animationDelay = imageDisplaySeconds + imageFadeSeconds;
+
+  // Calculate the keyframe percentages for the animation.
+  /*const animationKeyframePercentages = [*/
+  /*  (imageDisplaySeconds / animationDuration) * 100,*/
+  /*  ((imageDisplaySeconds + imageFadeSeconds) / animationDuration) * 100,*/
+  /*  100 - (imageFadeSeconds / animationDuration) * 100,*/
+  /*];*/
+  /*console.log(animationKeyframePercentages);*/
 
   if (!imageSrcSet && imageSrc === defaultImageSrc) {
     imageSrcSet = defaultImageSrcSet;
@@ -46,9 +57,10 @@
 
 <section
   id="hero"
-  style="--background-color: {backgroundColor}; --height: min({height}px, var(--max-hero-height));"
+  style="--background-color: {backgroundColor}; --height: min({height}px, var(--max-hero-height)); --animation-duration: {animationDuration}s;"
 >
   <img
+    class:main-image={useAltImages}
     alt="hero"
     src={imageSrc}
     srcset={imageSrcSet}
@@ -65,6 +77,7 @@
         sizes="max(100vw, min({height}px, var(--max-hero-height)))"
         {height}
         data-alt-image-number={i + 1}
+        style="animation-delay: {(i + 1) * animationDelay}s"
       />
     {/each}
   {/if}
@@ -84,12 +97,16 @@
 </section>
 
 <style>
+  /* These percentages unfortunately need to be hard-coded for timing... */
   @keyframes opacity {
     0%,
     45% {
+      opacity: 1;
+    }
+    50%,
+    95% {
       opacity: 0;
     }
-    55%,
     100% {
       opacity: 1;
     }
@@ -116,16 +133,16 @@
     object-fit: contain;
     z-index: 1;
   }
+  #hero img.main-image,
   #hero img.alt-image {
     position: absolute;
     top: 0;
     bottom: 0;
-    animation: opacity 10s;
-    animation-delay: 5s;
+    opacity: 0;
+    animation: opacity var(--animation-duration);
+    animation-delay: 0s;
     animation-timing-function: var(--animation-timing-function-natural);
     animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-fill-mode: both;
   }
   .overlay {
     position: absolute;
