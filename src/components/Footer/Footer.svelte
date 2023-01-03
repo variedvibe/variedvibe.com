@@ -2,6 +2,8 @@
   import { url } from "@roxi/routify";
 
   import SocialLinks from "/src/components/SocialLinks/SocialLinks.svelte";
+
+  const currentYear = new Date().getFullYear();
 </script>
 
 <footer>
@@ -14,7 +16,7 @@
         <li><a href={$url("/sales-policies")}>Sales and Refunds</a></li>
       </ul>
     </nav>
-    <span>Copyright © 2022 Varied Vibe.</span>
+    <span>Copyright © {currentYear} Varied Vibe.</span>
   </div>
 </footer>
 
